@@ -11,13 +11,14 @@ $ ./main.py
 ### Example
 11:30pm = 846 sectors with 18 sectors remaining today
 ```
-Local Time: 23:30:00  [ssm @846.00 stm @18.00 (sph: 36)]
+Local Time: 23:30:00  [ssm @846.00 stm @18.00 (spc: 99% sph: 36)]
 
 
 Where
-- ssm = Sectors since the last midnight
-- stm = Sectors remaining until the next midnight
+- ssm = Sectors since midnight
+- stm = Sectors remaining til midnight
 - sph = Sectors per human hour
+- spc = Segment progress (what percentage of the day has already elapsed)
 ```
 
 ### Theory
