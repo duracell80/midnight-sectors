@@ -24,7 +24,7 @@ Where
 - There are 86,400 seconds in a day.
 - Divided by 100, there are @864 sectors in a day
 - Each sector can hold 100 relatable human seconds!!
-- Subtracting the current sector from 864 produces an innate notion of countdown towards the end of the day
+- Subtracting the current sector from 864 produces an innate notion of a countdown that tracks actual minutes
 - At local midnight the SSM (Sectors Since Midnight) start back at zero, this is highly intuitive
 - At local midnight the STM (Sectors Til Midnight) flip back to 864, giving an intuitive context of sectors
 - A sector that is at midnight @000 is then easily identifiable and relatable to human midnight 00:00
