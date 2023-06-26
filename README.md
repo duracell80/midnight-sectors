@@ -11,7 +11,7 @@ Local and relative alternative to swatch internet time set around the notion of 
 - A sector that is at midnight @000 is then easily identifiable and relatable to human midnight 00:00
 
 ### Defining a day as a seg
-Since a human day consists of 24 hours to relate the two systems the total number of sectors can be divided by 24, giving 36 sectors per hour and 100 seconds per sector. A whole day can then be thought of as a segment of the week. Each segment representing @864 sectors. A week may still be 7 segs in duration.
+Since a human day consists of 24 hours to relate the two systems the total number of sectors can be divided by 24, giving 36 sectors per hour and 100 seconds per sector. A whole day can then be thought of as a segment of the week. Each segment representing @864 sectors. A week may still be 7 segs in duration and December can contain 31 segs as it would days.
 
 ### Beat IT
 .Beat or Swatch Time aims to be a standardized absolute time format that would be exactly the same around the world and not tied to a local time. Neither is a beat anchored to the relation of two celestial bodies. An example of a beat would be @237. However by dividing a day into 1000 .beats is a little difficult to innately relate to human seconds and being absolute there is no refrence to local time. https://en.wikipedia.org/wiki/Swatch_Internet_Time
@@ -23,9 +23,11 @@ Understanding of context in day in both a count up and a count down. For example
 11:30pm = 846 sectors with 18 sectors remaining today
 ```
 Local Time: 23:30:00  [ssm @846.00 stm @18.00 (sph: 36)]
+Local Time: 00:05:00  [ssm @3.01 stm @860.99 (sph: 36)]
+
 
 Where
-- ssm = Sectors since midnight
-- stm = Sectors remaining until midnight
+- ssm = Sectors since the last midnight
+- stm = Sectors remaining until the next midnight
 - sph = Sectors per human hour
 ```
