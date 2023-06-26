@@ -79,10 +79,16 @@ def get_sst():
 	sst     	= float(float(get_ssm()) / 100)
 	sliced  	= str(sst).replace(".", ":").split(":")
 
-	if spc < 50:
-		sliced_h 	= str(sliced[0]).rjust(2, 'A')
-	else:
-		sliced_h        = str(sliced[0]).rjust(2, 'P')
+	if spc <= 10:
+		sliced_h        = str(sliced[0]).rjust(2, 'N')
+	elif spc < 50:
+		sliced_h 	= str(sliced[0]).rjust(2, 'M')
+	elif spc <= 75:
+		sliced_h        = str(sliced[0]).rjust(2, 'A')
+	elif spc <= 85:
+		sliced_h        = str(sliced[0]).rjust(2, 'E')
+	elif spc <= 80:
+		sliced_h        = str(sliced[0]).rjust(2, 'N')
 
 	sliced_m	= str(sliced[1][0:2]).rjust(2, '0')
 	sliced_s	= str(sliced[1][2:4]).ljust(2, '0')
