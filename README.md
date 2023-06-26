@@ -7,6 +7,7 @@ Local and relative alternative to swatch internet time set around the notion of 
 - Each sector can hold 100 relatable human seconds!!
 - Subtracting the current sector from 864 produces an innate notion of countdown towards the end of the day
 - At local midnight the SSM (Sectors Since Midnight) start back at zero, this is highly intuitive
+- At local midnight the STM (Sectors Til Midnight) flip back to 864, giving an intuitive context of sectors
 - A sector that is at midnight @000 is then easily identifiable and relatable to human midnight 00:00
 
 ### Defining a day as a seg
