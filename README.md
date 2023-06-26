@@ -39,7 +39,7 @@ https://en.wikipedia.org/wiki/Swatch_Internet_Time
 
 ### Advantages of sectors:
 - The main advantage of this time format is its dual personality 
-- As an example STM gives a countdown to midnight
+- Easily know how much time remains in the day; STM gives a countdown to midnight
 - Relates to and changes alongside the current minute
-- Contains 100 seconds per sector, making math easier
-- Can be roughly related to an hour by halving (if 30 sectors have passed, likely an hour has elapsed)
+- Contains 100 seconds per sector, making math a bit easier
+- Can be roughly related to an hour by halving (if 30 sectors have passed, likely almost an hour has elapsed)
