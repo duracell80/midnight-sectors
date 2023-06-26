@@ -45,3 +45,4 @@ https://en.wikipedia.org/wiki/Swatch_Internet_Time
 - Relates to and changes alongside the current minute
 - Contains 100 seconds per sector, making math a bit easier
 - Can be roughly related to an hour by halving (if 30 sectors have passed, likely almost an hour has elapsed)
+- Who also doesn't want 40 more seconds per minute?
