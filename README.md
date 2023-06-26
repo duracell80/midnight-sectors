@@ -12,7 +12,6 @@ $ ./main.py
 11:30pm = 846 sectors with 18 sectors remaining today
 ```
 Local Time: 23:30:00  [ssm @846.00 stm @18.00 (sph: 36)]
-Local Time: 00:05:00  [ssm @3.01 stm @860.99 (sph: 36)]
 
 
 Where
