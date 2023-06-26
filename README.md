@@ -1,5 +1,5 @@
 # midnight-sectors
-Local and relative alternative to swatch internet time set around the notion of 86,400 seconds per day. 
+A hectosecond based unit of time measurement and a local and relative alternative to swatch internet time set around the notion of 86,400 seconds per day. 
 
 ### Run the clock
 In a terminal
