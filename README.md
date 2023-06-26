@@ -15,10 +15,12 @@ Local Time: 23:30:00  [ssm @846.00 stm @18.00 (spc: 99% sph: 36)]
 
 
 Where
-- ssm = Sectors since midnight
-- stm = Sectors remaining til midnight
-- sph = Sectors per human hour
-- spc = Segment progress (what percentage of the day has already elapsed)
+- stm = Sectors til midnight      
+- ssm = Sectors since midnight    (.slice = 1 minute 40 seconds)
+- sph = Sectors per human hour    (36 .sectors per hour)
+- spc = Segment percent completed (from 0 to 100%)
+- spr = Segment percent remaining
+- blt = Beats in Local time (.beat = 1 minute 25 seconds)
 ```
 
 ### Theory
