@@ -1,6 +1,26 @@
 # midnight-sectors
 Local and relative alternative to swatch internet time set around the notion of 86,400 seconds per day. 
 
+### Run the clock
+In a terminal
+```
+$ chmod +x main.py
+$ ./main.py
+```
+
+### Example
+11:30pm = 846 sectors with 18 sectors remaining today
+```
+Local Time: 23:30:00  [ssm @846.00 stm @18.00 (sph: 36)]
+Local Time: 00:05:00  [ssm @3.01 stm @860.99 (sph: 36)]
+
+
+Where
+- ssm = Sectors since the last midnight
+- stm = Sectors remaining until the next midnight
+- sph = Sectors per human hour
+```
+
 ### Theory
 - There are 86,400 seconds in a day.
 - Divided by 100, there are @864 sectors in a day
@@ -20,16 +40,3 @@ https://en.wikipedia.org/wiki/Swatch_Internet_Time
 
 ### Advantages of sectors:
 The main advantage of this time format is its dual personality. Understanding of context in day in both a count up and a count down. For example STM (Gives a countdown to midnight)
-
-### Example
-11:30pm = 846 sectors with 18 sectors remaining today
-```
-Local Time: 23:30:00  [ssm @846.00 stm @18.00 (sph: 36)]
-Local Time: 00:05:00  [ssm @3.01 stm @860.99 (sph: 36)]
-
-
-Where
-- ssm = Sectors since the last midnight
-- stm = Sectors remaining until the next midnight
-- sph = Sectors per human hour
-```
