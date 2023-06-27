@@ -1,5 +1,5 @@
 # midnight-sectors
-Midnight sectors are a decimal / hectosecond based unit of time measurement somewhere between Base 10 and Base 8 and somewhat relatable to Base 12. It is a local and relative alternative to swatch internet time set around the notion of 86,400 seconds per day. 
+Midnight sectors are a decimal / hectosecond based unit of time measurement somewhere between Base 10 and Base 8 and somewhat relatable to Base 12. It is a local and relative alternative to swatch internet time set around the Base 12 notion of 86,400 seconds per day. 
 
 ### Terms
 - Segment (1 segment of 864 sectors = 1 day of 24 hours)
