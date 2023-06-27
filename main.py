@@ -87,7 +87,9 @@ def get_sst():
 		sliced_h        = str(sliced[0]).rjust(2, 'A')
 	elif spc <= 85:
 		sliced_h        = str(sliced[0]).rjust(2, 'E')
-	elif spc <= 80:
+	elif spc <= 100:
+		sliced_h        = str(sliced[0]).rjust(2, 'N')
+	else:
 		sliced_h        = str(sliced[0]).rjust(2, 'N')
 
 	sliced_m	= str(sliced[1][0:2]).rjust(2, '0')
