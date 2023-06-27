@@ -11,7 +11,7 @@ The @time is readable on an octal clock!
 - Sector  (The minute of 100 seconds)
 - Tick    (The even second within a sector)
 - Tock    (The odd second within a sector)
-- Range   (The seg progression from 0 to 100% clockwise in linear left to right motion)
+- Range   (The progression of day from 0 to 100% clockwise in linear left to right motion)
 
 Note: that the range allows the better scope of an afternoon and evening duration based on percentage of the day elapsed. To that goal a prefix to time can be added rather than AM/PM the following letters signify roughly four time periods in a segment (NAME)
 
@@ -80,7 +80,8 @@ https://en.wikipedia.org/wiki/Swatch_Internet_Time
 
 ### Advantages of sectors:
 - The main advantage of this time format is its dual personality
-- Seen at midnight (or DayStart) when everything flips magically 
+- Seen at midnight (or DayStart) when everything flips magically
+- It's magic ... https://youtu.be/JYZv0_PMzOg 
 - Easily know how much time remains in the day; STM gives a countdown to midnight
 - Relates to and changes alongside the current minute
 - Contains 100 seconds per sector, making math a bit easier
