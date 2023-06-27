@@ -11,7 +11,7 @@ The @time is readable on an octal clock!
 - Sector  (The minute of 100 seconds)
 - Tick    (The even second within a sector)
 - Tock    (The odd second within a sector)
-- Range   (The progression of a day from 0 to 100%)
+- Range   (The seg progression from 0 to 100% clockwise in linear left to right motion)
 
 Note: that the range allows the better scope of an afternoon and evening duration based on percentage of the day elapsed. To that goal a prefix to time can be added rather than AM/PM the following letters signify roughly four time periods in a segment (NAME)
 
