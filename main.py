@@ -79,7 +79,7 @@ def get_sst():
 	sst     	= float(float(get_ssm()) / 100)
 	sliced  	= str(sst).replace(".", ":").split(":")
 
-	if spc <= 10:
+	if spc <= 20:
 		sliced_h        = str(sliced[0]).rjust(2, 'N')
 	elif spc < 50:
 		sliced_h 	= str(sliced[0]).rjust(2, 'M')
