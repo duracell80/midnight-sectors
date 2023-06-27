@@ -7,6 +7,7 @@ The @time is readable on an octal clock!
 ### Terms
 - Segment (1 segment of 864 sectors = 1 day of 24 hours)
 - Slice   (The octal time way of spliting the day into 8 parts, also pie slices)
+- Period  (Consisting of 2 slices, a period denotes 4 periods of time in the day)
 - Sector  (The minute of 100 seconds)
 - Tick    (The even second within a sector)
 - Tock    (The odd second within a sector)
@@ -14,10 +15,11 @@ The @time is readable on an octal clock!
 
 Note: that the range allows the better scope of an afternoon and evening duration based on percentage of the day elapsed. To that goal a prefix to time can be added rather than AM/PM the following letters signify roughly four time periods in a segment (NAME)
 
-[N] = Night
-[A] = Afternoon
-[M] = Morning
-[E] = Evening 
+Periods: 
+- [N] = Night
+- [A] = Afternoon
+- [M] = Morning
+- [E] = Evening 
 
 ### Run the clock
 In a terminal
