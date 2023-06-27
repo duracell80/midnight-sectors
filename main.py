@@ -8,6 +8,21 @@ import time, os
 from datetime import datetime
 from dateutil import tz
 
+# Tear
+def tear():
+	global d, h, m, s, seg
+
+	# Define the number of seconds in a day as in base 12
+	d = 1
+	h = d * 24
+	m = h * 60
+	s = m * 60
+
+	# 864
+	seg = s / 100
+
+	return d, h, m, s, seg
+
 # Padding
 def format(n, digits):
 	formatter = '{:.' + '{}'.format(digits) + 'f}'
@@ -37,21 +52,15 @@ def get_bar(spc = 432):
 
 # Seconds per day
 def get_spd():
-	d = 1
-	h = d * 24
-	m = h * 60
-	s = m * 60
-
 	return int(s/100)
 
 # Sectors per hour
 def get_sph():
-	s = get_spd()
-	return int(round(float((int(s) / 24)), 0))
+	return int(round(float((int(get_spd()) / 24)), 0))
 
 # Sectors elapsed in this segment
 def get_spc(ssm):
-	return int(round(scale(864, 0, float(ssm)),0))
+	return int(round(scale(int(seg), 0, float(ssm)),0))
 
 # Sectors remaining in this segment
 def get_spr(spc):
@@ -97,11 +106,21 @@ def get_sst():
 
 	return str(str(sliced_h) + ":" + str(sliced_m) + ":" + str(sliced_s))
 
+# Create a degree out of 360 based on current segment since midnight
+def get_deg(ssm):
+	# 1 day = 24 hours / 10 = 2.4 (to divide the current ssm by)
+	d = 1
+	h = d * 24
+	p = h / 10 #2.4
+
+	return int(float(float(ssm) / p))
+
 # Define local time in beats
 def get_blt(ssm):
 	bld = float(1000 - 864)
 	blt = float(float(ssm) + bld)
-	return int(blt)
+
+	return str(format(float(blt), 0)).rjust(3, '0')
 
 # Define universal time in beats
 def get_bit(tz_base = "UTC"):
@@ -120,7 +139,7 @@ def get_bit(tz_base = "UTC"):
 	elif beats < 0:
 		beats += 1000
 
-	return int(float(beats))
+	return str(format(float(beats), 0)).rjust(3, '0')
 
 def get_ltz():
 	now = datetime.now()
@@ -132,6 +151,8 @@ def get_ltz():
 
 
 # Sector Clock for Today's Segment
+d, h, m, s, seg = tear()
+
 while True:
 	now = datetime.now()
 	ssm = get_ssm() # sectors since midnight
@@ -139,6 +160,7 @@ while True:
 	sph = get_sph() # sectors per hour
 	spc = get_spc(ssm)	# progress through the sector as completed percentage
 	spr = get_spr(spc)	# sectors remaining this segment as percentage to be completed
+	deg = get_deg(ssm)
 
 	blt = get_blt(ssm)	# produce a local version of a .beat
 	bit = get_bit("UTC+1")	# produce the universal internet time from Swatch during daylight savings
@@ -154,7 +176,7 @@ while True:
 	os.system("clear")
 	print("Local Time: " + str(now.strftime("%H:%M:%S")) + "  [ssm @" + str(ssm) + " stm @" + str(stm) + " spc: " + str(spc)  + "% spr: " + str(spr)  + "%]")
 	print("Range Bar : " + str(get_bar(spc)))
-	print("            DS 1 2 3 4 5 6 7 8  11 AM/PM 2 3 4 5 6 7 8 9  10  DE")
+	print("            DS 1 2 3 4 5 6 7 8  11 AM/PM  2 3 4 5 6 7 8 9  10 DE")
 	print("\n\n")
 	print("Where")
 	print("- stm = Sectors til midnight      (.tick is a sector's second [0-100])")
@@ -168,7 +190,7 @@ while True:
 
 	print("\n\n")
 	print("Segment Slice (Octal)  : " + str(get_sst()))
-	print("                         ")
+	print("Segment Angle (0-360)  : @" + str(deg))
 	print("Local Beat             : @" + str(blt) + ".beats (" + str(get_ltz())  + ")")
 	print("Universal Beat         : @" + str(bit) + ".beats (BMT)")
 
