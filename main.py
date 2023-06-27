@@ -154,8 +154,7 @@ while True:
 	os.system("clear")
 	print("Local Time: " + str(now.strftime("%H:%M:%S")) + "  [ssm @" + str(ssm) + " stm @" + str(stm) + " spc: " + str(spc)  + "% spr: " + str(spr)  + "%]")
 	print("Range Bar : " + str(get_bar(spc)))
-	print("            N-AM 2 3 4 5 6 7 8  11 AM/PM 2 3 4 5 6 7 8 9  10 N-PM")
-
+	print("            DS 1 2 3 4 5 6 7 8  11 AM/PM 2 3 4 5 6 7 8 9  10  DE")
 	print("\n\n")
 	print("Where")
 	print("- stm = Sectors til midnight      (.tick is a sector's second [0-100])")
@@ -164,10 +163,12 @@ while True:
 	print("- spr = Segment percent remaining")
 	print("- sph = Sectors per standard hour (~" + str(sph) + " .sectors in an hour)")
 	print("- blt = Beats in Local time (.beat = 1min:25s, ~42 .beats in an hour)")
-	print("\n NAME = [N]ight [A]fternoon [M]orning [E]vening")
+	print("\nNAME  = [N]ight [A]fternoon [M]orning [E]vening")
+	print("DS/DE = [D]ay[S]tart [D]ay[E]nd")
 
 	print("\n\n")
 	print("Local Segment Time : " + str(get_sst()))
+	print("                         ")
 	print("Local Beat         : @" + str(blt) + ".beats (" + str(get_ltz())  + ")")
 	print("Universal Beat     : @" + str(bit) + ".beats (BMT)")
 

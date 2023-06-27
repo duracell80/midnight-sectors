@@ -1,5 +1,20 @@
 # midnight-sectors
-A hectosecond based unit of time measurement and a local and relative alternative to swatch internet time set around the notion of 86,400 seconds per day. 
+Midnight sectors are a decimal / hectosecond based unit of time measurement somewhere between Base 10 and Base 8 and somewhat relatable to Base 12. It is a local and relative alternative to swatch internet time set around the notion of 86,400 seconds per day. 
+
+### Terms
+- Segment (1 segment of 864 sectors = 1 day of 24 hours)
+- Slice   (The octal time way of spliting the day into 8 parts)
+- Sector  (The minute of 100 seconds)
+- Tick    (The even second within a sector)
+- Tock    (The odd second within a sector)
+- Range   (The progression of a day from 0 to 100%)
+
+Note: that the range allows the better scope of an afternoon and evening duration based on percentage of the day elapsed. To that goal a prefix to time can be added rather than AM/PM the following letters signify roughly four time periods in a segment (NAME)
+
+[N] = Night
+[A] = Afternoon
+[M] = Morning
+[E] = Evening 
 
 ### Run the clock
 In a terminal
@@ -9,23 +24,38 @@ $ ./main.py
 ```
 
 ### Example
-11:30pm = 846 sectors with 18 sectors remaining today
+11:30pm = 846 sectors with 18 sectors remaining today roughly 2% remains of the day
 ```
-Local Time: 23:30:00  [ssm @846.00 stm @18.00 (spc: 99% sph: 36)]
+Local Time: 23:29:59  [ssm @846.00 stm @18.00 spc: 98% spr: 2%]
+Range Bar : -------------------------------------------------[+]-
+            DS 1 2 3 4 5 6 7 8  11 AM/PM 2 3 4 5 6 7 8 9  10  DE
+
 
 
 Where
-- stm = Sectors til midnight      
-- ssm = Sectors since midnight    (.slice = 1 minute 40 seconds)
-- sph = Sectors per human hour    (36 .sectors per hour)
-- spc = Segment percent completed (from 0 to 100%)
+- stm = Sectors til midnight      (.tick is a sector's second [0-100])
+- ssm = Sectors since midnight    (.tick   = 1 minute 40 seconds)
+- spc = Segment percent completed (.range  = from 0 to 100%)
 - spr = Segment percent remaining
-- blt = Beats in Local time (.beat = 1 minute 25 seconds)
+- sph = Sectors per standard hour (~36 .sectors in an hour)
+- blt = Beats in Local time (.beat = 1min:25s, ~42 .beats in an hour)
+
+NAME  = [N]ight [A]fternoon [M]orning [E]vening
+DS/DE = [D]ay[S]tart [D]ay[E]nd
+
+
+
+Local Segment Time : N8:46:00
+                         
+Local Beat         : @982.beats (CDT)
+Universal Beat     : @229.beats (BMT)
+
 ```
 
 ### Theory
-- There are 86,400 seconds in a day.
-- Divided by 100, there are @864 sectors in a day
+- Starting with Base 12
+- There are 86,400 seconds in a standard day.
+- Divided by 100, there are @864 sectors in a day (rather than 1000)
 - Each sector can hold 100 relatable human seconds (just like .beats)!!
 - Subtracting the current sector from 864 produces an innate notion of a countdown that tracks actual minutes
 - At local midnight the SSM (Sectors Since Midnight) start back at zero, this is highly intuitive
