@@ -6,7 +6,7 @@ The @time is readable on an octal clock!
 
 ### Terms
 - Segment (1 segment of 864 sectors = 1 day of 24 hours)
-- Slice   (The octal time way of spliting the day into 8 parts)
+- Slice   (The octal time way of spliting the day into 8 parts, also pie slices)
 - Sector  (The minute of 100 seconds)
 - Tick    (The even second within a sector)
 - Tock    (The odd second within a sector)
