@@ -61,7 +61,7 @@ Universal Beat     : @229.beats (BMT)
 - Starting with Base 12
 - There are 86,400 seconds in a standard day.
 - Divided by 100, there are @864 sectors in a day (rather than 1000)
-- Each sector can hold 100 relatable human seconds (just like .beats)!!
+- Each sector can hold 100 relatable standard seconds (just like .beats)!!
 - Subtracting the current sector from 864 produces an innate notion of a countdown that tracks actual minutes
 
 - A day can be broken down into 8 periods and is readable on an Octal Clock
