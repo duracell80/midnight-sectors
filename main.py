@@ -160,11 +160,11 @@ while True:
 	print("Where")
 	print("- stm = Sectors til midnight      (.tick is a sector's second [0-100])")
 	print("- ssm = Sectors since midnight    (.tick   = 1 minute 40 seconds)")
-	print("- sph = Sectors per standard hour (.sector = " + str(sph) + " minutes)")
 	print("- spc = Segment percent completed (.range  = from 0 to 100%)")
 	print("- spr = Segment percent remaining")
-	print("- blt = Beats in Local time (.beat = 1 minute 25 seconds)")
-
+	print("- sph = Sectors per standard hour (~" + str(sph) + " .sectors in an hour)")
+	print("- blt = Beats in Local time (.beat = 1min:25s, ~42 .beats in an hour)")
+	print("\n NAME = [N]ight [A]fternoon [M]orning [E]vening")
 
 	print("\n\n")
 	print("Local Segment Time : " + str(get_sst()))
