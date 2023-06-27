@@ -97,13 +97,13 @@ def get_sst():
 
 	return str(str(sliced_h) + ":" + str(sliced_m) + ":" + str(sliced_s))
 
-# Convert a percentage of segment completed to a sector
-def get_blt(spc):
-	bld = int(float((1000 - 864) / 10))
-	blt = int((spc + bld) * 10)
-	return blt
+# Define local time in beats
+def get_blt(ssm):
+	bld = float(1000 - 864)
+	blt = float(float(ssm) + bld)
+	return int(blt)
 
-
+# Define universal time in beats
 def get_bit(tz_base = "UTC"):
 	from_zone = tz.gettz(tz_base)
 	to_zone = tz.gettz('Europe/Zurich')
@@ -140,7 +140,7 @@ while True:
 	spc = get_spc(ssm)	# progress through the sector as completed percentage
 	spr = get_spr(spc)	# sectors remaining this segment as percentage to be completed
 
-	blt = get_blt(spc)	# produce a local version of a .beat
+	blt = get_blt(ssm)	# produce a local version of a .beat
 	bit = get_bit("UTC+1")	# produce the universal internet time from Swatch during daylight savings
 
 
@@ -153,16 +153,15 @@ while True:
 
 	os.system("clear")
 	print("Local Time: " + str(now.strftime("%H:%M:%S")) + "  [ssm @" + str(ssm) + " stm @" + str(stm) + " spc: " + str(spc)  + "% spr: " + str(spr)  + "%]")
-	print("Tick Bar  : " + str(get_bar(spc)))
-	print("            Early AM             11 AM/PM 2 3 4 5 6 7 8 9 Late PM")
-
+	print("Range Bar : " + str(get_bar(spc)))
+	print("            N-AM 2 3 4 5 6 7 8  11 AM/PM 2 3 4 5 6 7 8 9  10 N-PM")
 
 	print("\n\n")
 	print("Where")
-	print("- stm = Sectors til midnight      ")
-	print("- ssm = Sectors since midnight    (.slice = 1 minute 40 seconds)")
-	print("- sph = Sectors per human hour    (" + str(sph) + " .sectors per hour)")
-	print("- spc = Segment percent completed (from 0 to 100%)")
+	print("- stm = Sectors til midnight      (.tick is a sector's second [0-100])")
+	print("- ssm = Sectors since midnight    (.tick   = 1 minute 40 seconds)")
+	print("- sph = Sectors per standard hour (.sector = " + str(sph) + " minutes)")
+	print("- spc = Segment percent completed (.range  = from 0 to 100%)")
 	print("- spr = Segment percent remaining")
 	print("- blt = Beats in Local time (.beat = 1 minute 25 seconds)")
 
