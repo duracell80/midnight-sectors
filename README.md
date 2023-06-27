@@ -45,7 +45,7 @@ DS/DE = [D]ay[S]tart [D]ay[E]nd
 
 
 
-Local Segment Time : N8:46:00
+Segment Period     : N8:46:00
                          
 Local Beat         : @982.beats (CDT)
 Universal Beat     : @229.beats (BMT)
