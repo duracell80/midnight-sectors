@@ -167,10 +167,10 @@ while True:
 	print("DS/DE = [D]ay[S]tart [D]ay[E]nd")
 
 	print("\n\n")
-	print("Local Segment Time : " + str(get_sst()))
+	print("Segment Period (Octal) : " + str(get_sst()))
 	print("                         ")
-	print("Local Beat         : @" + str(blt) + ".beats (" + str(get_ltz())  + ")")
-	print("Universal Beat     : @" + str(bit) + ".beats (BMT)")
+	print("Local Beat             : @" + str(blt) + ".beats (" + str(get_ltz())  + ")")
+	print("Universal Beat         : @" + str(bit) + ".beats (BMT)")
 
 	# Simulate a real clock display
 	time.sleep(1)
