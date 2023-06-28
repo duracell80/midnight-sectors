@@ -117,8 +117,7 @@ def get_first_hand():
 # Create a degree of second hand
 def get_second_hand():
 	sec = get_tick()
-	s = scale(28, 0, int(sec))
-
+	s = round(float(sec) * 3.6, 2) # 36 STARS!!
 	return int(s)
 
 
