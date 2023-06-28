@@ -237,8 +237,8 @@ while True:
 	print("- ssm = Sectors since midnight    (.tick   = 1min:40s)")
 	print("- spc = Segment percent completed (.range  = from 0 to 100%)")
 	print("- spr = Segment percent remaining")
-	print("- sph = Sectors per standard hour (~" + str(sph) + " .sectors in an hour)")
-	print("- blt = Beats in Local time (.beat = 1min:25s, ~42 .beats in an hour)")
+	#print("- sph = Sectors per standard hour (~" + str(sph) + " .sectors in an hour)")
+	#print("- blt = Beats in Local time (.beat = 1min:25s, ~42 .beats in an hour)")
 	print("\nPERIOD = [N]ight [A]fternoon [M]orning [E]vening")
 	print("SS/SE  = [S]egment[S]tart [S]egment[E]nd\n\n")
 
