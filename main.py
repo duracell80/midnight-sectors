@@ -44,7 +44,7 @@ def get_bar():
 	return tb
 
 def get_labels():
-	return "SS 1 2 3 4 5 6 7 8 9 11AM/PM  2 3 4 5 6 7 8 9 10  SE"
+	return "SS 1 2 3 4 5 6 7 8 9 10AM/PM  2 3 4 5 6 7 8 9 10  SE"
 
 
 # Sectors per hour
@@ -109,7 +109,32 @@ def get_sst():
 	sector_m = str(slice[1][0:2]).rjust(2, '0')
 	sector_s = str(slice[1][2:4]).ljust(2, '0')
 
-	return str("S" + str(sector_h) + ":" + str(sector_m) + ":" + str(sector_s) + " @" + str(sector_p) + " Sector[" + str(sector_h) + "] Period[" + str(sector_p) + "]")
+	if int(sector_m) <= 25:
+		sector_q = str(int(sector_h)) + ".25"
+	elif int(sector_m) <= 50:
+		sector_q = str(int(sector_h)) + ".50"
+	elif int(sector_m) <= 75:
+		sector_q = str(int(sector_h)) + ".75"
+	elif int(sector_m) <= 99:
+		sector_q = str(int(sector_h)) + ".75"
+	else:
+		sector_q = str(int(sector_h)) + ".00"
+
+	if int(sector_s) % 2 == 1:
+    		decond = " "
+	else:
+		decond = ":"
+
+	sector_hh = round(float((float(ssm) / 3.6) / 10),2)
+	sector_hb = str(sector_hh).split(".")
+	sector_hc = str(int(sector_hb[1])).ljust(2, '0')
+
+	sat_string = str(sector_hb[0]) + str(decond) + str(sector_hc) + "⋅" + str(sector_p)
+	sst_string = str(sector_hb[0]) + ":" + str(sector_m) + ":" + str(sector_s) + "⋅" + str(sector_d)
+	sss_string = str("S" + str(sector_h) + ":" + str(sector_m) + ":" + str(sector_s) + "⋅" + str(sector_p) + " Sector[" + str(sector_q) + "] Period[" + str(sector_p) + "] Hour[" + str(int(float(sector_hh))) + " (" + str(sector_hc)  + "%)]")
+
+	return sst_string, sat_string, sss_string
+
 
 def get_tick():
 	ssm = str(get_ssm()).split(".")
@@ -173,9 +198,13 @@ def get_lst():
 
 @background
 def run_segment(when = "now"):
-	global iso, hst, hnd, ssm, stm, spc, spr, sph, spd, blt, bmt
+	global iso, hst, hnd, sss, ssm, stm, sst, sat, spc, spr, sph, spd, blt, bmt
 	iso = [1, 24, 1440, 864000, 864]
 	bmt = 0
+	blt = 0
+	sss = "S1:00:00"
+	sst = "00:00"
+	sat = "00:00"
 
 	while True:
 		ssm = get_ssm() # sectors since midnight
@@ -186,6 +215,7 @@ def run_segment(when = "now"):
 		sph = get_sph() # sectors per hour
 		spc = get_spc() # progress through the sector as completed percentage
 		spr = get_spr() # sectors remaining this segment as percentage to be completed
+		sst, sat, sss = get_sst() # Get [S]tandard [S]ector [T]ime
 
 		blt = get_blt() # produce a local version of a .beat
 		bmt = get_bmt("UTC+1")
@@ -197,6 +227,7 @@ run_segment("CDT")
 
 while True:
 	os.system("clear")
+
 	print("Local Time: " + get_lst() + "  [ssm @" + str(ssm) + " stm @" + str(stm) + " spc: " + str(spc)  + "% spr: " + str(spr)  + "%]")
 	print("Range Bar : " + get_bar())
 	print("            " + get_labels())
@@ -211,13 +242,16 @@ while True:
 	print("\nPERIOD = [N]ight [A]fternoon [M]orning [E]vening")
 	print("SS/SE  = [S]egment[S]tart [S]egment[E]nd\n\n")
 
-	print("Segment Time  (Oct:Dec:Dec)  : " + str(get_sst()))
-	print("Angle of Tick (second hand)  : " + str(hnd) + "°")
-	print("Angle of Sector (hour hand)  : " + str(hst) + "°\n")
+	print("Abr Segment Time  (Duo:Percent:Period)  : " + str(sat))
+	print("Std Segment Time  (Duo:Dec:Dec:Period)  : " + str(sst))
+	print("Sector Time       (Oct:Dec:Dec:Period)  : " + str(sss))
+	print("\nAngle of Tick (second hand)             : " + str(hnd) + "°")
+	print("Angle of Sector (hour hand)             : " + str(hst) + "°\n")
 
-	print("Local Beat                   : @" + str(blt) + ".beats (" + str(get_ltz())  + ")")
+
+	print("Local Beat                              : @" + str(blt) + ".beats (" + str(get_ltz())  + ")")
 	if bmt != 0:
-		print("Universal Beat               : @" + str(bmt) + ".beats (BMT)")
+		print("Universal Beat                          : @" + str(bmt) + ".beats (BMT)")
 
 	# Simulate a real clock display
 	time.sleep(1)
