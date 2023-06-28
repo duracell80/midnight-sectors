@@ -4,15 +4,22 @@
 
 # An attempt at linking base 8 time to real time in a .beats style format
 
-import time, os
+import os, sys, time, asyncio
+
 from datetime import datetime
 from dateutil import tz
 
+
+def background(f):
+	def wrapped(*args, **kwargs):
+		return asyncio.new_event_loop().run_in_executor(None, f, *args, **kwargs)
+
+	return wrapped
+
+
 def init():
-	global iso, hst, hnd; iso = [1, 24, 1440, 864000, 864]
-	hst = 0
-	hnd = 0
-	return iso, hst, hnd
+	iso = [1, 24, 1440, 864000, 864]
+	return iso
 
 def format(n, digits):
 	formatter = '{:.' + '{}'.format(digits) + 'f}'
@@ -39,9 +46,6 @@ def get_bar():
 def get_labels():
 	return "SS 1 2 3 4 5 6 7 8  11 AM/PM  2 3 4 5 6 7 8 9 10  SE"
 
-# Seconds per day
-def get_spd():
-	return int(iso[3])
 
 # Sectors per hour
 def get_sph():
@@ -60,7 +64,9 @@ def get_spr():
 # Sectors since midnight
 def get_ssm():
 	now = datetime.now()
-	return format(float(((now - now.replace(hour=0, minute=0, second=0, microsecond=0)).total_seconds()/100)), 2)
+	ssm = format(float(((now - now.replace(hour=0, minute=0, second=0, microsecond=0)).total_seconds()/100)), 2)
+	ssm = str(ssm).rjust(3, '0')
+	return ssm
 
 # Sectors to midnight
 def get_stm():
@@ -68,40 +74,42 @@ def get_stm():
 	ssm = get_ssm()
 	stn = (now - now.replace(hour=0, minute=0, second=0, microsecond=0)).total_seconds()
 	stm = format(float(iso[4] - (stn/100)), 2)
+	stm = str(stm).rjust(3, '0')
 
 	return stm
 
-# Slice Sectors into 8 Slices
+
+# Define Sectors as 8 Slices and 4 periods
 def get_sst():
 	spc		= get_spc()
 	sst     	= float(float(get_ssm()) / 100)
 	slice  		= str(sst).replace(".", ":").split(":")
 
 	if spc <= 22:
-		slice_p = "N"
-		slice_d = "Night"
+		sector_p = "N"
+		sector_d = "Night"
 	elif spc < 50:
-		slice_p = "M"
-		slice_d = "Morning"
+		sector_p = "M"
+		sector_d = "Morning"
 	elif spc <= 75:
-		slice_p = "A"
-		slice_d = "Afternoon"
+		sector_p = "A"
+		sector_d = "Afternoon"
 	elif spc <= 85:
-		slice_p = "E"
-		slice_d = "Evening"
+		sector_p = "E"
+		sector_d = "Evening"
 	elif spc <= 100:
-		slice_p = "N"
-		slice_d = "Night"
+		sector_p = "N"
+		sector_d = "Night"
 	else:
-		slice_p = "N"
-		slice_d = "Deep Night"
+		sector_p = "N"
+		sector_d = "Deep Night"
 
 	#slice_h	= str(slice[0]).rjust(2, '0')
-	slice_h = slice[0]
-	slice_m	= str(slice[1][0:2]).rjust(2, '0')
-	slice_s = str(slice[1][2:4]).ljust(2, '0')
+	sector_h = slice[0]
+	sector_m = str(slice[1][0:2]).rjust(2, '0')
+	sector_s = str(slice[1][2:4]).ljust(2, '0')
 
-	return str("S" + str(slice_h) + ":" + str(slice_m) + ":" + str(slice_s) + " Sector[" + str(slice_h) + "] Period[" + str(slice_p) + "]")
+	return str("S" + str(sector_h) + ":" + str(sector_m) + ":" + str(sector_s) + " Sector[" + str(sector_h) + "] Period[" + str(sector_p) + "]")
 
 def get_tick():
 	ssm = str(get_ssm()).split(".")
@@ -116,7 +124,6 @@ def get_first_hand():
 # Create a degree of second hand
 def get_second_hand():
 	t = get_tick()
-	#tok = hnd
 	tik = round((float(t) * 3.55)/5.) * 5
 	return tik
 
@@ -130,7 +137,7 @@ def get_blt():
 	return str(format(float(blt), 0)).rjust(3, '0')
 
 # Define universal time in beats
-def get_bit(tz_base = "UTC"):
+def get_bmt(tz_base = "UTC"):
 	from_zone = tz.gettz(tz_base)
 	to_zone = tz.gettz('Europe/Zurich')
 	time = datetime.utcnow()
@@ -145,8 +152,8 @@ def get_bit(tz_base = "UTC"):
 		beats -= 1000
 	elif beats < 0:
 		beats += 1000
-
-	return str(format(float(beats), 0)).rjust(3, '0')
+	bmt = str(format(float(beats), 0)).rjust(3, '0')
+	return bmt
 
 def get_ltz():
 	now = datetime.now()
@@ -162,36 +169,39 @@ def get_lst():
 
 	return str(now.strftime("%H:%M:%S"))
 
-# Sector Clock for Today's Segment
-iso, hst, hnd = init()
+
+
+@background
+def run_segment(when = "now"):
+	global iso, hst, hnd, ssm, stm, spc, spr, sph, spd, blt, bmt
+	iso = [1, 24, 1440, 864000, 864]
+	bmt = 0
+
+	while True:
+		ssm = get_ssm() # sectors since midnight
+		hst = get_first_hand()
+		hnd = get_second_hand()
+
+		stm = get_stm() # sectors to midnight
+		sph = get_sph() # sectors per hour
+		spc = get_spc() # progress through the sector as completed percentage
+		spr = get_spr() # sectors remaining this segment as percentage to be completed
+
+		blt = get_blt() # produce a local version of a .beat
+		bmt = get_bmt("UTC+1")
+
+		time.sleep(0.5)
+
+run_segment("CDT")
+
 
 while True:
-	ssm = get_ssm() # sectors since midnight
-	hst = get_first_hand()
-	hnd = get_second_hand()
-
-	stm = get_stm() # sectors to midnight
-	sph = get_sph() # sectors per hour
-	spc = get_spc()	# progress through the sector as completed percentage
-	spr = get_spr()	# sectors remaining this segment as percentage to be completed
-
-	blt = get_blt()	# produce a local version of a .beat
-	bit = get_bit("UTC+1")	# produce the universal internet time from Swatch during daylight savings
-
-
-
-
-
-
-
-
-
 	os.system("clear")
 	print("Local Time: " + get_lst() + "  [ssm @" + str(ssm) + " stm @" + str(stm) + " spc: " + str(spc)  + "% spr: " + str(spr)  + "%]")
 	print("Range Bar : " + get_bar())
 	print("            " + get_labels())
-	print("\n\n")
-	print("Where")
+
+	print("\n\nWhere")
 	print("- stm = Sectors til midnight      (.tick is a sector's second [0-100])")
 	print("- ssm = Sectors since midnight    (.tick   = 1min:40s)")
 	print("- spc = Segment percent completed (.range  = from 0 to 100%)")
@@ -199,15 +209,15 @@ while True:
 	print("- sph = Sectors per standard hour (~" + str(sph) + " .sectors in an hour)")
 	print("- blt = Beats in Local time (.beat = 1min:25s, ~42 .beats in an hour)")
 	print("\nPERIOD = [N]ight [A]fternoon [M]orning [E]vening")
-	print("SS/SE  = [S]egment[S]tart [S]egment[E]nd")
+	print("SS/SE  = [S]egment[S]tart [S]egment[E]nd\n\n")
 
-	print("\n\n")
 	print("Segment Time  (Oct:Dec:Dec)  : " + str(get_sst()))
 	print("Angle of Tick (second hand)  : " + str(hnd) + "°")
-	print("Angle of Sector (hour hand)  : " + str(hst) + "°")
-	print("\n")
+	print("Angle of Sector (hour hand)  : " + str(hst) + "°\n")
+
 	print("Local Beat                   : @" + str(blt) + ".beats (" + str(get_ltz())  + ")")
-	print("Universal Beat               : @" + str(bit) + ".beats (BMT)")
+	if bmt != 0:
+		print("Universal Beat               : @" + str(bmt) + ".beats (BMT)")
 
 	# Simulate a real clock display
 	time.sleep(1)
