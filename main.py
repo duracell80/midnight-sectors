@@ -4,7 +4,7 @@
 
 # An attempt at linking base 8 time to real time in a .beats style format
 
-import os, sys, time, asyncio
+import os, sys, time, math, asyncio
 
 from datetime import datetime
 from dateutil import tz
@@ -121,16 +121,32 @@ def get_sst():
 		sector_q = str(int(sector_h)) + ".00"
 
 	if int(sector_s) % 2 == 1:
-    		decond = " "
+		decond = " "
+		period = " "
 	else:
 		decond = ":"
+		period = str(sector_p)
 
 	sector_hh = round(float((float(ssm) / 3.6) / 10),2)
 	sector_hb = str(sector_hh).split(".")
-	sector_hc = str(int(sector_hb[1])).ljust(2, '0')
+	if int(str(sector_hb[1])) < 10:
+		sector_hc = str(int(sector_hb[1])).rjust(2, '0')
+	else:
+		sector_hc = str(int(sector_hb[1]))
+	if "0" in str(sector_hc):
+                sector_hc = str(int(sector_hb[1])).ljust(2, '0')
 
-	sat_string = str(sector_hb[0]) + str(decond) + str(sector_hc) + "⋅" + str(sector_p) + "  Hour[" + str(int(float(sector_hh))) + " (" + str(sector_hc)  + "%)]"
-	sst_string = str(sector_hb[0]) + ":" + str(sector_m) + ":" + str(sector_s) + "⋅" + str(sector_d)
+	sector_hd = str(sector_hb[0]).rjust(2, '0')
+	sector_hs = str(int(sector_hb[0]) - 12).rjust(2, '0')
+	sector_ht = str(int(sector_hb[0]) - 12)
+
+	#if int(sector_hb[0]) > 12:
+	#	sector_hd = str(int(sector_hb[0]) - 12).rjust(2, '0')
+	#else:
+	#	sector_hd = str(sector_hb[0])
+
+	sat_string = str(sector_ht) + ":" + str(sector_hc) + ":" + str(sector_p) + "ꝑ  Hour[" + str(int(float(sector_hh))) + " (" + str(sector_hc)  + "%)]"
+	sst_string = str(sector_hd) + ":" + str(sector_m) + ":" + str(sector_s) + "⋅" + str(sector_d)
 	sss_string = str("S" + str(sector_h) + ":" + str(sector_m) + ":" + str(sector_s) + "⋅" + str(sector_p) + " Sector[" + str(sector_q) + "] Period[" + str(sector_p) + "]")
 
 	return sst_string, sat_string, sss_string
@@ -198,13 +214,14 @@ def get_lst():
 
 @background
 def run_segment(when = "now"):
-	global iso, hst, hnd, sss, ssm, stm, sst, sat, spc, spr, sph, spd, blt, bmt
+	global iso, hst, hnd, sss, ssm, stm, sbm, sst, sat, spc, spr, sph, spd, blt, bmt
 	iso = [1, 24, 1440, 864000, 864]
 	bmt = 0
 	blt = 0
 	sss = "S1:00:00"
 	sst = "00:00"
 	sat = "00:00"
+	sbm = 0
 
 	while True:
 		ssm = get_ssm() # sectors since midnight
@@ -216,6 +233,7 @@ def run_segment(when = "now"):
 		spc = get_spc() # progress through the sector as completed percentage
 		spr = get_spr() # sectors remaining this segment as percentage to be completed
 		sst, sat, sss = get_sst() # Get [S]tandard [S]ector [T]ime
+		sbm = math.trunc(float(ssm))
 
 		blt = get_blt() # produce a local version of a .beat
 		bmt = get_bmt("UTC+1")
@@ -233,8 +251,8 @@ while True:
 	print("            " + get_labels())
 
 	print("\n\nWhere")
-	print("- stm = Sectors til midnight      (.tick is a sector's second [0-100])")
-	print("- ssm = Sectors since midnight    (.tick   = 1min:40s)")
+	print("- stm = Sectors til midnight      (.decond is a sector's second [0-100])")
+	print("- ssm = Sectors since midnight    (.decond = 1min:40s)")
 	print("- spc = Segment percent completed (.range  = from 0 to 100%)")
 	print("- spr = Segment percent remaining")
 	#print("- sph = Sectors per standard hour (~" + str(sph) + " .sectors in an hour)")
@@ -242,16 +260,18 @@ while True:
 	print("\nPERIOD = [N]ight [A]fternoon [M]orning [E]vening")
 	print("SS/SE  = [S]egment[S]tart [S]egment[E]nd\n\n")
 
-	print("Abr Segment Time  (Duo:Percent:Period)  : " + str(sat))
-	print("Std Segment Time  (Duo:Dec:Dec:Period)  : " + str(sst))
+	print("REL Segment Time  (Duo:Percent:Period)  : " + str(sat))
+	print("STD Segment Time  (Duo:Dec:Dec:Period)  : " + str(sst))
 	print("Sector Time       (Oct:Dec:Dec:Period)  : " + str(sss))
-	print("\nAngle of Tick (second hand)             : " + str(hnd) + "°")
-	print("Angle of Sector (hour hand)             : " + str(hst) + "°\n")
+	print("Angle of Decond          (Second hand)  : " + str(hnd) + "°")
+	print("Angle of Sector            (Hour hand)  : " + str(hst) + "°\n")
 
+	print("Sector Beat                             : @" + str(sbm) + ".sectors (" + str(get_ltz())  + ")")
 
-	print("Local Beat                              : @" + str(blt) + ".beats (" + str(get_ltz())  + ")")
+	if blt != 0:
+		print("Local Beat                              : @" + str(blt) + ".beats   (" + str(get_ltz())  + ")")
 	if bmt != 0:
-		print("Universal Beat                          : @" + str(bmt) + ".beats (BMT)")
+		print("Universal Beat                          : @" + str(bmt) + ".beats   (BMT)")
 
 	# Simulate a real clock display
 	time.sleep(1)
