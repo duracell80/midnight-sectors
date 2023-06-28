@@ -2,121 +2,129 @@
 # Author: Lee Jordan
 # Github: Duracell80
 
-# An attempt at linking decimal time to real time in a .beats style format
+# An attempt at linking base 8 time to real time in a .beats style format
 
 import time, os
 from datetime import datetime
 from dateutil import tz
 
-# Tear
-def tear():
-	global d, h, m, s, seg
+def init():
+	global iso; iso = [1, 24, 1440, 864000, 864]
+	return iso
 
-	# Define the number of seconds in a day as in base 12
-	d = 1
-	h = d * 24
-	m = h * 60
-	s = m * 60
-
-	# 864
-	seg = s / 100
-
-	return d, h, m, s, seg
-
-# Padding
 def format(n, digits):
 	formatter = '{:.' + '{}'.format(digits) + 'f}'
 	x = round(n, digits)
 	return formatter.format(x)
 
-# Scaling
 def scale(max = 864, min = 0, sector = 432):
 	return ((sector - min) / (max - min)) * 100
 
-def get_bar(spc = 432):
-	tick_left	= ""
-	tick_right	= ""
-	tick_icon	= "+"
+def get_bar():
+	spc = get_spc()
+	tl = ""; tr = "";
+	ti = "+"
 
 	for x in range(0, int((spc / 2))):
-		tick_left+="-"
-		x+=1
+		tl+="-"; x+=1
 
 	for y in range(0, int((100 - spc) / 2)):
-		tick_right+="-"
-		y+=1
+		tr+="-"; y+=1
 
+	tb = str(tl) + "[" + str(ti) + "]" + str(tr)
+	return tb
 
-	tick_bar	= str(tick_left) + "[" + str(tick_icon) + "]" + str(tick_right)
-	return tick_bar
+def get_labels():
+	return "DS 1 2 3 4 5 6 7 8  11 AM/PM  2 3 4 5 6 7 8 9 10  DE"
 
 # Seconds per day
 def get_spd():
-	return int(s/100)
+	return int(iso[3])
 
 # Sectors per hour
 def get_sph():
-	return int(round(float((int(get_spd()) / 24)), 0))
+	return int(round(float((int(iso[4]) / iso[1])), 0))
 
 # Sectors elapsed in this segment
-def get_spc(ssm):
-	return int(round(scale(int(seg), 0, float(ssm)),0))
+def get_spc():
+	ssm = get_ssm()
+	return int(round(scale(int(iso[4]), 0, float(ssm)),0))
 
 # Sectors remaining in this segment
-def get_spr(spc):
+def get_spr():
+	spc = get_spc()
 	return int(abs(100-spc))
 
 # Sectors since midnight
 def get_ssm():
 	now = datetime.now()
-	ssm = (now - now.replace(hour=0, minute=0, second=0, microsecond=0)).total_seconds()
-
-	return format(float((ssm/100)), 2)
+	return format(float(((now - now.replace(hour=0, minute=0, second=0, microsecond=0)).total_seconds()/100)), 2)
 
 # Sectors to midnight
 def get_stm():
 	now = datetime.now()
 	ssm = get_ssm()
 	stn = (now - now.replace(hour=0, minute=0, second=0, microsecond=0)).total_seconds()
-	stm = format(float(864 - (stn/100)), 2)
+	stm = format(float(iso[4] - (stn/100)), 2)
 
 	return stm
 
 # Slice Sectors into 8 Slices
 def get_sst():
-	spc		= get_spc(get_ssm())
+	spc		= get_spc()
 	sst     	= float(float(get_ssm()) / 100)
-	sliced  	= str(sst).replace(".", ":").split(":")
+	slice  		= str(sst).replace(".", ":").split(":")
 
 	if spc <= 22:
-		sliced_h        = str(sliced[0]).rjust(2, 'N')
+		slice_p = "N"
+		slice_d = "Night"
 	elif spc < 50:
-		sliced_h 	= str(sliced[0]).rjust(2, 'M')
+		slice_p = "M"
+		slice_d = "Morning"
 	elif spc <= 75:
-		sliced_h        = str(sliced[0]).rjust(2, 'A')
+		slice_p = "A"
+		slice_d = "Afternoon"
 	elif spc <= 85:
-		sliced_h        = str(sliced[0]).rjust(2, 'E')
+		slice_p = "E"
+		slice_d = "Evening"
 	elif spc <= 100:
-		sliced_h        = str(sliced[0]).rjust(2, 'N')
+		slice_p = "N"
+		slice_d = "Night"
 	else:
-		sliced_h        = str(sliced[0]).rjust(2, 'N')
+		slice_p = "N"
+		slice_d = "Deep Night"
 
-	sliced_m	= str(sliced[1][0:2]).rjust(2, '0')
-	sliced_s	= str(sliced[1][2:4]).ljust(2, '0')
+	slice_h	= str(slice[0]).rjust(2, '0')
+	slice_m	= str(slice[1][0:2]).rjust(2, '0')
+	slice_s = str(slice[1][2:4]).ljust(2, '0')
 
-	return str(str(sliced_h) + ":" + str(sliced_m) + ":" + str(sliced_s))
+	return str(str(slice_h) + ":" + str(slice_m) + ":" + str(slice_s) + " Sector[" + str(slice_h) + "] Period[" + str(slice_d) + "]")
 
-# Create a degree out of 360 based on current segment since midnight
-def get_deg(ssm):
-	# 1 day = 24 hours / 10 = 2.4 (to divide the current ssm by)
-	d = 1
-	h = d * 24
-	p = h / 10 #2.4
+def get_tick():
+	ssm = str(get_ssm()).split(".")
+	tic = ssm[1]
+	return tic
 
-	return int(float(float(ssm) / p))
+# Create a degree of first hand
+def get_first_hand():
+	ssm = get_ssm()
+	#d = 1
+	#h = d * 24
+	#p = h / 10 #2.4
+
+	return int(float(float(ssm) / 2.4))
+
+# Create a degree of second hand
+def get_second_hand():
+	sec = get_tick()
+	s = scale(28, 0, int(sec))
+
+	return int(s)
+
 
 # Define local time in beats
-def get_blt(ssm):
+def get_blt():
+	ssm = get_ssm()
 	bld = float(1000 - 864)
 	blt = float(float(ssm) + bld)
 
@@ -149,20 +157,26 @@ def get_ltz():
 
 	return str(local_tzname)
 
+# Local Standard Time
+def get_lst():
+	now = datetime.now()
+
+	return str(now.strftime("%H:%M:%S"))
 
 # Sector Clock for Today's Segment
-d, h, m, s, seg = tear()
+iso = init()
 
 while True:
-	now = datetime.now()
+
 	ssm = get_ssm() # sectors since midnight
 	stm = get_stm() # sectors to midnight
 	sph = get_sph() # sectors per hour
-	spc = get_spc(ssm)	# progress through the sector as completed percentage
-	spr = get_spr(spc)	# sectors remaining this segment as percentage to be completed
-	deg = get_deg(ssm)
+	spc = get_spc()	# progress through the sector as completed percentage
+	spr = get_spr()	# sectors remaining this segment as percentage to be completed
+	hst = get_first_hand()
+	hnd = get_second_hand()
 
-	blt = get_blt(ssm)	# produce a local version of a .beat
+	blt = get_blt()	# produce a local version of a .beat
 	bit = get_bit("UTC+1")	# produce the universal internet time from Swatch during daylight savings
 
 
@@ -174,9 +188,9 @@ while True:
 
 
 	os.system("clear")
-	print("Local Time: " + str(now.strftime("%H:%M:%S")) + "  [ssm @" + str(ssm) + " stm @" + str(stm) + " spc: " + str(spc)  + "% spr: " + str(spr)  + "%]")
-	print("Range Bar : " + str(get_bar(spc)))
-	print("            DS 1 2 3 4 5 6 7 8  11 AM/PM  2 3 4 5 6 7 8 9  10 DE")
+	print("Local Time: " + get_lst() + "  [ssm @" + str(ssm) + " stm @" + str(stm) + " spc: " + str(spc)  + "% spr: " + str(spr)  + "%]")
+	print("Range Bar : " + get_bar())
+	print("            " + get_labels())
 	print("\n\n")
 	print("Where")
 	print("- stm = Sectors til midnight      (.tick is a sector's second [0-100])")
@@ -189,10 +203,12 @@ while True:
 	print("DS/DE  = [D]ay[S]tart [D]ay[E]nd")
 
 	print("\n\n")
-	print("Segment Slice (Octal)  : " + str(get_sst()))
-	print("Segment Angle (0-360)  : @" + str(deg))
-	print("Local Beat             : @" + str(blt) + ".beats (" + str(get_ltz())  + ")")
-	print("Universal Beat         : @" + str(bit) + ".beats (BMT)")
+	print("Segment Time  (Oct:Dec:Dec)  : " + str(get_sst()))
+	print("Angle of Tick (second hand)  : °" + str(hnd))
+	print("Angle of Sector (hour hand)  : °" + str(hst))
+	print("\n")
+	print("Local Beat                   : @" + str(blt) + ".beats (" + str(get_ltz())  + ")")
+	print("Universal Beat               : @" + str(bit) + ".beats (BMT)")
 
 	# Simulate a real clock display
 	time.sleep(1)
