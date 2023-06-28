@@ -88,21 +88,29 @@ def get_sst():
 	if spc <= 22:
 		sector_p = "N"
 		sector_d = "Night"
+		sector_l = "nox"
 	elif spc < 50:
 		sector_p = "M"
 		sector_d = "Morning"
+		sector_l = "antemeridies"
 	elif spc <= 75:
 		sector_p = "A"
 		sector_d = "Afternoon"
+		sector_l = "post meridiem"
 	elif spc <= 85:
 		sector_p = "E"
 		sector_d = "Evening"
+		sector_l = "vespera"
 	elif spc <= 100:
 		sector_p = "N"
 		sector_d = "Night"
+		sector_l = "nocturnis"
 	else:
 		sector_p = "N"
-		sector_d = "Deep Night"
+		sector_d = "Night"
+		sector_l = "nuper nocte"
+
+	sel_string = sector_l
 
 	#slice_h	= str(slice[0]).rjust(2, '0')
 	sector_h = slice[0]
@@ -148,11 +156,11 @@ def get_sst():
 	#else:
 	#	sector_hd = str(sector_hb[0])
 
-	sat_string = str(sector_ht) + ":" + str(sector_hc) + ":" + str(sector_p) + "ꝑ  Hour[" + str(int(float(sector_hh))) + " (" + str(sector_hc)  + "%)]"
+	sat_string = str(sector_ht) + ":" + str(sector_hc) + ":" + str(sector_p) + "ꝑ     Hour:" + str(int(float(sector_hh))) + " (" + str(sector_hc)  + "% complete)"
 	sst_string = str(sector_hd) + ":" + str(sector_m) + ":" + str(sector_s) + "⋅" + str(sector_d)
-	sss_string = str("S" + str(sector_h) + ":" + str(sector_m) + ":" + str(sector_s) + "⋅" + str(sector_p) + " Sector[" + str(sector_q) + "] Period[" + str(sector_p) + "]")
+	sss_string = str("S" + str(sector_h) + ":" + str(sector_m) + ":" + str(sector_s) + "⋅" + str(sector_p) + "ꝑ Sector[" + str(sector_q) + "] Period[" + str(sector_p) + "]")
 
-	return sst_string, sat_string, sss_string
+	return sst_string, sat_string, sss_string, sel_string
 
 
 def get_tick():
@@ -239,7 +247,7 @@ def get_lst():
 
 @background
 def run_segment(when = "now"):
-	global iso, hst, hnd, sss, ssm, stm, sbm, sst, sat, spc, spr, sph, spd, seg, blt, bmt
+	global iso, hst, hnd, sss, ssm, stm, sbm, sst, sat, spc, spr, sph, spd, seg, sel, blt, bmt
 	iso = [1, 24, 1440, 864000, 864]
 	bmt = 0
 	blt = 0
@@ -248,6 +256,7 @@ def run_segment(when = "now"):
 	sst = "00:00"
 	sat = "00:00"
 	seg = "unus"
+	sel = "nox"
 
 	while True:
 		ssm = get_ssm() # sectors since midnight
@@ -258,7 +267,7 @@ def run_segment(when = "now"):
 		sph = get_sph() # sectors per hour
 		spc = get_spc() # progress through the sector as completed percentage
 		spr = get_spr() # sectors remaining this segment as percentage to be completed
-		sst, sat, sss = get_sst() # Get [S]tandard [S]ector [T]ime
+		sst, sat, sss, sel = get_sst() # Get [S]tandard [S]ector [T]ime
 		sbm = math.trunc(float(ssm))
 		seg = get_seg()
 
@@ -278,23 +287,24 @@ while True:
 	print("            " + get_labels())
 
 	print("\n\nWhere")
-	print("- stm = Sectors til midnight      (.decond is a sector's second [0-100])")
+	print("- stm = Sectors til midnight      (.decond is a decimal second [0-100])")
 	print("- ssm = Sectors since midnight    (.decond = 1min:40s)")
 	print("- spc = Segment percent completed (.range  = from 0 to 100%)")
-	print("- spr = Segment percent remaining")
+	print("- spr = Segment percent remaining \n\n")
 	#print("- sph = Sectors per standard hour (~" + str(sph) + " .sectors in an hour)")
 	#print("- blt = Beats in Local time (.beat = 1min:25s, ~42 .beats in an hour)")
-	print("\nPERIOD = [N]ight [A]fternoon [M]orning [E]vening")
-	print("SS/SE  = [S]egment[S]tart [S]egment[E]nd\n\n")
+	#print("\nPERIOD = [N]ight [A]fternoon [M]orning [E]vening")
+	#print("SS/SE  = [S]egment[S]tart [S]egment[E]nd\n\n")
 
+	print("Sector Time       (Oct:Dec:Dec:Period)  : " + str(sss))
 	print("REL Segment Time  (Duo:Percent:Period)  : " + str(sat))
 	print("STD Segment Time  (Duo:Dec:Dec:Period)  : " + str(sst))
+
 	#print("Sector Name                    (Latin)  : " + str(seg))
-	print("Sector Time       (Oct:Dec:Dec:Period)  : " + str(sss))
 	print("Angle of Decond          (Second hand)  : " + str(hnd) + "°")
 	print("Angle of Sector            (Hour hand)  : " + str(hst) + "°\n")
 
-	print("Sector Beat                             : @" + str(sbm) + ".sectors (" + str(seg)  + ")")
+	print("Sector Beat                             : @" + str(sbm) + ".sectors (" + str(seg) + " - " + str(sel) + ")")
 
 	if blt != 0:
 		print("Local Beat                              : @" + str(blt) + ".beats   (" + str(get_ltz())  + ")")
