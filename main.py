@@ -98,7 +98,7 @@ def get_sst():
 	slice_m	= str(slice[1][0:2]).rjust(2, '0')
 	slice_s = str(slice[1][2:4]).ljust(2, '0')
 
-	return str(str(slice_h) + ":" + str(slice_m) + ":" + str(slice_s) + " Sector[" + str(slice_h) + "] Period[" + str(slice_d) + "]")
+	return str(str(slice_h) + ":" + str(slice_m) + ":" + str(slice_s) + " Sector[" + str(slice_h) + "] Period[" + str(slice_p) + "]")
 
 def get_tick():
 	ssm = str(get_ssm()).split(".")
