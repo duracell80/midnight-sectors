@@ -138,7 +138,10 @@ def get_sst():
 
 	sector_hd = str(sector_hb[0]).rjust(2, '0')
 	sector_hs = str(int(sector_hb[0]) - 12).rjust(2, '0')
-	sector_ht = str(int(sector_hb[0]) - 12)
+	if int(sector_hb[0]) >= 13:
+		sector_ht = str(int(sector_hb[0]) - 12)
+	else:
+		sector_ht = str(int(sector_hb[0]))
 
 	#if int(sector_hb[0]) > 12:
 	#	sector_hd = str(int(sector_hb[0]) - 12).rjust(2, '0')
@@ -156,6 +159,28 @@ def get_tick():
 	ssm = str(get_ssm()).split(".")
 	tic = ssm[1]
 	return tic
+
+def get_seg():
+	if float(ssm) <= 200:
+		seg = "centum"
+	elif float(ssm) <= 300:
+		seg = "ducenti"
+	elif float(ssm) <= 400:
+		seg = "trecenti"
+	elif float(ssm) <= 500:
+		seg = "quadrigenti"
+	elif float(ssm) <= 600:
+		seg = "quingenti"
+	elif float(ssm) <= 700:
+		seg = "sescenti"
+	elif float(ssm) <= 800:
+		seg = "septingenti"
+	elif float(ssm) <= 900:
+		seg = "octingenti"
+	else:
+		seg = "octodecim"
+
+	return seg
 
 # Create a degree of first hand
 def get_first_hand():
@@ -214,14 +239,15 @@ def get_lst():
 
 @background
 def run_segment(when = "now"):
-	global iso, hst, hnd, sss, ssm, stm, sbm, sst, sat, spc, spr, sph, spd, blt, bmt
+	global iso, hst, hnd, sss, ssm, stm, sbm, sst, sat, spc, spr, sph, spd, seg, blt, bmt
 	iso = [1, 24, 1440, 864000, 864]
 	bmt = 0
 	blt = 0
+	sbm = 0
 	sss = "S1:00:00"
 	sst = "00:00"
 	sat = "00:00"
-	sbm = 0
+	seg = "unus"
 
 	while True:
 		ssm = get_ssm() # sectors since midnight
@@ -234,6 +260,7 @@ def run_segment(when = "now"):
 		spr = get_spr() # sectors remaining this segment as percentage to be completed
 		sst, sat, sss = get_sst() # Get [S]tandard [S]ector [T]ime
 		sbm = math.trunc(float(ssm))
+		seg = get_seg()
 
 		blt = get_blt() # produce a local version of a .beat
 		bmt = get_bmt("UTC+1")
@@ -262,11 +289,12 @@ while True:
 
 	print("REL Segment Time  (Duo:Percent:Period)  : " + str(sat))
 	print("STD Segment Time  (Duo:Dec:Dec:Period)  : " + str(sst))
+	#print("Sector Name                    (Latin)  : " + str(seg))
 	print("Sector Time       (Oct:Dec:Dec:Period)  : " + str(sss))
 	print("Angle of Decond          (Second hand)  : " + str(hnd) + "°")
 	print("Angle of Sector            (Hour hand)  : " + str(hst) + "°\n")
 
-	print("Sector Beat                             : @" + str(sbm) + ".sectors (" + str(get_ltz())  + ")")
+	print("Sector Beat                             : @" + str(sbm) + ".sectors (" + str(seg)  + ")")
 
 	if blt != 0:
 		print("Local Beat                              : @" + str(blt) + ".beats   (" + str(get_ltz())  + ")")
