@@ -129,9 +129,9 @@ def get_sst():
 	sector_hb = str(sector_hh).split(".")
 	sector_hc = str(int(sector_hb[1])).ljust(2, '0')
 
-	sat_string = str(sector_hb[0]) + str(decond) + str(sector_hc) + "⋅" + str(sector_p)
+	sat_string = str(sector_hb[0]) + str(decond) + str(sector_hc) + "⋅" + str(sector_p) + "  Hour[" + str(int(float(sector_hh))) + " (" + str(sector_hc)  + "%)]"
 	sst_string = str(sector_hb[0]) + ":" + str(sector_m) + ":" + str(sector_s) + "⋅" + str(sector_d)
-	sss_string = str("S" + str(sector_h) + ":" + str(sector_m) + ":" + str(sector_s) + "⋅" + str(sector_p) + " Sector[" + str(sector_q) + "] Period[" + str(sector_p) + "] Hour[" + str(int(float(sector_hh))) + " (" + str(sector_hc)  + "%)]")
+	sss_string = str("S" + str(sector_h) + ":" + str(sector_m) + ":" + str(sector_s) + "⋅" + str(sector_p) + " Sector[" + str(sector_q) + "] Period[" + str(sector_p) + "]")
 
 	return sst_string, sat_string, sss_string
 
