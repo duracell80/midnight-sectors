@@ -304,12 +304,12 @@ while True:
 	print("Angle of Decond          (Second hand)  : " + str(hnd) + "°")
 	print("Angle of Sector            (Hour hand)  : " + str(hst) + "°\n")
 
-	print("Sector Beat                             : @" + str(sbm) + ".sectors (" + str(seg) + " - " + str(sel) + ")")
+	print("Sector Beat              : @" + str(sbm) + ".sectors (" + str(seg) + " - " + str(sel) + ")")
 
 	if blt != 0:
-		print("Local Beat                              : @" + str(blt) + ".beats   (" + str(get_ltz())  + ")")
+		print("Locale Beat              : @" + str(blt) + ".beats   (" + str(get_ltz())  + ")")
 	if bmt != 0:
-		print("Universal Beat                          : @" + str(bmt) + ".beats   (BMT)")
+		print("Global Beat              : @" + str(bmt) + ".beats   (BMT)")
 
 	# Simulate a real clock display
 	time.sleep(1)
