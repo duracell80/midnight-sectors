@@ -44,7 +44,7 @@ def get_bar():
 	return tb
 
 def get_labels():
-	return "SS 1 2 3 4 5 6 7 8  11 AM/PM  2 3 4 5 6 7 8 9 10  SE"
+	return "SS 1 2 3 4 5 6 7 8 9 11AM/PM  2 3 4 5 6 7 8 9 10  SE"
 
 
 # Sectors per hour
@@ -109,7 +109,7 @@ def get_sst():
 	sector_m = str(slice[1][0:2]).rjust(2, '0')
 	sector_s = str(slice[1][2:4]).ljust(2, '0')
 
-	return str("S" + str(sector_h) + ":" + str(sector_m) + ":" + str(sector_s) + " Sector[" + str(sector_h) + "] Period[" + str(sector_p) + "]")
+	return str("S" + str(sector_h) + ":" + str(sector_m) + ":" + str(sector_s) + " @" + str(sector_p) + " Sector[" + str(sector_h) + "] Period[" + str(sector_p) + "]")
 
 def get_tick():
 	ssm = str(get_ssm()).split(".")
