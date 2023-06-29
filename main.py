@@ -288,9 +288,9 @@ while True:
 
 	print("\n\nWhere")
 	print("- stm = Sectors til midnight      (.decond is a decimal second [0-100])")
-	print("- ssm = Sectors since midnight    (.decond = 1min:40s)")
-	print("- spc = Segment percent completed (.range  = from 0 to 100%)")
-	print("- spr = Segment percent remaining \n\n")
+	print("- ssm = Sectors since midnight    (.decond   = 1min:40s,  1,000d = 10m)")
+	print("- spc = Segment percent completed (.range    = from 0 to 100%)")
+	print("- spr = Segment percent remaining (.percent  = "+ str(float(36/10)*10) +"ds     1,000s = 16m)\n\n")
 	#print("- sph = Sectors per standard hour (~" + str(sph) + " .sectors in an hour)")
 	#print("- blt = Beats in Local time (.beat = 1min:25s, ~42 .beats in an hour)")
 	#print("\nPERIOD = [N]ight [A]fternoon [M]orning [E]vening")
