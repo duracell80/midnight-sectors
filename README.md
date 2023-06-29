@@ -25,7 +25,7 @@ Ever noticed how it's not entirely clear how AM/PM denotes evening and morning? 
 - Range   (The progression of day from 0 to 100% clockwise in linear left to right motion)
 
 #### Periods:
-Two sectors are combined to give 4 periods
+Two slices are combined to give 4 periods
 - [N] = Night
 - [A] = Afternoon
 - [M] = Morning
