@@ -1,5 +1,5 @@
 # Midnight Sectors (Readable Decimal Hybrid)
-Time is messy and decimal time tricky. Midnight sectors is a decimal / hectosecond based unit of time measurement somewhere between Base 10 and Base 8 and somewhat relatable to Base 12. It is a local and relative alternative to swatch internet time set around the calculation of 86,400 seconds per day. 
+Time is messy and decimal time tricky. Midnight sectors is a decimal / hectosecond based unit of time measurement somewhere between Base 10 and Base 8 and somewhat relatable to Base 12. It is a local and relative alternative to swatch internet time set around the calculation of 86,400 seconds per day thus a day will start at midnight @000 and end at midnight @864.
 
 ### A 10 day week?
 NO! Relax, there are no 10 day weeks or 1 day weekends here. This proposal lays out a hybrid between the two opposing systems, keeping a 7 day week.
