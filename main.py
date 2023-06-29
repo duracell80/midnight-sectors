@@ -304,7 +304,7 @@ while True:
 	print("Angle of Decond          (Second hand)  : " + str(hnd) + "°")
 	print("Angle of Sector            (Hour hand)  : " + str(hst) + "°\n")
 
-	print("Sector Beat              : @" + str(sbm) + ".sectors (" + str(seg) + " - " + str(sel) + ")")
+	print("Sector Beat              : @" + str(sbm).rjust(3, '0') + ".sectors (" + str(seg) + " - " + str(sel) + ")")
 
 	if blt != 0:
 		print("Locale Beat              : @" + str(blt) + ".beats   (" + str(get_ltz())  + ")")
