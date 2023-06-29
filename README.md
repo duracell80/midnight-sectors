@@ -16,8 +16,9 @@ The @time is readable on an octal clock!
 Ever noticed how it's not entirely clear how AM/PM denotes evening and morning? Add to this, AM denotes a period of time that is both night and day. It's not possible to look at a clock and know straight away if AM means morning when it's light or night when it's dark.
 
 ### Terms for Hours, Minutes and Seconds
+- Slice   (a 24 hour day that is sliced into 8 hours instead)
 - Sector  (A sector contains = 1 minute and 40 seconds or 100 seconds)
-- Decond  (The way to think of an extended second)
+- Decond  (The way to think of an extended second, or hectosecond)
 - Tick    (An odd  .decond)
 - Tock    (An even .decond)
 - SSM     (The number of whole single sectors of 100 deconds, since midnight)
