@@ -17,11 +17,11 @@ Ever noticed how it's not entirely clear how AM/PM denotes evening and morning? 
 
 ### Terms for Hours, Minutes and Seconds
 - Sector  (A sector contains = 1 minute and 40 seconds or 100 seconds)
-- Decond  (An integer second ranging to 100)
+- Decond  (The way to think of an extended second)
 - Tick    (An odd  .decond)
 - Tock    (An even .decond)
-- SSM     (The number of whole single sectors of 100 seconds, since midnight)
-- STM     (The number of whole single sectors of 100 seconds, til midnight)
+- SSM     (The number of whole single sectors of 100 deconds, since midnight)
+- STM     (The number of whole single sectors of 100 sdeconds, til midnight)
 - Range   (The progression of day from 0 to 100% clockwise in linear left to right motion)
 
 #### Periods:
