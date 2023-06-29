@@ -110,7 +110,9 @@ Global Beat              : @240.beats   (BMT)
 - Each sector can hold 100 relatable standard seconds (just like .beats)!!
 - Subtracting the current sector from 864 produces an innate notion of a countdown that tracks actual minutes
 
-- A day can be broken down into 8 periods and is readable on an Octal Clock
+- A day can be broken down into 8 sectors and is readable on an Octal Clock
+
+- Those 8 sectors can yeild 4 periods, that we culturally know in English by NAME
 
 - At local midnight the SSM (Sectors Since Midnight) start back at zero, this is highly intuitive
 - At local midnight the STM (Sectors Til Midnight) flip back to 864, giving an intuitive context of sectors
