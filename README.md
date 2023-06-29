@@ -31,14 +31,16 @@ Two slices are combined to give 4 periods
 - [M] = Morning
 - [E] = Evening
 
+More than one sector can span a period, given that seasons lengthen and shorten the durations of an evening, morning or afternoon and indeed night. Our current time systems struggle to define an evening and rarely display local durations of these periods. AM and PM are so binary! Time is messy.
+
 Latin:
-- Night     - Nox
+- Night     - nox (nx) *night crossing
 - Afternoon - post meridiem (pm)
 - Morning   - antemeridies (am)
-- Evening   - nocturnis
+- Evening   - nocturnis (nc) *night coming
 
 #### Slices with Latin Names:
-There are 8 slices or hours in the day. A whole sector can span a period, so morning may run through the 3rd and 4th slice. A slice defines 100 sectors.
+There are 8 slices or hours in the day. A slice defines 100 sectors.
 
 - Slice 1 (000 to 100) - centum
 - Slice 2 (100 to 200) - ducenti
