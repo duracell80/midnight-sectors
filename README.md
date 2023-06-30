@@ -40,10 +40,12 @@ Look at that! He:Se:De ... just like HH:MM:SS!
 (*) decimalizable should be a word.
 
 #### Terms for Periods:
+Why only two (am/pm)? Let's double up and describe night and evening.
+
 - Night     - nox (nx) *night crossing
 - Afternoon - post meridiem (pm)
 - Morning   - antemeridies (am)
-- Evening   - nocturnis (nc) *night coming
+- Evening   - noc (nc) *night coming
 
 #### Hedrons with Latin Names:
 There are 8 hedrons or hours in the day (technically the 9th to hold the final 64 sectors), named in latin for their boundary. A hedron defines 100 sectors (there are 100 minutes in an hour).
