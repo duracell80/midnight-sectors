@@ -37,6 +37,8 @@ https://www.youtube.com/watch?v=PIe2auW9EMI
 - STM     (The number of whole single sectors of 100 sdeconds, til midnight)
 - Range   (The progression of day from 0 to 100% clockwise in linear left to right motion)
 
+Look at that! He:Se:De ... just like HH:MM:SS!
+
 (*) decimalizable should be a word.
 
 #### Terms for Periods:
@@ -76,6 +78,9 @@ Easily know how far through a Hedron you are with decimals is it half past 5? Ye
 - Decimal Hours  : https://www.youtube.com/watch?v=-58c2mDU1KY
 - Time can be art: https://nanoleaf.me
 - Time can be childsplay: https://www.youtube.com/watch?v=VRyxzHIq3wY
+- The Decans: https://egyptmagictours.com/the-ancient-egyptians-chose-36-stars-or-a-group-of-stars-called-the-decans/
+
+Decan Blue? Sure ok.
 
 
 ### Run the clock
