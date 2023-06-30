@@ -65,7 +65,7 @@ There are 8 hedrons or hours in the day (technically the 9th to hold the final 6
 - Hedron 7 (@700 to @800) - septingenti
 - Hedron 10 (@800 The remaining 64) - octingenti
 
-Hedron 8 and 9 cannot exist in base 8, totally not confusing. 64 is divisible by 8 and equals 8 for fun Octal NYE celebrations!
+Hedron 8 and 9 cannot exist in base 8, totally not confusing, October is the 10th month (instead of Decotober), see time is messy. 64 is divisible by 8 and equals 8 for fun Octal NYE celebrations!
 
 #### Hedron Orientation Shorthand
 Easily know how far through a Hedron you are with decimals. Question is it half past 5? Yes it is 5.50 .... makes sense. Half dollar. Quarter past the hours? Sure if it's 3.25, it's a quater-past three, easy, quarters are good in gaming arcades.
