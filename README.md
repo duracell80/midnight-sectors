@@ -7,7 +7,7 @@ This proposal lays out a hybrid between the two opposing systems, keeping a 7 da
 The @time is readable on an octal clock!
 ![Octahedron as net](https://raw.githubusercontent.com/duracell80/midnight-sectors/main/docs/images/octahedron_net.svg)
 
-### Terms For The Day
+#### Terms For The Day
 - Lumin (A whole of 864 sectors = 1 day of 24 hours, lumen = light, day is light)
 - Segment (Octal division of the day into 8 parts of up to 100 sectors each)
 - Period (A period denotes 4 periods of time within the lumin [NAME])
@@ -23,7 +23,7 @@ Ever noticed how it's not entirely clear how AM/PM denotes evening and morning? 
 This is a problem, a generation is not able to read a dial clock face!
 https://www.youtube.com/watch?v=PIe2auW9EMI
 
-### Terms for Hours, Minutes and Seconds
+#### Terms for Hours, Minutes and Seconds
 - Hedron  (A hedron (face with hands) is the second part of the word Octahedron, seems like a large measure)
 - Sector  (A sector (minute) contains = 1 minute and 40 seconds or 100 decimalizable* seconds)
 - Decond  (The way to think of an extended second, or hectosecond)
@@ -35,7 +35,7 @@ https://www.youtube.com/watch?v=PIe2auW9EMI
 
 (*) decimalizable should be a word.
 
-### Terms for Periods:
+#### Terms for Periods:
 - Night     - nox (nx) *night crossing
 - Afternoon - post meridiem (pm)
 - Morning   - antemeridies (am)
@@ -107,25 +107,7 @@ Global Beat              : @240.beats   (BMT)
 
 ```
 
-### Theory
-- Starting with Base 12
-- There are 86,400 seconds in a standard day.
-- Divided by 100, there are @864 sectors in a day (rather than 1000)
-- Each sector can hold 100 relatable standard seconds (just like .beats)!!
-- Subtracting the current sector from 864 produces an innate notion of a countdown that tracks actual minutes
-
-- A day can be broken down into 8 sectors and is readable on an Octal Clock
-
-- Those 8 sectors can yeild 4 periods, that we culturally know in English by NAME
-
-- At local midnight the SSM (Sectors Since Midnight) start back at zero, this is highly intuitive
-- At local midnight the STM (Sectors Til Midnight) flip back to 864, giving an intuitive context of sectors
-- A sector that is at midnight @000 is then easily identifiable and relatable to human midnight 00:00
-
-### Defining a day as a segment
-There simply are enough sectors in a segment!! Since a human day consists of 24 hours to relate the two systems the total number of sectors can be divided by 24, giving 36 sectors per hour and 100 seconds per sector. A whole day can then be thought of as a segment of the week. Each segment representing @864 sectors. A week may still be 7 segs in duration and December can contain 31 segs as it would days.
-
-### Beat IT
-.Beat or Swatch Time aims to be a standardized absolute time format that would be exactly the same around the world and not relative to a local time. Neither is a beat anchored to the relation of two celestial bodies nor does it make any sense since there aren't 100,000 seconds in a day. Beats are instead like most timezones anchored to a physical location. An example of a beat would be @237 and the idea is that it would be universally @237 everywhere. However by dividing a day into 1000 .beats is a little difficult to innately relate to human time. Another drawback is that @237 to me close to midnight is not the same as @237 somewhere else where they may be eating breakfast. Whereas we eat breakfast roughly at the "same relative time" around the world, for example 7am, with beats we get a cultural disconnect. 
+#### Beat IT (Inspiration)
+So I wouldn't have gone down a decimal rabbithole if it wasn't for beats. Swatch time or BMT aims to be a standardized absolute time format that would be exactly the same around the world and not relative to a local time (except Zurich is about as cool and epic as Greenwhich.). Neither is a beat anchored to the relation of two celestial bodies nor does it make any sense since there aren't 100,000 seconds in a day. Beats are instead like most timezones anchored to a physical location. An example of a beat would be @237 and the idea is that it would be universally @237 everywhere. However by dividing a day into 1000 .beats is a little difficult to innately relate to human time. Another drawback is that @237 to me close to midnight is not the same as @237 somewhere else where they may be eating breakfast. Whereas we eat breakfast roughly at the "same relative time" around the world, for example 7am, with beats we get a cultural disconnect. 
 
 https://en.wikipedia.org/wiki/Swatch_Internet_Time
