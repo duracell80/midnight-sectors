@@ -71,7 +71,7 @@ Easily know how far through a Hedron you are with decimals is it half past 5? Ye
 - H5 ...
 - H6 ...
 - H7 ... 
-- H8 ...
+- H8 ... *
 
 ### Further Resources / Inspiration
 - Decimal Minutes: https://hr.colostate.edu/minute-to-decimal-conversion-chart
@@ -82,6 +82,8 @@ Easily know how far through a Hedron you are with decimals is it half past 5? Ye
 
 Decan Blue? Sure ok. Time is fun again with deconds (seconds 0 to 100)
 https://www.youtube.com/watch?v=5SD4lI9GKUE
+
+(*) Could there be 16 hours in a day? Sure I don't see why not. The asterix on the keyboard is Shift+8 anything is possible!
 
 ### Run the clock
 In a terminal
