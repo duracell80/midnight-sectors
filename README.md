@@ -70,7 +70,7 @@ Easily know how far through a Hedron you are with decimals is it half past 5? Ye
 ### Further Resources
 - Decimal Minutes: https://hr.colostate.edu/minute-to-decimal-conversion-chart
 - Decimal Hours  : https://www.youtube.com/watch?v=-58c2mDU1KY
-
+- Time can be childsplay: https://www.youtube.com/watch?v=VRyxzHIq3wY
 
 
 ### Run the clock
