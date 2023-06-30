@@ -9,6 +9,10 @@ This proposal lays out a hybrid between the two opposing systems, keeping a 7 da
 The @time is readable on an octal clock!
 ![Octahedron as net](https://raw.githubusercontent.com/duracell80/midnight-sectors/main/docs/images/octahedron_net.svg)
 
+#### Application in real life
+- A 3min 33s pop song = 2 sectors and 13 deconds (00:03:33 = 00:02:13)
+- A 2 hour movie = 85 sectors and 71 deconds or 0.85 hedrons (02:00:00 = 00:85:71)
+
 #### Terms For The Day
 - Lumin (A whole of 864 sectors = 1 day of 24 hours, lumen = light, day is light)
 - Segment (Octal division of the day into 8.64 parts of up to 100 sectors each)
