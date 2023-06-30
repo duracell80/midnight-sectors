@@ -33,39 +33,39 @@ https://www.youtube.com/watch?v=PIe2auW9EMI
 - STM     (The number of whole single sectors of 100 sdeconds, til midnight)
 - Range   (The progression of day from 0 to 100% clockwise in linear left to right motion)
 
-* decimalizable should be a word.
+(*) decimalizable should be a word.
 
-Latin:
+### Terms for Periods:
 - Night     - nox (nx) *night crossing
 - Afternoon - post meridiem (pm)
 - Morning   - antemeridies (am)
 - Evening   - nocturnis (nc) *night coming
 
-#### Slices with Latin Names:
-There are 8 slices or hours in the day. A slice defines 100 sectors.
+#### Hedrons with Latin Names:
+There are 8 hedrons or hours in the day. A hedron defines 100 sectors, is the inter-face to the sectors.
 
-- Slice 1 (000 to 100) - centum
-- Slice 2 (100 to 200) - ducenti
-- Slice 3 (200 to 300) - trecenti
-- Slice 4 (300 to 400) - quadrigenti
-- Slice 5 (500 to 600) - quingenti
-- Slice 6 (600 to 700) - sescenti
-- Slice 7 (700 to 800) - septingenti
-- Slice 8 (The remaining 64) - octingenti
+- Hedron 1 (000 to 100) - centum
+- Hedron 2 (100 to 200) - ducenti
+- Hedron 3 (200 to 300) - trecenti
+- Hedron 4 (300 to 400) - quadrigenti
+- Hedron 5 (500 to 600) - quingenti
+- Hedron 6 (600 to 700) - sescenti
+- Hedron 7 (700 to 800) - septingenti
+- Hedron 8 (The remaining 64) - octingenti
 
 64 is divisible by 8 and equals 8 for fun Octal NYE celebrations!
 
-#### Sector Orientation Shorthand
-Easily know how far through a sector you are with decimals.
+#### Hedron Orientation Shorthand
+Easily know how far through a Hedron you are with decimals is it half past 5? Yes it is 5.50 .... makes sense. Half dollar. Quarter past the hours? Sure if it's 3.25, it's a quater-past three, easy.
 
-- S1 (.25 .50 .75)
-- S2 ...
-- S3 ...
-- S4 ...
-- S5 ...
-- S6 ...
-- S7 ... 
-- S8 ...
+- H1 (.25 .50 .75)
+- H2 ...
+- H3 ...
+- H4 ...
+- H5 ...
+- H6 ...
+- H7 ... 
+- H8 ...
 
 ### Further Resources
 - Decimal Minutes: https://hr.colostate.edu/minute-to-decimal-conversion-chart
