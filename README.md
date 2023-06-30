@@ -48,7 +48,7 @@ Look at that! He:Se:De ... just like HH:MM:SS!
 #### Hedrons with Latin Names:
 There are 8 hedrons or hours in the day (technically the 9th to hold the final 64 sectors), named in latin for their boundary. A hedron defines 100 sectors (there are 100 minutes in an hour).
 
-- Hedron 0 (@000 to @100) - venti
+- Hedron 0 (@000 to @100) - venti (all computer scientists drink coffee at night, I assume)
 - Hedron 1 (@100 to @200) - centumi
 - Hedron 2 (@200 to @300) - ducenti
 - Hedron 3 (@300 to @400) - trecenti
