@@ -80,8 +80,8 @@ Easily know how far through a Hedron you are with decimals is it half past 5? Ye
 - Time can be childsplay: https://www.youtube.com/watch?v=VRyxzHIq3wY
 - The Decans: https://egyptmagictours.com/the-ancient-egyptians-chose-36-stars-or-a-group-of-stars-called-the-decans/
 
-Decan Blue? Sure ok.
-
+Decan Blue? Sure ok. Time is fun again with deconds (seconds 0 to 100)
+https://www.youtube.com/watch?v=5SD4lI9GKUE
 
 ### Run the clock
 In a terminal
