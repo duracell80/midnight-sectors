@@ -1,15 +1,14 @@
 # Midnight Sectors (Readable OctaDecimal Hybrid)
-Time is messy and decimal time tricky. Midnight sectors is a decimal / hectosecond based unit of time measurement somewhere between Base 10 and Base 8 and somewhat relatable to Base 12. It is a local and relative alternative to swatch internet time set around the calculation of 86,400 seconds per day thus a day will start at midnight @000 and end at midnight @864.
+Time is messy and decimal time tricky. Midnight sectors is a decimal / hectosecond based unit of time measurement somewhere between Base 10 and Base 8 and somewhat relatable to Base 12. It is a local and relative alternative to Swatch internet time (BMT) set around the calculation of 86,400 seconds per day thus a day will start at midnight @000 and end at midnight @864.
 
 ### Overall goal: Make decimal minutes and seconds eaiser to relate to ...
 This proposal lays out a hybrid between the two opposing systems, keeping a 7 day week, spliting the day into 8 (sectors) and again into 4 (periods).
-
 
 The @time is readable on an octal clock!
 ![Octahedron as net](https://raw.githubusercontent.com/duracell80/midnight-sectors/main/docs/images/octahedron_net.svg)
 
 ### Terms For The Day
-- Lumin   (A whole of 864 sectors = 1 day of 24 hours)
+- Lumin   (A whole of 864 sectors = 1 day of 24 hours, lumen = light, day is light)
 - Segment (Octal division of the day into 8 parts of up to 100 sectors each)
 - Period  (A period denotes 4 periods of time within the lumin [NAME])
 
@@ -23,8 +22,8 @@ Two segments are combined to give 4 periods
 Ever noticed how it's not entirely clear how AM/PM denotes evening and morning? Before noon and after noon both relate to periods of time that don;t rleate to if it's day or night. 12pm is the brighest part of the day but 11pm is usally not daylight. It's not possible to look at a clock and know innately if it's night or day.
 
 ### Terms for Hours, Minutes and Seconds
-- Slice   (a 24 hour day that is sliced into 8 hours instead)
-- Sector  (A sector contains = 1 minute and 40 seconds or 100 seconds)
+- Hedron  (A hedron (face) is the second part of the word Octahedron, seems like a large measure)
+- Sector  (A sector (minute) contains = 1 minute and 40 seconds or 100 seconds)
 - Decond  (The way to think of an extended second, or hectosecond)
 - Tick    (An odd  .decond)
 - Tock    (An even .decond)
@@ -32,8 +31,6 @@ Ever noticed how it's not entirely clear how AM/PM denotes evening and morning? 
 - STM     (The number of whole single sectors of 100 sdeconds, til midnight)
 - Range   (The progression of day from 0 to 100% clockwise in linear left to right motion)
 
-
-More than one sector can span a period, given that seasons lengthen and shorten the durations of an evening, morning or afternoon and indeed night. Our current time systems struggle to define an evening and rarely display local durations of these periods. AM and PM are so binary! Time is messy.
 
 Latin:
 - Night     - nox (nx) *night crossing
