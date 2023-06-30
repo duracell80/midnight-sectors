@@ -48,15 +48,15 @@ Look at that! He:Se:De ... just like HH:MM:SS!
 - Evening   - nocturnis (nc) *night coming
 
 #### Hedrons with Latin Names:
-There are 8 hedrons or hours in the day. A hedron defines 100 sectors, is the inter-face to the sectors.
+There are 8 hedrons or hours in the day, named in latin for their boundary. A hedron defines 100 sectors, is the inter-face to the sectors.
 
-- Hedron 1 (000 to 100) - centum
-- Hedron 2 (100 to 200) - ducenti
-- Hedron 3 (200 to 300) - trecenti
-- Hedron 4 (300 to 400) - quadrigenti
-- Hedron 5 (500 to 600) - quingenti
-- Hedron 6 (600 to 700) - sescenti
-- Hedron 7 (700 to 800) - septingenti
+- Hedron 1 (@000 to @100) - centum
+- Hedron 2 (@100 to @200) - ducenti
+- Hedron 3 (@200 to @300) - trecenti
+- Hedron 4 (@300 to @400) - quadrigenti
+- Hedron 5 (@500 to @600) - quingenti
+- Hedron 6 (@600 to @700) - sescenti
+- Hedron 7 (@700 to @800) - septingenti
 - Hedron 8 (The remaining 64) - octingenti
 
 64 is divisible by 8 and equals 8 for fun Octal NYE celebrations!
