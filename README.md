@@ -24,8 +24,8 @@ This is a problem, a generation is not able to read a dial clock face!
 https://www.youtube.com/watch?v=PIe2auW9EMI
 
 ### Terms for Hours, Minutes and Seconds
-- Hedron  (A hedron (face) is the second part of the word Octahedron, seems like a large measure)
-- Sector  (A sector (minute) contains = 1 minute and 40 seconds or 100 seconds)
+- Hedron  (A hedron (face with hands) is the second part of the word Octahedron, seems like a large measure)
+- Sector  (A sector (minute) contains = 1 minute and 40 seconds or 100 decimalizable* seconds)
 - Decond  (The way to think of an extended second, or hectosecond)
 - Tick    (An odd  .decond)
 - Tock    (An even .decond)
@@ -33,6 +33,7 @@ https://www.youtube.com/watch?v=PIe2auW9EMI
 - STM     (The number of whole single sectors of 100 sdeconds, til midnight)
 - Range   (The progression of day from 0 to 100% clockwise in linear left to right motion)
 
+* decimalizable should be a word.
 
 Latin:
 - Night     - nox (nx) *night crossing
