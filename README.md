@@ -22,9 +22,9 @@ The @time is readable on an octal clock!
 - [M] = Morning
 - [E] = Evening
 
-Ever noticed how it's not entirely clear how AM/PM denotes evening and morning? Before noon and after noon both relate to periods of time that don't relate to if it's day or night. 12pm is the brighest part of the day but 11pm is usally not daylight. It's not possible to look at a clock and know innately if it's night or day. Worse a dial interface doesn't rotate 360 degrees once, but TWICE and contains no AM/PM context!
+Ever noticed how it's not entirely clear how AM/PM denotes evening and morning? Before noon and after noon both relate to periods of time that don't relate to if it's day or night. 12pm is the brighest part of the day but 11pm is usually not daylight. It's not possible to look at a clock and know innately if it's night or day. Worse a dial interface doesn't rotate 360 degrees once, but TWICE and contains no AM/PM context! Are we in the first 360 rotation or second?
 
-This is a problem, a generation is not able to read a dial clock face!
+This is a problem, a generation is not able to read a dial clock face! How could they? 11 means 5 to something and 11 o'something at night and 11 o'something at day? How strange.
 https://www.youtube.com/watch?v=PIe2auW9EMI
 
 #### Terms for Hours, Minutes and Seconds
