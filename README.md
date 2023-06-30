@@ -4,7 +4,7 @@ Time is messy and decimal time tricky. Midnight sectors is a decimal / hectoseco
 Throwback Thursday: https://www.youtube.com/watch?v=zI_SBAkdKzc
 
 ### Overall goal: Make decimal minutes and seconds eaiser to relate to ...
-This proposal lays out a hybrid between the two opposing systems, keeping a 7 day week, spliting the day into 8 (sectors) and again into 4 (periods). It stops short of 10 hours, because that's just confusing!!
+This proposal lays out a hybrid between the two opposing systems, keeping a 7 day week, spliting the day into 8 (chunks * ) and again into 4 (periods). It stops short of 10 hours, because that's just confusing!! (*) a 9th "hour" is needed for the remaining 64 sectors.
 
 The @time is readable on an octal clock!
 ![Octahedron as net](https://raw.githubusercontent.com/duracell80/midnight-sectors/main/docs/images/octahedron_net.svg)
@@ -73,7 +73,7 @@ Easily know how far through a Hedron you are with decimals. Question is it half 
 - H8 ... *
 
 #### Triangles, 24 hours / 3 = 8
-If all calculations are correct a headron could be considered the passage of around 3 hours.
+If all calculations are correct a headron could be considered the passage of just a teeny bit more than 3 hours.
 
 Let's tesselate!
 
