@@ -3,6 +3,7 @@ Time is messy and decimal time tricky. Midnight sectors is a decimal / hectoseco
 
 Does this replace standard time? No, it's an overlay, the math underneath is about as Babylonian as David Grey at a traffic light.
 
+Throwback Thursday: https://www.youtube.com/watch?v=zI_SBAkdKzc
 
 ### Overall goal: Make decimal minutes and seconds eaiser to relate to ...
 This proposal lays out a hybrid between the two opposing systems, keeping a 7 day week, spliting the day into 8 (sectors) and again into 4 (periods).
