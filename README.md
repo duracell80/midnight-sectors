@@ -1,5 +1,5 @@
 # Midnight Sectors (Readable OctaDecimal Hybrid)
-Time is messy and decimal time tricky. Midnight sectors is a decimal / hectosecond based unit of time measurement somewhere between Base 10 and Base 8 and somewhat relatable to Base 12. It is a local and relative alternative to Swatch internet time (BMT) set around the calculation of 86,400 seconds per day thus a day will start at midnight @000 and end at midnight @864. Does this replace standard time? No, it's an overlay, the math underneath is about as Babylonian as David Grey at a traffic light. 
+Time is messy and decimal time tricky. Midnight sectors is a decimal / hectosecond based unit of time measurement somewhere between Base 10 and Base 8 and somewhat relatable to the mundane sex·a·ges·i·mal system. It is a local and relative alternative to Swatch internet time (BMT) set around the calculation of 86,400 seconds per day thus a day will start at midnight @000 and end at midnight @864. Does this replace standard time? No, it's an overlay, the math underneath is about as Babylonian as David Grey at a traffic light. 
 
 Throwback Thursday: https://www.youtube.com/watch?v=zI_SBAkdKzc
 
