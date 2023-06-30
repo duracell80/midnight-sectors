@@ -12,6 +12,7 @@ The @time is readable on an octal clock!
 #### Application in real life
 - A 3min 33s pop song = 2 sectors and 13 deconds (00:03:33 = 00:02:13)
 - A 2 hour movie = 85 sectors and 71 deconds or 0.85 hedrons (02:00:00 = 00:85:71)
+- A 45 minute bus ride takes 32 sectors and 14 deconds (00:45:00 = 00:32:14)
 
 #### Terms For The Day
 - Lumin (A whole of 864 sectors = 1 day of 24 hours, lumen = light, day is light)
