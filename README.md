@@ -9,9 +9,16 @@ The @time is readable on an octal clock!
 ![Octahedron as net](https://raw.githubusercontent.com/duracell80/midnight-sectors/main/docs/images/octahedron_net.svg)
 
 ### Terms For The Day
-- Segment (A segment of 864 sectors = 1 day of 24 hours)
-- Slice   (Octal division of the day into 8 parts of up to 100 sectors each)
-- Period  (2 slices of a segment, a period denotes 4 periods of time [NAME])
+- Lumin   (A whole of 864 sectors = 1 day of 24 hours)
+- Segment (Octal division of the day into 8 parts of up to 100 sectors each)
+- Period  (A period denotes 4 periods of time within the lumin [NAME])
+
+#### Lumin Periods:
+Two segments are combined to give 4 periods
+- [N] = Night
+- [A] = Afternoon
+- [M] = Morning
+- [E] = Evening
 
 Ever noticed how it's not entirely clear how AM/PM denotes evening and morning? Add to this, AM denotes a period of time that is both night and day. It's not possible to look at a clock and know straight away if AM means morning when it's light or night when it's dark.
 
@@ -25,12 +32,6 @@ Ever noticed how it's not entirely clear how AM/PM denotes evening and morning? 
 - STM     (The number of whole single sectors of 100 sdeconds, til midnight)
 - Range   (The progression of day from 0 to 100% clockwise in linear left to right motion)
 
-#### Periods:
-Two slices are combined to give 4 periods
-- [N] = Night
-- [A] = Afternoon
-- [M] = Morning
-- [E] = Evening
 
 More than one sector can span a period, given that seasons lengthen and shorten the durations of an evening, morning or afternoon and indeed night. Our current time systems struggle to define an evening and rarely display local durations of these periods. AM and PM are so binary! Time is messy.
 
