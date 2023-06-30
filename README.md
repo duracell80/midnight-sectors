@@ -11,7 +11,7 @@ The @time is readable on an octal clock!
 
 #### Terms For The Day
 - Lumin (A whole of 864 sectors = 1 day of 24 hours, lumen = light, day is light)
-- Segment (Octal division of the day into 8 parts of up to 100 sectors each)
+- Segment (Octal division of the day into 8.64 parts of up to 100 sectors each)
 - Period (A period denotes 4 periods of time within the lumin [NAME])
 
 #### Lumin Periods:
