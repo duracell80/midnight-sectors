@@ -8,18 +8,20 @@ The @time is readable on an octal clock!
 ![Octahedron as net](https://raw.githubusercontent.com/duracell80/midnight-sectors/main/docs/images/octahedron_net.svg)
 
 ### Terms For The Day
-- Lumin ... (A whole of 864 sectors = 1 day of 24 hours, lumen = light, day is light)
-- Segment . (Octal division of the day into 8 parts of up to 100 sectors each)
-- Period .. (A period denotes 4 periods of time within the lumin [NAME])
+- Lumin (A whole of 864 sectors = 1 day of 24 hours, lumen = light, day is light)
+- Segment (Octal division of the day into 8 parts of up to 100 sectors each)
+- Period (A period denotes 4 periods of time within the lumin [NAME])
 
 #### Lumin Periods:
-Two segments are combined to give 4 periods
 - [N] = Night
 - [A] = Afternoon
 - [M] = Morning
 - [E] = Evening
 
-Ever noticed how it's not entirely clear how AM/PM denotes evening and morning? Before noon and after noon both relate to periods of time that don;t rleate to if it's day or night. 12pm is the brighest part of the day but 11pm is usally not daylight. It's not possible to look at a clock and know innately if it's night or day.
+Ever noticed how it's not entirely clear how AM/PM denotes evening and morning? Before noon and after noon both relate to periods of time that don't relate to if it's day or night. 12pm is the brighest part of the day but 11pm is usally not daylight. It's not possible to look at a clock and know innately if it's night or day. Worse a dial interface doesn't rotate 360 degrees once, but TWICE and contains no AM/PM context!
+
+This is a problem, a generation is not able to read a dial clock face!
+https://www.youtube.com/watch?v=PIe2auW9EMI
 
 ### Terms for Hours, Minutes and Seconds
 - Hedron  (A hedron (face) is the second part of the word Octahedron, seems like a large measure)
