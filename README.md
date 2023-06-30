@@ -1,12 +1,12 @@
-# Midnight Sectors (Readable Decimal Hybrid)
+# Midnight Sectors (Readable OctaDecimal Hybrid)
 Time is messy and decimal time tricky. Midnight sectors is a decimal / hectosecond based unit of time measurement somewhere between Base 10 and Base 8 and somewhat relatable to Base 12. It is a local and relative alternative to swatch internet time set around the calculation of 86,400 seconds per day thus a day will start at midnight @000 and end at midnight @864.
 
 ### A 10 day week?
-NO! Relax, there are no 10 day weeks or 1 day weekends here. This proposal lays out a hybrid between the two opposing systems, keeping a 7 day week.
+NO! Relax, there are no 10 day weeks or 1 day weekends here. This proposal lays out a hybrid between the two opposing systems, keeping a 7 day week, spliting the day into 8 (sectors) and again into 4 (periods).
 
 
 The @time is readable on an octal clock!
-![An Octal Wrist Watch](https://rlv.zcache.com/octal_clock_base_eight_wrist_watch-r96038d637caa4f628250eaf51195ed92_zd5ip_630.jpg?rlvnet=1&view_padding=%5B285%2C0%2C285%2C0%5D)
+![Octahedron as net](https://raw.githubusercontent.com/duracell80/midnight-sectors/main/docs/images/octahedron_net.svg)
 
 ### Terms For The Day
 - Segment (A segment of 864 sectors = 1 day of 24 hours)
