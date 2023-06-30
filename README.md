@@ -80,7 +80,7 @@ Easily know how far through a Hedron you are with decimals. Question is it half 
 - H8 ... *
 
 #### Triangles, 24 hours / 3 = 8
-If all calculations are correct a headron could be considered the passage of just a teeny bit more than 3 hours.
+If all calculations are correct a hedron could be considered the passage of just a teeny bit more than 3 hours.
 
 Let's tesselate!
 
