@@ -6,7 +6,7 @@ Does this replace standard time? No, it's an overlay, the math underneath is abo
 Throwback Thursday: https://www.youtube.com/watch?v=zI_SBAkdKzc
 
 ### Overall goal: Make decimal minutes and seconds eaiser to relate to ...
-This proposal lays out a hybrid between the two opposing systems, keeping a 7 day week, spliting the day into 8 (sectors) and again into 4 (periods).
+This proposal lays out a hybrid between the two opposing systems, keeping a 7 day week, spliting the day into 8 (sectors) and again into 4 (periods). It stops short of 10 hours, because that's just confusing!!
 
 The @time is readable on an octal clock!
 ![Octahedron as net](https://raw.githubusercontent.com/duracell80/midnight-sectors/main/docs/images/octahedron_net.svg)
