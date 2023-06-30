@@ -8,9 +8,9 @@ The @time is readable on an octal clock!
 ![Octahedron as net](https://raw.githubusercontent.com/duracell80/midnight-sectors/main/docs/images/octahedron_net.svg)
 
 ### Terms For The Day
-- Lumin   (A whole of 864 sectors = 1 day of 24 hours, lumen = light, day is light)
-- Segment (Octal division of the day into 8 parts of up to 100 sectors each)
-- Period  (A period denotes 4 periods of time within the lumin [NAME])
+- Lumin ... (A whole of 864 sectors = 1 day of 24 hours, lumen = light, day is light)
+- Segment . (Octal division of the day into 8 parts of up to 100 sectors each)
+- Period .. (A period denotes 4 periods of time within the lumin [NAME])
 
 #### Lumin Periods:
 Two segments are combined to give 4 periods
