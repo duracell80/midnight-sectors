@@ -20,7 +20,7 @@ Two segments are combined to give 4 periods
 - [M] = Morning
 - [E] = Evening
 
-Ever noticed how it's not entirely clear how AM/PM denotes evening and morning? Add to this, AM denotes a period of time that is both night and day. It's not possible to look at a clock and know straight away if AM means morning when it's light or night when it's dark.
+Ever noticed how it's not entirely clear how AM/PM denotes evening and morning? Before noon and after noon both relate to periods of time that don;t rleate to if it's day or night. 12pm is the brighest part of the day but 11pm is usally not daylight. It's not possible to look at a clock and know innately if it's night or day.
 
 ### Terms for Hours, Minutes and Seconds
 - Slice   (a 24 hour day that is sliced into 8 hours instead)
