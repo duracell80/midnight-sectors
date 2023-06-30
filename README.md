@@ -72,7 +72,12 @@ Easily know how far through a Hedron you are with decimals. Question is it half 
 - H7 ... 
 - H8 ... *
 
-### Further Resources / Inspiration
+#### Triangles, 24 hours / 3 = 8
+If all calculations are correct a headron could be considered the passage of around 3 hours.
+
+Let's tesselate!
+
+#### Further Resources / Inspiration
 - Decimal Minutes: https://hr.colostate.edu/minute-to-decimal-conversion-chart
 - Decimal Hours  : https://www.youtube.com/watch?v=-58c2mDU1KY
 - Time can be art: https://nanoleaf.me
