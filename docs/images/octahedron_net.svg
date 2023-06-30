@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="240pt" height="180pt" viewBox="0 0 240 180" version="1.2">
+<g id="surface1">
+<path style="fill:none;stroke-width:10;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:4;" d="M 2048.476562 610 L 2386.25 1195 L 1710.742188 1195 Z M 2048.476562 610 " transform="matrix(0.1,0,0,-0.1,0,180)"/>
+<path style="fill:none;stroke-width:10;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:4;" d="M 1373.007812 610 L 1710.742188 1195 L 1035.234375 1195 Z M 1373.007812 610 " transform="matrix(0.1,0,0,-0.1,0,180)"/>
+<path style="fill:none;stroke-width:10;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:4;" d="M 697.5 610 L 1035.234375 1195 L 359.726562 1195 Z M 697.5 610 " transform="matrix(0.1,0,0,-0.1,0,180)"/>
+<path style="fill:none;stroke-width:10;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:4;" d="M 1710.976562 1185 L 2048.75 600 L 1373.242188 600 Z M 1710.976562 1185 " transform="matrix(0.1,0,0,-0.1,0,180)"/>
+<path style="fill:none;stroke-width:10;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:4;" d="M 1035.507812 1185 L 1373.242188 600 L 697.734375 600 Z M 1035.507812 1185 " transform="matrix(0.1,0,0,-0.1,0,180)"/>
+<path style="fill:none;stroke-width:10;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:4;" d="M 360 1185 L 697.734375 600 L 22.265625 600 Z M 360 1185 " transform="matrix(0.1,0,0,-0.1,0,180)"/>
+<path style="fill:none;stroke-width:10;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:4;" d="M 1373.007812 1780 L 1710.742188 1195 L 1035.234375 1195 Z M 1373.007812 1780 " transform="matrix(0.1,0,0,-0.1,0,180)"/>
+<path style="fill:none;stroke-width:10;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:4;" d="M 1032.5 15 L 1370.234375 600 L 694.726562 600 Z M 1032.5 15 " transform="matrix(0.1,0,0,-0.1,0,180)"/>
+</g>
+</svg>
