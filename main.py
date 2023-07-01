@@ -29,6 +29,29 @@ def format(n, digits):
 def scale(max = 864, min = 0, sector = 432):
 	return ((sector - min) / (max - min)) * 100
 
+def get_lum(day = None):
+	if day:
+		day = str(day).lower()
+	else:
+		day = datetime.now().weekday()
+
+	if day == 6 or day == "sunday" or day == "dimanche" or day == "domingo" or day == "domenica":
+		return "solis"
+	elif day == 0 or day == "monday" or day == "lundi" or day == "lunes" or day == "lunedi":
+		return "lunae"
+	elif day == 1 or day == "tuesday" or day == "mardi" or day == "martes" or day == "martedi":
+		return "martis"
+	elif day == 2 or day == "wednesday" or day == "mercredi" or day == "miercoles" or day == "mercoledi":
+		return "mercurii"
+	elif day == 3 or day == "thursday" or day == "jeudi" or day == "jueves" or day == "giovedi":
+		return "jovis"
+	elif day == 4 or day == "friday" or day == "vendredi" or day == "viernes" or day == "venerdi":
+		return "veneris"
+	elif day == 5 or day == "saturday" or day == "samedi" or day == "sabado" or day == "sabato":
+		return "saturni"
+	else:
+		return "lumni"
+
 def get_bar():
 	spc = get_spc()
 	tl = ""; tr = "";
@@ -156,9 +179,9 @@ def get_sst():
 	#else:
 	#	sector_hd = str(sector_hb[0])
 
-	sat_string = str(sector_ht) + ":" + str(sector_hc) + ":" + str(sector_p) + "ꝑ     Hour:" + str(int(float(sector_hh))) + " (" + str(sector_hc)  + "% complete)"
+	sat_string = str(sector_ht) + ":" + str(sector_hc) + "⋅" + str(sector_p) + "ꝑ     Hour:" + str(int(float(sector_hh))) + " (" + str(sector_hc)  + "% complete)"
 	sst_string = str(sector_hd) + ":" + str(sector_m) + ":" + str(sector_s) + "⋅" + str(sector_d)
-	sss_string = str("S" + str(sector_h) + ":" + str(sector_m) + ":" + str(sector_s) + "⋅" + str(sector_p) + "ꝑ Sector[" + str(sector_q) + "] Period[" + str(sector_p) + "]")
+	sss_string = str("H" + str(sector_h) + ":" + str(sector_m) + ":" + str(sector_s) + "⋅" + str(sector_p) + "ꝑ Segment[" + str(sector_q) + "] Period[" + str(sector_p) + "]")
 
 	return sst_string, sat_string, sss_string, sel_string
 
@@ -197,9 +220,17 @@ def get_first_hand():
 
 # Create a degree of second hand
 def get_second_hand():
-	t = get_tick()
-	tik = round((float(t) * 3.55)/5.) * 5
-	return tik
+	tic = get_tick()
+	return round((float(tic) * 3.55)/5.) * 5
+
+# Create a degree of second hand
+def get_third_hand():
+	spc             = get_spc()
+	sst             = float(float(get_ssm()) / 100)
+	slice           = str(sst).replace(".", ":").split(":")
+	sst_m 		= str(slice[1][0:2]).rjust(2, '0')
+
+	return round((float(sst_m) * 3.55)/5.) * 5
 
 
 # Define local time in beats
@@ -244,24 +275,31 @@ def get_lst():
 	return str(now.strftime("%H:%M:%S"))
 
 
-
 @background
 def run_segment(when = "now"):
-	global iso, hst, hnd, sss, ssm, stm, sbm, sst, sat, spc, spr, sph, spd, seg, sel, blt, bmt
+	global iso, hst, hnd, hrd, sss, ssm, stm, sbm, sst, sat, spc, spr, sph, spd, seg, sel, blt, bmt, lum
 	iso = [1, 24, 1440, 864000, 864]
+	hst = 0
+	hnd = 0
+	hrd = 0
 	bmt = 0
 	blt = 0
 	sbm = 0
+	stm = 0
+	spc = 0
+	spr = 0
 	sss = "S1:00:00"
 	sst = "00:00"
 	sat = "00:00"
 	seg = "unus"
 	sel = "nox"
+	lum = get_lum()
 
 	while True:
 		ssm = get_ssm() # sectors since midnight
 		hst = get_first_hand()
 		hnd = get_second_hand()
+		hrd = get_third_hand()
 
 		stm = get_stm() # sectors to midnight
 		sph = get_sph() # sectors per hour
@@ -282,9 +320,10 @@ run_segment("CDT")
 while True:
 	os.system("clear")
 
-	print("Local Time: " + get_lst() + "  [ssm @" + str(ssm) + " stm @" + str(stm) + " spc: " + str(spc)  + "% spr: " + str(spr)  + "%]")
-	print("Range Bar : " + get_bar())
-	print("            " + get_labels())
+	print("Local Time  : " + get_lst() + "  [ssm @" + str(ssm) + " stm @" + str(stm) + " spc: " + str(spc)  + "% spr: " + str(spr)  + "%]")
+	print("Range Bar   : " + get_bar())
+	print("              " + get_labels())
+	print("\nEarth Lumin : " + str(lum) + " (" + str(sel) + ")")
 
 	print("\n\nWhere")
 	print("- stm = Sectors til midnight      (.decond is a decimal second [0-100])")
@@ -296,15 +335,16 @@ while True:
 	#print("\nPERIOD = [N]ight [A]fternoon [M]orning [E]vening")
 	#print("SS/SE  = [S]egment[S]tart [S]egment[E]nd\n\n")
 
-	print("Sector Time       (Oct:Dec:Dec:Period)  : " + str(sss))
-	print("REL Segment Time  (Duo:Percent:Period)  : " + str(sat))
-	print("STD Segment Time  (Duo:Dec:Dec:Period)  : " + str(sst))
+	print("Sector Time [SRT]   (Duo:Percent:Period)  : " + str(sat))
+	print("Sector Time [SEG]   (Oct:Dec:Dec:Period)  : " + str(sss))
+	print("Sector Time [STD]   (Duo:Dec:Dec:Period)  : " + str(sst))
 
 	#print("Sector Name                    (Latin)  : " + str(seg))
-	print("Angle of Decond          (Second hand)  : " + str(hnd) + "°")
-	print("Angle of Sector            (Hour hand)  : " + str(hst) + "°\n")
+	print("Angle of Hedron            (Hour hand)    : " + str(hst) + "°")
+	print("Angle of Sector          (Minute hand)    : " + str(hrd) + "°")
+	print("Angle of Decond          (Second hand)    : " + str(hnd) + "°\n")
 
-	print("Sector Beat              : @" + str(sbm).rjust(3, '0') + ".sectors (" + str(seg) + " - " + str(sel) + ")")
+	print("Sector Beat              : @" + str(sbm).rjust(3, '0') + ".sectors (" + str(seg) + ")")
 
 	if blt != 0:
 		print("Locale Beat              : @" + str(blt) + ".beats   (" + str(get_ltz())  + ")")
