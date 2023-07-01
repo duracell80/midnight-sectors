@@ -322,8 +322,9 @@ while True:
 
 	print("Local Time  : " + get_lst() + "  [ssm @" + str(ssm) + " stm @" + str(stm) + " spc: " + str(spc)  + "% spr: " + str(spr)  + "%]")
 	print("Range Bar   : " + get_bar())
-	print("              " + get_labels())
-	print("\nEarth Lumin : " + str(lum) + " (" + str(sel) + ")")
+	print("              " + get_labels() + "\n")
+	print("Earth Lumin : " + str(lum) + " (" + str(sel) + ")")
+	print("Earth Time  : " + str(sat))
 
 	print("\n\nWhere")
 	print("- stm = Sectors til midnight      (.decond is a decimal second [0-100])")
