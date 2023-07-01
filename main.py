@@ -29,6 +29,9 @@ def format(n, digits):
 def scale(max = 864, min = 0, sector = 432):
 	return ((sector - min) / (max - min)) * 100
 
+def percentage(part, whole):
+	return 100 * float(part)/float(whole)
+
 def get_lum(day = None):
 	if day:
 		day = str(day).lower()
@@ -84,12 +87,24 @@ def get_spr():
 	spc = get_spc()
 	return int(abs(100-spc))
 
-# Sectors since midnight
+# Sectors since midnight on Earth
 def get_ssm():
 	now = datetime.now()
 	ssm = format(float(((now - now.replace(hour=0, minute=0, second=0, microsecond=0)).total_seconds()/100)), 2)
 	ssm = str(ssm).rjust(3, '0')
 	return ssm
+
+# Sectors since midnight on Mars
+def get_msm():
+	now = datetime.now()
+	mss = format(float(((((now - now.replace(hour=0, minute=0, second=0, microsecond=0)).total_seconds()) - (soi[3] - iso[3])) / 100)),2)
+	# Slow down time as a sol takes longer to complete than a lum
+	#msm = percentage(2.75, get_ssm())
+	#msm = float(get_ssm()) - (soi[3] - iso[3])
+	if float(mss) < 0:
+		mss = 0
+	return mss
+
 
 # Sectors to midnight
 def get_stm():
@@ -160,12 +175,14 @@ def get_sst():
 
 	sector_hh = round(float((float(ssm) / 3.6) / 10),2)
 	sector_hb = str(sector_hh).split(".")
-	if int(str(sector_hb[1])) < 10:
-		sector_hc = str(int(sector_hb[1])).rjust(2, '0')
-	else:
-		sector_hc = str(int(sector_hb[1]))
-	if "0" in str(sector_hc):
-                sector_hc = str(int(sector_hb[1])).ljust(2, '0')
+	#if int(str(sector_hb[1])) < 10:
+	#	sector_hc = str(int(sector_hb[1])).rjust(2, '0')
+	#else:
+	#	sector_hc = str(int(sector_hb[1]))
+	#if "0" in str(sector_hc):
+        #        sector_hc = str(int(sector_hb[1])).rjust(2, '0')
+
+	sector_hc = str(sector_hb[1]).rjust(2, '0')
 
 	sector_hd = str(sector_hb[0]).rjust(2, '0')
 	sector_hs = str(int(sector_hb[0]) - 12).rjust(2, '0')
@@ -179,11 +196,12 @@ def get_sst():
 	#else:
 	#	sector_hd = str(sector_hb[0])
 
-	sat_string = str(sector_ht) + ":" + str(sector_hc) + "⋅" + str(sector_p) + "ꝑ     Hour:" + str(int(float(sector_hh))) + " (" + str(sector_hc)  + "% complete)"
+	sat_string_1 = str(sector_ht) + ":" + str(sector_hc) + "⋅" + str(sector_p) + "ꝑ"
+	sat_string_2 = "Hour:" + str(int(float(sector_hh))) + " (" + str(sector_hc)  + "% complete)"
 	sst_string = str(sector_hd) + ":" + str(sector_m) + ":" + str(sector_s) + "⋅" + str(sector_d)
 	sss_string = str("H" + str(sector_h) + ":" + str(sector_m) + ":" + str(sector_s) + "⋅" + str(sector_p) + "ꝑ Segment[" + str(sector_q) + "] Period[" + str(sector_p) + "]")
 
-	return sst_string, sat_string, sss_string, sel_string
+	return sst_string, sat_string_1, sat_string_2, sss_string, sel_string
 
 
 def get_tick():
@@ -241,6 +259,16 @@ def get_blt():
 
 	return str(format(float(blt), 0)).rjust(3, '0')
 
+# Define mars time in beats
+def get_bmr():
+	msm = get_msm()
+	#mld = float(1000 - 888)
+	mld = 0
+	mlt = float(float(msm) + mld)
+
+	return str(format(float(mlt),0)).rjust(3, '0')
+
+
 # Define universal time in beats
 def get_bmt(tz_base = "UTC"):
 	from_zone = tz.gettz(tz_base)
@@ -277,40 +305,44 @@ def get_lst():
 
 @background
 def run_segment(when = "now"):
-	global iso, hst, hnd, hrd, sss, ssm, stm, sbm, sst, sat, spc, spr, sph, spd, seg, sel, blt, bmt, lum
-	iso = [1, 24, 1440, 864000, 864]
-	hst = 0
-	hnd = 0
-	hrd = 0
-	bmt = 0
-	blt = 0
-	sbm = 0
-	stm = 0
-	spc = 0
-	spr = 0
-	sss = "S1:00:00"
-	sst = "00:00"
-	sat = "00:00"
-	seg = "unus"
-	sel = "nox"
-	lum = get_lum()
+	global iso, soi, hst, hnd, hrd, sss, ssm, stm, sbm, sst, sat1, sat2, spc, spr, sph, spd, seg, sel, blt, bmt, bmr, lum, sol
+	iso  = [1, 24, 1440, 86400, 864] # Clocks on Earth
+	soi  = [1, 24, 1440, 88775, 888] # Clocks on Mars ... 8*3 = 24, 8 and a bit hedrons (8 hour day with 4 periods, (or 16, also with 4 periods))
+	hst  = 0
+	hnd  = 0
+	hrd  = 0
+	bmt  = 0
+	blt  = 0
+	bmr  = 0
+	sbm  = 0
+	stm  = 0
+	spc  = 0
+	spr  = 0
+	sss  = "S1:00:00"
+	sst  = "00:00"
+	sat1 = "00:00"
+	sat2 = ""
+	seg  = "unus"
+	sel  = "nox"
+	lum  = get_lum()
 
 	while True:
-		ssm = get_ssm() # sectors since midnight
+		ssm = get_ssm() # sectors since midnight on Earth
 		hst = get_first_hand()
 		hnd = get_second_hand()
 		hrd = get_third_hand()
 
-		stm = get_stm() # sectors to midnight
-		sph = get_sph() # sectors per hour
-		spc = get_spc() # progress through the sector as completed percentage
-		spr = get_spr() # sectors remaining this segment as percentage to be completed
-		sst, sat, sss, sel = get_sst() # Get [S]tandard [S]ector [T]ime
+		stm = get_stm() # sectors to midnight on Earth
+		sph = get_sph() # sectors per hour on Earth
+		spc = get_spc() # progress through the sector as completed percentage on Earth
+		spr = get_spr() # sectors remaining this segment as percentage to be completed on Earth
+		sst, sat1, sat2, sss, sel = get_sst() # Get [S]tandard [S]ector [T]ime on Earth
 		sbm = math.trunc(float(ssm))
 		seg = get_seg()
 
-		blt = get_blt() # produce a local version of a .beat
+		blt = get_blt() # produce a local version of a .beat on Earth
 		bmt = get_bmt("UTC+1")
+		bmr = get_bmr()
 
 		time.sleep(0.5)
 
@@ -323,11 +355,11 @@ while True:
 	print("Local Time  : " + get_lst() + "  [ssm @" + str(ssm) + " stm @" + str(stm) + " spc: " + str(spc)  + "% spr: " + str(spr)  + "%]")
 	print("Range Bar   : " + get_bar())
 	print("              " + get_labels() + "\n")
-	print("Earth Lumin : " + str(lum) + " (" + str(sel) + ")")
-	print("Earth Time  : " + str(sat))
+	print("Earth Lumin : (day: " + str(lum) + ") (period: " + str(sel) + ") (segment: " + str(seg) + ")")
+	print("Earth Time  : " + str(sat1))
 
 	print("\n\nWhere")
-	print("- stm = Sectors til midnight      (.decond is a decimal second [0-100])")
+	print("- stm = Sectors til midnight      (.sector   = decimal minute of an 8 hour day)")
 	print("- ssm = Sectors since midnight    (.decond   = 1min:40s,  1,000d = 10m)")
 	print("- spc = Segment percent completed (.range    = from 0 to 100%)")
 	print("- spr = Segment percent remaining (.percent  = "+ str(float(36/10)*10) +"ds     1,000s = 16m)\n\n")
@@ -336,7 +368,7 @@ while True:
 	#print("\nPERIOD = [N]ight [A]fternoon [M]orning [E]vening")
 	#print("SS/SE  = [S]egment[S]tart [S]egment[E]nd\n\n")
 
-	print("Sector Time [SRT]   (Duo:Percent:Period)  : " + str(sat))
+	print("Sector Time [SRT]   (Duo:Percent:Period)  : " + str(sat1) + "     " + str(sat2))
 	print("Sector Time [SEG]   (Oct:Dec:Dec:Period)  : " + str(sss))
 	print("Sector Time [STD]   (Duo:Dec:Dec:Period)  : " + str(sst))
 
@@ -345,12 +377,14 @@ while True:
 	print("Angle of Sector          (Minute hand)    : " + str(hrd) + "°")
 	print("Angle of Decond          (Second hand)    : " + str(hnd) + "°\n")
 
-	print("Sector Beat              : @" + str(sbm).rjust(3, '0') + ".sectors (" + str(seg) + ")")
+	print("MarSol Beat              : @" + str(bmr) + ".sectors (MTC)") # Time on Mars
+	print("Sector Beat              : @" + str(sbm).rjust(3, '0') + ".sectors (SMT)")
 
 	if blt != 0:
 		print("Locale Beat              : @" + str(blt) + ".beats   (" + str(get_ltz())  + ")")
 	if bmt != 0:
 		print("Global Beat              : @" + str(bmt) + ".beats   (BMT)")
+
 
 	# Simulate a real clock display
 	time.sleep(1)
