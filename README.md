@@ -145,7 +145,7 @@ Inspired by the Martian Time-Slip, midnight-sectors provides an approximation be
 Thus giving the impression of instant communication in the most important direction, Mars back to Earth (Thank you PKD).
 
 #### Enhancing the Martian Time-Slip
-Whereas PKD (Phillip K Dick) imagined the time at midnight to be frozen to celebrate Mars as a distinct civilization from Earth and a time to shed inhibitions, freezing time doesn't make too much logical sense in practical life. Therefore the first 36 sectors after midnight (The Decons) can be aproximated to a percentage. The progress of the time slip can be measured and at the end of the time slip (The Decons). This time slip provides the perfect calculation to make Mars be consistently ahead of Earth by 36 sectors. Giving a mechanisim to send a message from Mars timestamped with a local Mars time that would then almost equate to a real time on Earth or be considered the deliver by time to Earth based reception systems.
+Whereas PKD (Phillip K Dick) imagined the time at midnight to be frozen to celebrate Mars as a distinct civilization from Earth and a time to shed inhibitions, freezing time doesn't make too much logical sense in practical life. Therefore the first 36 sectors after midnight (The Decons) can be approximated as a percentage. This time slip provides the perfect calculation to make Mars be consistently ahead of Earth by 36 sectors. Giving a mechanisim to send a message from Mars timestamped with a local Mars time that would then almost equate to a real time in Earth based reception systems.
 
 ```
 The extent of how far Mars is ahead of Earth shows around 65% past 11 at or 23:40 at night
@@ -153,7 +153,7 @@ The extent of how far Mars is ahead of Earth shows around 65% past 11 at or 23:4
 Earth Time  : 11:65⋅Nꝑ
 ⋅Mars Time  : 12:00⋅Nꝑ
 
-Producing the 20 minutes for communciation lag
+Producing the 20 minutes for comms lag
 ```
 
 ```
