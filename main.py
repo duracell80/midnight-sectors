@@ -142,7 +142,7 @@ def get_sst():
 		sector_p = "N"
 		sector_d = "Night"
 		sector_l = "nox"
-	elif spc < 50:
+	elif spc <= 50:
 		sector_p = "M"
 		sector_d = "Morning"
 		sector_l = "antemeridies"
@@ -204,7 +204,7 @@ def get_sst():
 	if int(sector_hb[0]) >= 13:
 		sector_ht = str(int(sector_hb[0]) - 12)
 	else:
-		sector_ht = str(int(sector_hb[0]))
+		sector_ht = str(int(sector_hb[0])).rjust(2, '0')
 
 
 	if str(sector_hb[1])[0] == 0:
@@ -218,7 +218,7 @@ def get_sst():
 	#	sector_hd = str(sector_hb[0])
 
 	sat_string_1 = str(sector_ht) + ":" + str(sector_hc) + "⋅" + str(sector_p) + "ꝑ"
-	sat_string_2 = "Hour:" + str(int(float(sector_hh))) + " (" + str(sector_hc)  + "% complete)"
+	sat_string_2 = "Hour:" + str(int(float(sector_hh))).rjust(2, '0') + " (" + str(sector_hc).rjust(2, '0')  + "% complete)"
 	sst_string = str(sector_hd) + ":" + str(sector_m) + ":" + str(sector_s) + "⋅" + str(sector_d)
 	sss_string = str("H" + str(sector_h) + ":" + str(sector_m) + ":" + str(sector_s) + "⋅" + str(sector_p) + "ꝑ Segment[" + str(sector_q) + "] Period[" + str(sector_p) + "]")
 
@@ -230,15 +230,15 @@ def get_mst():
 	mlice           = str(mst).replace(".", ":").split(":")
 
 	mpc = get_mpc()
-	if mpc <= 22:
+	if int(mpc) <= 22:
 		mector_p = "N"
-	elif mpc < 50:
+	elif int(mpc) <= 50:
                 mector_p = "M"
-	elif mpc <= 75:
+	elif int(mpc) <= 75:
 		mector_p = "A"
-	elif mpc <= 85:
+	elif int(mpc) <= 85:
 		mector_p = "E"
-	elif mpc <= 100:
+	elif int(mpc) <= 100:
 		mector_p = "N"
 	else:
 		mector_p = "N"
@@ -247,7 +247,7 @@ def get_mst():
 	mector_h = mlice[0]
 	mector_m = str(mlice[1][0:2]).rjust(2, '0')
 	mector_s = str(mlice[1][2:4])
-	mector_p = "N"
+
 
 	if int(mector_m) <= 25:
 		mector_q = str(int(mector_h)) + ".25"
@@ -270,10 +270,10 @@ def get_mst():
 	else:
 		mector_hc = str(mector_hb[1]).ljust(2, '0')
 
-	if int(mector_hb[0]) >= 12:
-		mector_ht = str(int(mector_hb[0]) - 13)
+	if int(mector_hb[0]) >= 13:
+		mector_ht = str(int(mector_hb[0]) - 12)
 	else:
-		mector_ht = str(int(mector_hb[0]))
+		mector_ht = str(int(mector_hb[0])).rjust(2, '0')
 
 	if mts:
 		mector_p = "S"
@@ -282,7 +282,7 @@ def get_mst():
 
 	mat_string_1 = str(mector_ht) + ":" + str(mector_hc) + "⋅" + str(mector_p) + "ꝑ"
 
-	return mat_string_1
+	return mat_string_1, mpc
 
 def get_tick():
 	ssm = str(get_ssm()).split(".")
@@ -290,7 +290,9 @@ def get_tick():
 	return tic
 
 def get_seg():
-	if float(ssm) <= 200:
+	if float(ssm) <= 100:
+		seg = "venti" # every lux (day) should start with a coffee
+	elif float(ssm) <= 200:
 		seg = "centum"
 	elif float(ssm) <= 300:
 		seg = "ducenti"
@@ -385,7 +387,7 @@ def get_lst():
 
 @background
 def run_segment(when = "now"):
-	global iso, soi, pkd, mts, msm, mat1, hst, hnd, hrd, sss, ssm, stm, sbm, sst, sat1, sat2, spc, spr, sph, spd, seg, sel, blt, bmt, bmr, lum, sol
+	global iso, soi, pkd, mts, msm, mat1, mpc, hst, hnd, hrd, sss, ssm, stm, sbm, sst, sat1, sat2, spc, spr, sph, spd, seg, sel, blt, bmt, bmr, lum, sol
 	iso  = [1, 24, 1440, 86400, 864] # Clocks on Earth
 	soi  = [1, 24, 1440, 88775, 888] # Clocks on Mars ... 8*3 = 24, 8 and a bit hedrons (8 hour day with 4 periods, (or 16, also with 4 periods))
 	hst  = 0
@@ -411,6 +413,7 @@ def run_segment(when = "now"):
 	pkd  = False
 	mts  = False # Keep track of status of the Time Slip
 	msm  = 0
+	mpc  = 0
 
 	while True:
 		ssm = get_ssm() # sectors since midnight on Earth
@@ -430,7 +433,7 @@ def run_segment(when = "now"):
 		bmt = get_bmt("UTC+1")
 
 		bmr, mts, msm = get_bmr()
-		mat1 = get_mst()
+		mat1, mpc = get_mst()
 
 		time.sleep(0.5)
 
@@ -447,11 +450,12 @@ while True:
 	print("Earth Time  : " + str(sat1))
 	print("⋅Mars Time  : " + str(mat1))
 
-	print("\n\nWhere")
-	print("- stm = Sectors til midnight      (.sector   = decimal minute of an 8 hour day)")
-	print("- ssm = Sectors since midnight    (.decond   = 1min:40s,  1,000d = 10m)")
-	print("- lpc = Lumin percent completed   (.range    = from 0 to 100%)")
-	print("- lpr = Lumin percent remaining   (.percent  = "+ str(float(36/10)*10) +"ds     1,000s = 16m)\n\n")
+	print("\n\n")
+	#print("Where")
+	#print("- stm = Sectors til midnight      (.sector   = decimal minute of an 8 hour day)")
+	#print("- ssm = Sectors since midnight    (.decond   = 1min:40s,  1,000d = 10m)")
+	#print("- lpc = Lumin percent completed   (.range    = from 0 to 100%)")
+	#print("- lpr = Lumin percent remaining   (.percent  = "+ str(float(36/10)*10) +"ds     1,000s = 16m)\n\n")
 	#print("- sph = Sectors per standard hour (~" + str(sph) + " .sectors in an hour)")
 	#print("- blt = Beats in Local time (.beat = 1min:25s, ~42 .beats in an hour)")
 	#print("\nPERIOD = [N]ight [A]fternoon [M]orning [E]vening")
@@ -471,13 +475,13 @@ while True:
 	else:
 		tz_mar = "MTC" # Mars Coordinated Time
 
-	print("MarSol Beat              : @" + str(bmr) + ".sectors (" + str(tz_mar) + ")") # Time on Mars
-	print("Sector Beat              : @" + str(sbm).rjust(3, '0') + ".sectors (SMT)")
+	print("MarSol Beat         [Sol Complete = "+str(mpc).rjust(2, '0')+"%]  : @" + str(bmr) + ".sectors (" + str(tz_mar) + ")") # Time on Mars
+	print("Sector Beat         [Lux Complete = "+str(spc).rjust(2, '0')+"%]  : @" + str(sbm).rjust(3, '0') + ".sectors (SMT)")
 
 	if blt != 0:
-		print("Locale Beat              : @" + str(blt) + ".beats   (" + str(get_ltz())  + ")")
+		print("Locale Beat                               : @" + str(blt) + ".beats   (" + str(get_ltz())  + ")")
 	if bmt != 0:
-		print("Global Beat              : @" + str(bmt) + ".beats   (BMT)")
+		print("Global Beat                               : @" + str(bmt) + ".beats   (BMT)")
 
 
 	# Simulate a real clock display
