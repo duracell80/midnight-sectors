@@ -152,29 +152,27 @@ Whereas PKD (Phillip K Dick) imagined the time at midnight to be frozen to celeb
 
 Encoding The Decons into interstellar travel seems pretty poetic!
 
-```
 The extent of how far Mars is ahead of Earth shows around 65% past 11 at or 23:40 at night
 
+```
 Earth Time  : 11:65⋅Nꝑ
 ⋅Mars Time  : 12:00⋅Nꝑ
 
 Producing the 20 minutes for comms lag
 ```
 
-```
 The Time Slip begins at Midnight on Earth Where Coordinated Mars Time switches to Mars Timeslip Time. The progression of the TS is marked in the hour section of the display:
 
+```
 ⋅Mars Time  : %:52⋅Sꝑ
-
 
 The period changes to "S" denoting the Time-Slip is in progress
 The timezone MTC changes to MTS
 
 @019.sectors (MTS)
+```
 
 At 36 sectors; Timeslip Time ends leaving Mars ahead of Earth by 36 sectors.
-
-```
 
 
 #### Beat IT (Inspiration)
