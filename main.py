@@ -98,12 +98,22 @@ def get_ssm():
 def get_msm():
 	now = datetime.now()
 	mss = format(float(((((now - now.replace(hour=0, minute=0, second=0, microsecond=0)).total_seconds()) - (soi[3] - iso[3])) / 100)),2)
-	# Slow down time as a sol takes longer to complete than a lum
-	#msm = percentage(2.75, get_ssm())
-	#msm = float(get_ssm()) - (soi[3] - iso[3])
-	if float(mss) < 0:
-		mss = 0
-	return mss
+	#msm = float(mss) - float(percentage(2.75, float(mss)))
+	if pkd:
+		# Introduce the time slip (frozen time for about 40 Standard Earth Minutes)
+		if float(mss) < 0:
+			mss = 0
+			mts = True
+		return mss, mts
+	else:
+		# Introduce the time skip (double the midnight sectors on Earth up to the first 24)
+		if float(ssm) <= 24:
+			mss = float(ssm) * 2
+			mts = True
+		else:
+			mss = float(ssm) + 24
+			mts = False
+		return mss, mts
 
 
 # Sectors to midnight
@@ -261,12 +271,12 @@ def get_blt():
 
 # Define mars time in beats
 def get_bmr():
-	msm = get_msm()
+	msm, mts = get_msm()
 	#mld = float(1000 - 888)
 	mld = 0
 	mlt = float(float(msm) + mld)
 
-	return str(format(float(mlt),0)).rjust(3, '0')
+	return str(format(float(mlt),0)).rjust(3, '0'), mts
 
 
 # Define universal time in beats
@@ -305,7 +315,7 @@ def get_lst():
 
 @background
 def run_segment(when = "now"):
-	global iso, soi, hst, hnd, hrd, sss, ssm, stm, sbm, sst, sat1, sat2, spc, spr, sph, spd, seg, sel, blt, bmt, bmr, lum, sol
+	global iso, soi, pkd, mts, hst, hnd, hrd, sss, ssm, stm, sbm, sst, sat1, sat2, spc, spr, sph, spd, seg, sel, blt, bmt, bmr, lum, sol
 	iso  = [1, 24, 1440, 86400, 864] # Clocks on Earth
 	soi  = [1, 24, 1440, 88775, 888] # Clocks on Mars ... 8*3 = 24, 8 and a bit hedrons (8 hour day with 4 periods, (or 16, also with 4 periods))
 	hst  = 0
@@ -326,6 +336,10 @@ def run_segment(when = "now"):
 	sel  = "nox"
 	lum  = get_lum()
 
+	# Set to True to introduce Phillip K Dick's Martian Time Slip
+	pkd  = False
+	mts  = False # Keep track of status of the Time Slip
+
 	while True:
 		ssm = get_ssm() # sectors since midnight on Earth
 		hst = get_first_hand()
@@ -342,7 +356,8 @@ def run_segment(when = "now"):
 
 		blt = get_blt() # produce a local version of a .beat on Earth
 		bmt = get_bmt("UTC+1")
-		bmr = get_bmr()
+		bmr, mts = get_bmr()
+
 
 		time.sleep(0.5)
 
@@ -352,7 +367,7 @@ run_segment("CDT")
 while True:
 	os.system("clear")
 
-	print("Local Time  : " + get_lst() + "  [ssm @" + str(ssm) + " stm @" + str(stm) + " spc: " + str(spc)  + "% spr: " + str(spr)  + "%]")
+	print("Local Time  : " + get_lst() + "  [ssm @" + str(ssm) + " stm @" + str(stm) + " lpc: " + str(spc)  + "% lpr: " + str(spr)  + "%]")
 	print("Range Bar   : " + get_bar())
 	print("              " + get_labels() + "\n")
 	print("Earth Lumin : (day: " + str(lum) + ") (period: " + str(sel) + ") (segment: " + str(seg) + ")")
@@ -361,8 +376,8 @@ while True:
 	print("\n\nWhere")
 	print("- stm = Sectors til midnight      (.sector   = decimal minute of an 8 hour day)")
 	print("- ssm = Sectors since midnight    (.decond   = 1min:40s,  1,000d = 10m)")
-	print("- spc = Segment percent completed (.range    = from 0 to 100%)")
-	print("- spr = Segment percent remaining (.percent  = "+ str(float(36/10)*10) +"ds     1,000s = 16m)\n\n")
+	print("- lpc = Lumin percent completed   (.range    = from 0 to 100%)")
+	print("- lpr = Lumin percent remaining   (.percent  = "+ str(float(36/10)*10) +"ds     1,000s = 16m)\n\n")
 	#print("- sph = Sectors per standard hour (~" + str(sph) + " .sectors in an hour)")
 	#print("- blt = Beats in Local time (.beat = 1min:25s, ~42 .beats in an hour)")
 	#print("\nPERIOD = [N]ight [A]fternoon [M]orning [E]vening")
@@ -377,7 +392,12 @@ while True:
 	print("Angle of Sector          (Minute hand)    : " + str(hrd) + "°")
 	print("Angle of Decond          (Second hand)    : " + str(hnd) + "°\n")
 
-	print("MarSol Beat              : @" + str(bmr) + ".sectors (MTC)") # Time on Mars
+	if mts:
+		tz_mar = "MTS" # Mars Time Slip
+	else:
+		tz_mar = "MTC" # Mars Coordinated Time
+
+	print("MarSol Beat              : @" + str(bmr) + ".sectors (" + str(tz_mar) + ")") # Time on Mars
 	print("Sector Beat              : @" + str(sbm).rjust(3, '0') + ".sectors (SMT)")
 
 	if blt != 0:
