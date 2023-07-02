@@ -192,17 +192,11 @@ def get_sst():
 		decond = " "
 		period = " "
 	else:
-		decond = ":"
+		decond = "."
 		period = str(sector_p)
 
 	sector_hh = round(float((float(ssm) / 3.6) / 10),2)
 	sector_hb = str(sector_hh).split(".")
-	#if int(str(sector_hb[1])) < 10:
-	#	sector_hc = str(int(sector_hb[1])).rjust(2, '0')
-	#else:
-	#	sector_hc = str(int(sector_hb[1]))
-	#if "0" in str(sector_hc):
-        #        sector_hc = str(int(sector_hb[1])).rjust(2, '0')
 
 	sector_hc = str(sector_hb[1]).rjust(2, '0')
 
@@ -219,15 +213,11 @@ def get_sst():
 	else:
 		sector_hc = str(sector_hb[1]).ljust(2, '0')
 
-	#if int(sector_hb[0]) > 12:
-	#	sector_hd = str(int(sector_hb[0]) - 12).rjust(2, '0')
-	#else:
-	#	sector_hd = str(sector_hb[0])
 
-	sat_string_1 = str(sector_ht) + ":" + str(sector_hc) + "⋅" + str(sector_p) + "ꝑ"
+	sat_string_1 = str(sector_ht) + "." + str(sector_hc) + ":" + str(sector_p) + "ꝑ"
 	sat_string_2 = "Hour:" + str(int(float(sector_hh))).rjust(2, '0') + " (" + str(sector_hc).rjust(2, '0')  + "% complete)"
-	sst_string = str(sector_hd) + ":" + str(sector_m) + ":" + str(sector_s) + "⋅" + str(sector_d)
-	sss_string = str("H" + str(sector_h) + ":" + str(sector_m) + ":" + str(sector_s) + "⋅" + str(sector_p) + "ꝑ Segment[" + str(sector_q) + "] Period[" + str(sector_p) + "]")
+	sst_string = str(sector_hd) + ":" + str(sector_m) + "." + str(sector_s) + ":" + str(sector_d)
+	sss_string = str("H" + str(sector_h) + ":" + str(sector_m) + "." + str(sector_s) + ":" + str(sector_p) + "ꝑ Segment[" + str(sector_q) + "] Period[" + str(sector_p) + "]")
 
 	return sst_string, sat_string_1, sat_string_2, sss_string, sel_string
 
@@ -320,7 +310,7 @@ def get_mst():
 		zoo = ""
 
 
-	mat_string_1 = str(mector_ht) + ":" + str(mector_hc) + "⋅" + str(mector_p) + "ꝑ"
+	mat_string_1 = str(mector_ht) + "." + str(mector_hc) + ":" + str(mector_p) + "ꝑ"
 
 	return mat_string_1, mpc, zoo
 
