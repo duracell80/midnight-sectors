@@ -82,6 +82,11 @@ def get_spc():
 	ssm = get_ssm()
 	return int(round(scale(int(iso[4]), 0, float(ssm)),0))
 
+# Sectors elapsed in this segment
+def get_mpc():
+	return int(round(scale(int(iso[4]), 0, float(msm)),0))
+
+
 # Sectors remaining in this segment
 def get_spr():
 	spc = get_spc()
@@ -107,11 +112,11 @@ def get_msm():
 		return mss, mts
 	else:
 		# Introduce the time skip (double the midnight sectors on Earth up to the first 24)
-		if float(ssm) <= 24:
-			mss = float(ssm) * 2
+		if float(ssm) <= 23.70:
+			mss = float(ssm) * 1.5
 			mts = True
 		else:
-			mss = float(ssm) + 24
+			mss = float(ssm) + 12
 			mts = False
 		return mss, mts
 
@@ -201,6 +206,12 @@ def get_sst():
 	else:
 		sector_ht = str(int(sector_hb[0]))
 
+
+	if str(sector_hb[1])[0] == 0:
+		sector_hc = str(sector_hb[1]).rjust(2, '0')
+	else:
+		sector_hc = str(sector_hb[1]).ljust(2, '0')
+
 	#if int(sector_hb[0]) > 12:
 	#	sector_hd = str(int(sector_hb[0]) - 12).rjust(2, '0')
 	#else:
@@ -213,6 +224,65 @@ def get_sst():
 
 	return sst_string, sat_string_1, sat_string_2, sss_string, sel_string
 
+# Track Mars time similar to Earth
+def get_mst():
+	mst             = float(float(msm) / 100)
+	mlice           = str(mst).replace(".", ":").split(":")
+
+	mpc = get_mpc()
+	if mpc <= 22:
+		mector_p = "N"
+	elif mpc < 50:
+                mector_p = "M"
+	elif mpc <= 75:
+		mector_p = "A"
+	elif mpc <= 85:
+		mector_p = "E"
+	elif mpc <= 100:
+		mector_p = "N"
+	else:
+		mector_p = "N"
+
+
+	mector_h = mlice[0]
+	mector_m = str(mlice[1][0:2]).rjust(2, '0')
+	mector_s = str(mlice[1][2:4])
+	mector_p = "N"
+
+	if int(mector_m) <= 25:
+		mector_q = str(int(mector_h)) + ".25"
+	elif int(mector_m) <= 50:
+		mector_q = str(int(mector_h)) + ".50"
+	elif int(mector_m) <= 75:
+		mector_q = str(int(mector_h)) + ".75"
+	elif int(mector_m) <= 99:
+		mector_q = str(int(mector_h)) + ".75"
+	else:
+		mector_q = str(int(mector_h)) + ".00"
+
+
+	mector_hh = round(float((float(msm) / 3.6) / 10),2)
+	mector_hb = str(mector_hh).split(".")
+
+
+	if str(mector_hb[1])[0] == 0:
+		mector_hc = str(mector_hb[1]).rjust(2, '0')
+	else:
+		mector_hc = str(mector_hb[1]).ljust(2, '0')
+
+	if int(mector_hb[0]) >= 12:
+		mector_ht = str(int(mector_hb[0]) - 13)
+	else:
+		mector_ht = str(int(mector_hb[0]))
+
+	if mts:
+		mector_p = "S"
+		mector_ht = "%"
+
+
+	mat_string_1 = str(mector_ht) + ":" + str(mector_hc) + "⋅" + str(mector_p) + "ꝑ"
+
+	return mat_string_1
 
 def get_tick():
 	ssm = str(get_ssm()).split(".")
@@ -276,7 +346,7 @@ def get_bmr():
 	mld = 0
 	mlt = float(float(msm) + mld)
 
-	return str(format(float(mlt),0)).rjust(3, '0'), mts
+	return str(format(float(mlt),0)).rjust(3, '0'), mts, msm
 
 
 # Define universal time in beats
@@ -315,7 +385,7 @@ def get_lst():
 
 @background
 def run_segment(when = "now"):
-	global iso, soi, pkd, mts, hst, hnd, hrd, sss, ssm, stm, sbm, sst, sat1, sat2, spc, spr, sph, spd, seg, sel, blt, bmt, bmr, lum, sol
+	global iso, soi, pkd, mts, msm, mat1, hst, hnd, hrd, sss, ssm, stm, sbm, sst, sat1, sat2, spc, spr, sph, spd, seg, sel, blt, bmt, bmr, lum, sol
 	iso  = [1, 24, 1440, 86400, 864] # Clocks on Earth
 	soi  = [1, 24, 1440, 88775, 888] # Clocks on Mars ... 8*3 = 24, 8 and a bit hedrons (8 hour day with 4 periods, (or 16, also with 4 periods))
 	hst  = 0
@@ -332,6 +402,7 @@ def run_segment(when = "now"):
 	sst  = "00:00"
 	sat1 = "00:00"
 	sat2 = ""
+	mat1 = "00:00"
 	seg  = "unus"
 	sel  = "nox"
 	lum  = get_lum()
@@ -339,6 +410,7 @@ def run_segment(when = "now"):
 	# Set to True to introduce Phillip K Dick's Martian Time Slip
 	pkd  = False
 	mts  = False # Keep track of status of the Time Slip
+	msm  = 0
 
 	while True:
 		ssm = get_ssm() # sectors since midnight on Earth
@@ -356,8 +428,9 @@ def run_segment(when = "now"):
 
 		blt = get_blt() # produce a local version of a .beat on Earth
 		bmt = get_bmt("UTC+1")
-		bmr, mts = get_bmr()
 
+		bmr, mts, msm = get_bmr()
+		mat1 = get_mst()
 
 		time.sleep(0.5)
 
@@ -370,8 +443,9 @@ while True:
 	print("Local Time  : " + get_lst() + "  [ssm @" + str(ssm) + " stm @" + str(stm) + " lpc: " + str(spc)  + "% lpr: " + str(spr)  + "%]")
 	print("Range Bar   : " + get_bar())
 	print("              " + get_labels() + "\n")
-	print("Earth Lumin : (day: " + str(lum) + ") (period: " + str(sel) + ") (segment: " + str(seg) + ")")
+	print("Earth Lumin : (lum: " + str(lum) + ") (period: " + str(sel) + ") (segment: " + str(seg) + ")")
 	print("Earth Time  : " + str(sat1))
+	print("⋅Mars Time  : " + str(mat1))
 
 	print("\n\nWhere")
 	print("- stm = Sectors til midnight      (.sector   = decimal minute of an 8 hour day)")
@@ -388,9 +462,9 @@ while True:
 	print("Sector Time [STD]   (Duo:Dec:Dec:Period)  : " + str(sst))
 
 	#print("Sector Name                    (Latin)  : " + str(seg))
-	print("Angle of Hedron            (Hour hand)    : " + str(hst) + "°")
-	print("Angle of Sector          (Minute hand)    : " + str(hrd) + "°")
-	print("Angle of Decond          (Second hand)    : " + str(hnd) + "°\n")
+	print("Angle of Hedron              (Hour hand)  : " + str(hst) + "°")
+	print("Angle of Sector            (Minute hand)  : " + str(hrd) + "°")
+	print("Angle of Decond            (Second hand)  : " + str(hnd) + "°\n")
 
 	if mts:
 		tz_mar = "MTS" # Mars Time Slip
