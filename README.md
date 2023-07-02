@@ -157,17 +157,21 @@ Producing the 20 minutes for comms lag
 ```
 
 ```
-The Time Slip begins at Midnight on Earth Where Coordinated Mars Time switches to Mars Timeslip Time
+The Time Slip begins at Midnight on Earth Where Coordinated Mars Time switches to Mars Timeslip Time. The progression of the TS is marked in the hour section of the display:
 
-The progression of the TS is marked in the hour section of the display:
 ⋅Mars Time  : %:52⋅Sꝑ
 
-The period changes to "S" denoting the Time-Slip is in progress and the timezone MTC changes to MTS
+
+The period changes to "S" denoting the Time-Slip is in progress
+The timezone MTC changes to MTS
+
 @019.sectors (MTS)
 
-At 36 sectors Timeslip Time ends leaving Mars ahead of Earth by 36 sectors.
+At 36 sectors; Timeslip Time ends leaving Mars ahead of Earth by 36 sectors.
 
 ```
+
+Encoding The Decons into interstellar travel seems pretty poetic
 
 
 #### Beat IT (Inspiration)
