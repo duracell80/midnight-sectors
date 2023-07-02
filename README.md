@@ -147,6 +147,8 @@ Thus giving the impression of instant communication in the most important direct
 #### Enhancing the Martian Time-Slip
 Whereas PKD (Phillip K Dick) imagined the time at midnight to be frozen to celebrate Mars as a distinct civilization from Earth and a time to shed inhibitions, freezing time doesn't make too much logical sense in practical life. Therefore the first 36 sectors after midnight (The Decons) can be approximated as a percentage. This time slip provides the perfect calculation to make Mars be consistently ahead of Earth by 36 sectors. Giving a mechanisim to send a message from Mars timestamped with a local Mars time that would then almost equate to a real time in Earth based reception systems.
 
+Encoding The Decons into interstellar travel seems pretty poetic!
+
 ```
 The extent of how far Mars is ahead of Earth shows around 65% past 11 at or 23:40 at night
 
@@ -170,8 +172,6 @@ The timezone MTC changes to MTS
 At 36 sectors; Timeslip Time ends leaving Mars ahead of Earth by 36 sectors.
 
 ```
-
-Encoding The Decons into interstellar travel seems pretty poetic
 
 
 #### Beat IT (Inspiration)
