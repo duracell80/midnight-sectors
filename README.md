@@ -135,7 +135,7 @@ Global Beat              : @240.beats   (BMT)
 
 #### Synchronization with Mars 
 - The Martian Time-Slip
-- The Decons
+- The Decans (36 star system)
 - The some 20 minutes communcation lag over distance (Recorded Video Messaging)
 
 Settlements on Mars would likely be commerce focused. How would we communicate easily between the two bodies in relation to a synchronized universal time and could we use the delta of 40 minutes between a sol and a lux to aid communication? Communications systems could have limited capacity or endure times of lower processing power and distances in space itself that could further delay message processing.
@@ -148,9 +148,9 @@ Thus giving the impression of instant communication in the most important direct
 All messages back to Earth may be sent, processed and deliverable before the time it was sent. Thus emergency messages from Mars to Earth should be delievered without waiting for the time on Earth to reach the send time from Mars. Non emergency messages processed and deliverable before the sent from Mars time, could in theory be held or lowered in priority to enable processing of Emergency or high priority messages.
 
 #### Enhancing the Martian Time-Slip
-Whereas PKD (Phillip K Dick) imagined the time at midnight to be frozen to celebrate Mars as a distinct civilization from Earth and a time to shed inhibitions, freezing time doesn't make too much logical sense in practical life. Therefore the first Martian 36 sectors after midnight (The Decons) can be approximated as a percentage. This time slip provides the perfect calculation to make Mars be consistently ahead of Earth by 36 sectors. Giving a mechanisim to send a message from Mars timestamped with a local Mars time that would then almost equate to a real time in Earth based reception systems.
+Whereas PKD (Phillip K Dick) imagined the time at midnight to be frozen to celebrate Mars as a distinct civilization from Earth and a time to shed inhibitions, freezing time doesn't make too much logical sense in practical life. Therefore the first Martian 36 sectors after midnight (The Decans) can be approximated as a percentage. This time slip provides the perfect calculation to make Mars be consistently ahead of Earth by 36 sectors. Giving a mechanisim to send a message from Mars timestamped with a local Mars time that would then almost equate to a real time in Earth based reception systems.
 
-Encoding The Decons into interstellar travel seems pretty poetic!
+Encoding The Decans into interstellar travel seems pretty poetic!
 
 The extent of how far Mars is ahead of Earth shows around 65% past 11 or at 23:40 sexagesimal-time at night on Earth
 
@@ -172,7 +172,7 @@ The timezone MTC changes to MTS
 @019.sectors (MTS)
 ```
 
-At 36 sectors; Timeslip Time ends leaving Mars ahead of Earth by 36 sectors.
+At 36 sectors; Timeslip Time ends leaving Mars ahead of Earth by 36 sectors. Artistically this Martian Time-Slip can be illustrated by lighting one of 36 stars on the face of a clock or other interface. At this time the zodiac signs can also be celebrated.
 
 
 #### Beat IT (Inspiration)
