@@ -153,11 +153,11 @@ def get_sst():
 		sector_p = "M"
 		sector_d = "Morning"
 		sector_l = "antemeridies"
-	elif spc <= 73:
+	elif spc <= 72:
 		sector_p = "A"
 		sector_d = "Afternoon"
 		sector_l = "post meridiem"
-	elif spc <= 83:
+	elif spc <= 82:
 		sector_p = "E"
 		sector_d = "Evening"
 		sector_l = "vespera"
