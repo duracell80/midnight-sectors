@@ -138,6 +138,9 @@ def get_sst():
 	sst     	= float(float(get_ssm()) / 100)
 	slice  		= str(sst).replace(".", ":").split(":")
 
+	if spc > 100:
+		spc = 100
+
 	if spc <= 22:
 		sector_p = "N"
 		sector_d = "Night"
@@ -230,6 +233,9 @@ def get_mst():
 	mlice           = str(mst).replace(".", ":").split(":")
 
 	mpc = get_mpc()
+	if int(mpc) > 100:
+		mpc = 100
+
 	if int(mpc) <= 22:
 		mector_p = "N"
 	elif int(mpc) <= 50:
@@ -475,8 +481,8 @@ while True:
 	else:
 		tz_mar = "MTC" # Mars Coordinated Time
 
-	print("MarSol Beat         [Sol Complete = "+str(mpc).rjust(2, '0')+"%]  : @" + str(bmr) + ".sectors (" + str(tz_mar) + ")") # Time on Mars
-	print("Sector Beat         [Lux Complete = "+str(spc).rjust(2, '0')+"%]  : @" + str(sbm).rjust(3, '0') + ".sectors (SMT)")
+	print("MarSol Beat        [Sol Complete = "+str(mpc).rjust(3, '0')+"%]  : @" + str(bmr) + ".sectors (" + str(tz_mar) + ")") # Time on Mars
+	print("Sector Beat        [Lux Complete = "+str(spc).rjust(3, '0')+"%]  : @" + str(sbm).rjust(3, '0') + ".sectors (SMT)")
 
 	if blt != 0:
 		print("Locale Beat                               : @" + str(blt) + ".beats   (" + str(get_ltz())  + ")")
