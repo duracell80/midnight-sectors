@@ -3,6 +3,9 @@ Time is messy and decimal time tricky. Midnight sectors is a decimal / hectoseco
 
 Throwback Thursday: https://www.youtube.com/watch?v=zI_SBAkdKzc
 
+#### The Martian Time-Slip
+See the end of this README.md transmission.
+
 ### Overall goal: Make decimal minutes and seconds eaiser to relate to ...
 This proposal lays out a hybrid between the two opposing systems, keeping a 7 day week, spliting the day into 8 (chunks * ) and again into 4 (periods). It stops short of 10 hours, because that's just confusing!! (*) a 9th "hour" is needed for the remaining 64 sectors.
 
@@ -13,42 +16,6 @@ The @time is readable on an octal clock!
 - A 3min 33s pop song = 2 sectors and 13 deconds (00:03:33 = 00:02:13)
 - A 2 hour movie = 85 sectors and 71 deconds or 0.85 hedrons (02:00:00 = 00:85:71)
 - A 45 minute bus ride takes 32 sectors and 14 deconds (00:45:00 = 00:32:14)
-
-#### Synchronization with Mars 
-- The Martian Time-Slip
-- The Decons
-- The some 20 minutes communcation lag over distance (Recorded Video Messaging)
-
-Settlements on Mars would likely be commerce focused. How would we communicate easily between the two bodies in relation to a synchronized universal time and could we use the delta of 40 minutes between a sol and a lux to aid communication? Communications systems could have limited capacity or endure times of lower processing power and distances in space itself that could further delay message processing.
-
-Inspired by the Martian Time-Slip, midnight-sectors provides an approximation between time on Earth and Mars for the purpose of delivering messages back to Earth in synchronicity of human refrenced time. To humans a message sent at 10:10 on Mars would appear to be seen as a new message arriving on Earth at 10:10 if all processing and transmission was completed within or before 20 sexagesimal minutes. Human communication between Earth and Mars could benefit from a method of equating time between the two locations taking into account the lag in time of sending data. For example sending radio signals back to Earth could take up to 20 sexagesimal minutes. Placing universal time on Mars slightly ahead of universal time on Earth provides a way to send a message at say 10:25 (25% or quarter past 10) in the morning on Mars and have it delivered or played back at 10:25 (25% or quarter past 10) on Earth. Sending a message back if taking around 20 sexagesimal minutes completes the 40 minute difference between a day on Earth (a lux) and a day on Mars (a sol).
-
-Thus giving the impression of instant communication in the most important direction, Mars back to Earth (Thank you PKD).
-
-#### Enhancing the Martian Time-Slip
-Whereas PKD (Phillip K Dick) imagined the time at midnight to be frozen to celebrate Mars as a distinct civilization from Earth and a time to shed inhibitions, freezing time doesn't make too much logical sense in practical life. Therefore the first 36 sectors after midnight (The Decons) can be aproximated to a percentage. The progress of the time slip can be measured and at the end of the time slip (The Decons). This time slip provides the perfect calculation to make Mars be consistently ahead of Earth by 36 sectors. Giving a mechanisim to send a message from Mars timestamped with a local Mars time that would then almost equate to a real time on Earth or be considered the deliver by time to Earth based reception systems.
-
-```
-The extent of how far Mars is ahead of Earth shows around 65% past 11 at or 23:40 at night
-
-Earth Time  : 11:65⋅Nꝑ
-⋅Mars Time  : 12:00⋅Nꝑ
-
-Producing the 20 minutes for communciation lag
-```
-
-```
-The Time Slip begins at Midnight on Earth Where Coordinated Mars Time switches to Mars Timeslip Time
-
-The progression of the TS is marked in the hour section of the display:
-⋅Mars Time  : %:52⋅Sꝑ
-
-The period changes to "S" denoting the Time-Slip is in progress and the timezone MTC changes to MTS
-@019.sectors (MTS)
-
-At 36 sectors Timeslip Time ends leaving Mars ahead of Earth by 36 sectors.
-
-```
 
 #### Terms For The Day
 - Lumin (A whole of 864 sectors = 1 day of 24 hours, lumen = light, day is light)
@@ -165,6 +132,43 @@ Locale Beat              : @991.beats   (CDT)
 Global Beat              : @240.beats   (BMT)
 
 ```
+
+#### Synchronization with Mars 
+- The Martian Time-Slip
+- The Decons
+- The some 20 minutes communcation lag over distance (Recorded Video Messaging)
+
+Settlements on Mars would likely be commerce focused. How would we communicate easily between the two bodies in relation to a synchronized universal time and could we use the delta of 40 minutes between a sol and a lux to aid communication? Communications systems could have limited capacity or endure times of lower processing power and distances in space itself that could further delay message processing.
+
+Inspired by the Martian Time-Slip, midnight-sectors provides an approximation between time on Earth and Mars for the purpose of delivering messages back to Earth in synchronicity of human refrenced time. To humans a message sent at 10:10 on Mars would appear to be seen as a new message arriving on Earth at 10:10 if all processing and transmission was completed within or before 20 sexagesimal minutes. Human communication between Earth and Mars could benefit from a method of equating time between the two locations taking into account the lag in time of sending data. For example sending radio signals back to Earth could take up to 20 sexagesimal minutes. Placing universal time on Mars slightly ahead of universal time on Earth provides a way to send a message at say 10:25 (25% or quarter past 10) in the morning on Mars and have it delivered or played back at 10:25 (25% or quarter past 10) on Earth. Sending a message back if taking around 20 sexagesimal minutes completes the 40 minute difference between a day on Earth (a lux) and a day on Mars (a sol).
+
+Thus giving the impression of instant communication in the most important direction, Mars back to Earth (Thank you PKD).
+
+#### Enhancing the Martian Time-Slip
+Whereas PKD (Phillip K Dick) imagined the time at midnight to be frozen to celebrate Mars as a distinct civilization from Earth and a time to shed inhibitions, freezing time doesn't make too much logical sense in practical life. Therefore the first 36 sectors after midnight (The Decons) can be aproximated to a percentage. The progress of the time slip can be measured and at the end of the time slip (The Decons). This time slip provides the perfect calculation to make Mars be consistently ahead of Earth by 36 sectors. Giving a mechanisim to send a message from Mars timestamped with a local Mars time that would then almost equate to a real time on Earth or be considered the deliver by time to Earth based reception systems.
+
+```
+The extent of how far Mars is ahead of Earth shows around 65% past 11 at or 23:40 at night
+
+Earth Time  : 11:65⋅Nꝑ
+⋅Mars Time  : 12:00⋅Nꝑ
+
+Producing the 20 minutes for communciation lag
+```
+
+```
+The Time Slip begins at Midnight on Earth Where Coordinated Mars Time switches to Mars Timeslip Time
+
+The progression of the TS is marked in the hour section of the display:
+⋅Mars Time  : %:52⋅Sꝑ
+
+The period changes to "S" denoting the Time-Slip is in progress and the timezone MTC changes to MTS
+@019.sectors (MTS)
+
+At 36 sectors Timeslip Time ends leaving Mars ahead of Earth by 36 sectors.
+
+```
+
 
 #### Beat IT (Inspiration)
 So I wouldn't have gone down a decimal rabbit hole if it wasn't for beats. As a kid of the 80's the Swatch was to us what these crazy computers on straps are to kids today, that and t-shirts that changed color when you got hot, wonder why that also never caught on? 
