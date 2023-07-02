@@ -12,7 +12,7 @@ from dateutil import tz
 try:
 	import asyncio
 except:
-	os.system("pip install asyncio")
+	os.system("pip install asyncio==3.4.3")
 
 def background(f):
 	def wrapped(*args, **kwargs):
@@ -287,12 +287,42 @@ def get_mst():
 
 	if mts:
 		mector_p = "S"
-		mector_ht = "%"
+		mector_ht = "T%"
+		dec = int(bmr)
+		if dec <= 3:
+			zoo = "Aries"
+		elif dec <=6:
+			zoo = "Tarus"
+		elif dec <=9:
+			zoo = "Gemini"
+		elif dec <=12:
+			zoo = "Cancer"
+		elif dec <=15:
+			zoo = "Leo"
+		elif dec <=18:
+			zoo = "Virgo"
+		elif dec <=21:
+			zoo = "Libra"
+		elif dec <=24:
+			zoo = "Scorpio"
+		elif dec <=27:
+			zoo = "Sagittarius"
+		elif dec <=30:
+			zoo = "Capricorn"
+		elif dec <=33:
+			zoo = "Aquarius"
+		elif dec <=36:
+			zoo = "Pisces"
+		else:
+			zoo = ""
+
+	else:
+		zoo = ""
 
 
 	mat_string_1 = str(mector_ht) + ":" + str(mector_hc) + "⋅" + str(mector_p) + "ꝑ"
 
-	return mat_string_1, mpc
+	return mat_string_1, mpc, zoo
 
 def get_tick():
 	ssm = str(get_ssm()).split(".")
@@ -397,7 +427,7 @@ def get_lst():
 
 @background
 def run_segment(when = "now"):
-	global iso, soi, pkd, mts, msm, mat1, mpc, hst, hnd, hrd, sss, ssm, stm, sbm, sst, sat1, sat2, spc, spr, sph, spd, seg, sel, blt, bmt, bmr, lum, sol
+	global iso, soi, pkd, mts, msm, mat1, mpc, zoo, hst, hnd, hrd, sss, ssm, stm, sbm, sst, sat1, sat2, spc, spr, sph, spd, seg, sel, blt, bmt, bmr, lum, sol
 	iso  = [1, 24, 1440, 86400, 864] # Clocks on Earth
 	soi  = [1, 24, 1440, 88775, 888] # Clocks on Mars ... 8*3 = 24, 8 and a bit hedrons (8 hour day with 4 periods, (or 16, also with 4 periods))
 	hst  = 0
@@ -424,6 +454,7 @@ def run_segment(when = "now"):
 	mts  = False # Keep track of status of the Time Slip
 	msm  = 0
 	mpc  = 0
+	zoo  = ""
 
 	while True:
 		ssm = get_ssm() # sectors since midnight on Earth
@@ -443,7 +474,7 @@ def run_segment(when = "now"):
 		bmt = get_bmt("UTC+1")
 
 		bmr, mts, msm = get_bmr()
-		mat1, mpc = get_mst()
+		mat1, mpc, zoo = get_mst()
 
 		time.sleep(0.5)
 
@@ -458,7 +489,13 @@ while True:
 	print("              " + get_labels() + "\n")
 	print("Earth Lumin : (lum: " + str(lum) + ") (period: " + str(sel) + ") (segment: " + str(seg) + ")")
 	print("Earth Time  : " + str(sat1))
-	print("⋅Mars Time  : " + str(mat1))
+
+	if mts:
+		print("⋅Mars Time  : " + str(mat1) + " (Decon:" + str(int(bmr)).rjust(2, '0') + " - " + str(zoo).lower() + ")")
+		tz_mar = "MTS" # Mars Time Slip
+	else:
+		tz_mar = "MTC" # Mars Coordinated Time
+		print("⋅Mars Time  : " + str(mat1))
 
 	print("\n\n")
 	#print("Where")
@@ -479,11 +516,6 @@ while True:
 	print("Angle of Hedron              (Hour hand)  : " + str(hst) + "°")
 	print("Angle of Sector            (Minute hand)  : " + str(hrd) + "°")
 	print("Angle of Decond            (Second hand)  : " + str(hnd) + "°\n")
-
-	if mts:
-		tz_mar = "MTS" # Mars Time Slip
-	else:
-		tz_mar = "MTC" # Mars Coordinated Time
 
 	print("MarSol Beat        [Sol Complete = "+str(mpc).rjust(3, '0')+"%]  : @" + str(bmr) + ".sectors (" + str(tz_mar) + ")") # Time on Mars
 	print("Sector Beat        [Lux Complete = "+str(spc).rjust(3, '0')+"%]  : @" + str(sbm).rjust(3, '0') + ".sectors (SMT)")
