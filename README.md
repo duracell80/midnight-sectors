@@ -152,7 +152,7 @@ Whereas PKD (Phillip K Dick) imagined the time at midnight to be frozen to celeb
 
 Encoding The Decons into interstellar travel seems pretty poetic!
 
-The extent of how far Mars is ahead of Earth shows around 65% past 11 at or 23:40 at night
+The extent of how far Mars is ahead of Earth shows around 65% past 11 or at 23:40 sexagesimal-time at night on Earth
 
 ```
 Earth Time  : 11:65⋅Nꝑ
