@@ -144,6 +144,9 @@ Inspired by the Martian Time-Slip, midnight-sectors provides an approximation be
 
 Thus giving the impression of instant communication in the most important direction, Mars back to Earth (Thank you PKD).
 
+#### Emergency Broadcasts
+All messages back to Earth may be sent, processed and deliverable before the time it was sent. Thus emergency messages from Mars to Earth should be delievered without waiting for the time on Earth to reach the send time from Mars. Non emergency messages processed and deliverable before the sent from Mars time, could in theory be held or lowered in priority to enable processing of Emergency or high priority messages.
+
 #### Enhancing the Martian Time-Slip
 Whereas PKD (Phillip K Dick) imagined the time at midnight to be frozen to celebrate Mars as a distinct civilization from Earth and a time to shed inhibitions, freezing time doesn't make too much logical sense in practical life. Therefore the first 36 sectors after midnight (The Decons) can be approximated as a percentage. This time slip provides the perfect calculation to make Mars be consistently ahead of Earth by 36 sectors. Giving a mechanisim to send a message from Mars timestamped with a local Mars time that would then almost equate to a real time in Earth based reception systems.
 
