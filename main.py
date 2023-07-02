@@ -209,7 +209,7 @@ def get_sst():
 	sector_hd = str(sector_hb[0]).rjust(2, '0')
 	sector_hs = str(int(sector_hb[0]) - 12).rjust(2, '0')
 	if int(sector_hb[0]) >= 13:
-		sector_ht = str(int(sector_hb[0]) - 12)
+		sector_ht = str(int(sector_hb[0]) - 12).rjust(2, '0')
 	else:
 		sector_ht = str(int(sector_hb[0])).rjust(2, '0')
 
@@ -281,7 +281,7 @@ def get_mst():
 		mector_hc = str(mector_hb[1]).ljust(2, '0')
 
 	if int(mector_hb[0]) >= 13:
-		mector_ht = str(int(mector_hb[0]) - 12)
+		mector_ht = str(int(mector_hb[0]) - 12).rjust(2, '0')
 	else:
 		mector_ht = str(int(mector_hb[0])).rjust(2, '0')
 
