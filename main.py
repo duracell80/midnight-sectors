@@ -4,11 +4,15 @@
 
 # An attempt at linking base 8 time to real time in a .beats style format
 
-import os, sys, time, math, asyncio
+import os, sys, time, math
 
 from datetime import datetime
 from dateutil import tz
 
+try:
+	import asyncio
+except:
+	os.system("pip install asyncio")
 
 def background(f):
 	def wrapped(*args, **kwargs):
