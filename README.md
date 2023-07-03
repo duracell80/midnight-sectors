@@ -14,6 +14,16 @@ The @time is readable on an octal clock!
 - A 2 hour movie = 85 sectors and 71 deconds or 0.85 hedrons (02:00:00 = 00:85:71)
 - A 45 minute bus ride takes 32 sectors and 14 deconds (00:45:00 = 00:32:14)
 
+#### Synchronization with Mars 
+- The Martian Time-Slip
+- The Decons
+- The some 20 minutes communcation lag over distance (Recorded Video Messaging)
+
+Settlements on Mars would likely be commerce focused. Inspired by the Martain Time-Slip, midnight-sectors provides an approximation between time on Earth and Mars for the purpose of delivering messages back to Earth in synchronicity of human refrenced time. Human communication between Earth and Mars could benefit from a method of equating time between the two locations taking into account the lag in time of sending data. For example sending radio signals back to Earth could take up to 20 sexagesimal minutes. Placing universal time on Mars slightly ahead of universal time on Earth provides a way to send a message at say 10:25 (25% past 10) in the morning on Mars and have it delivered or played back at 10:25 (25% past 10) on Earth.
+
+Whereas PKD (Phillip K Dick) imagined the time at midnight to be frozen to celebrate Mars as a distinct civilization from Earth, freezing time doesn't make too much logical sense in practical life. Therefore the first 36 sectors after midnight (The Decons) can be aproximated to a percentage. The progress of the time slip can be measured and at the end of the time slip (The Decons). This time slip provides the perfect calculation to make Mars be consistantly ahead of Earth by 36 sectors. Giving a mechanisim to send a message from Mars timestamped with a local Mars time that would then almost equate to a real time on Earth.
+
+
 #### Terms For The Day
 - Lumin (A whole of 864 sectors = 1 day of 24 hours, lumen = light, day is light)
 - Segment (Octal division of the day into 8.64 parts of up to 100 sectors each)
