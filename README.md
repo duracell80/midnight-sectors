@@ -19,10 +19,36 @@ The @time is readable on an octal clock!
 - The Decons
 - The some 20 minutes communcation lag over distance (Recorded Video Messaging)
 
-Settlements on Mars would likely be commerce focused. Inspired by the Martain Time-Slip, midnight-sectors provides an approximation between time on Earth and Mars for the purpose of delivering messages back to Earth in synchronicity of human refrenced time. Human communication between Earth and Mars could benefit from a method of equating time between the two locations taking into account the lag in time of sending data. For example sending radio signals back to Earth could take up to 20 sexagesimal minutes. Placing universal time on Mars slightly ahead of universal time on Earth provides a way to send a message at say 10:25 (25% past 10) in the morning on Mars and have it delivered or played back at 10:25 (25% past 10) on Earth.
+Settlements on Mars would likely be commerce focused. How would we communicate easily between the two bodies in relation to a synchronized universal time? Communications systems could have limited capacity or endure times of lower processing power and distances in space itself that could further delay message processing.
 
-Whereas PKD (Phillip K Dick) imagined the time at midnight to be frozen to celebrate Mars as a distinct civilization from Earth, freezing time doesn't make too much logical sense in practical life. Therefore the first 36 sectors after midnight (The Decons) can be aproximated to a percentage. The progress of the time slip can be measured and at the end of the time slip (The Decons). This time slip provides the perfect calculation to make Mars be consistantly ahead of Earth by 36 sectors. Giving a mechanisim to send a message from Mars timestamped with a local Mars time that would then almost equate to a real time on Earth.
+Inspired by the Martain Time-Slip, midnight-sectors provides an approximation between time on Earth and Mars for the purpose of delivering messages back to Earth in synchronicity of human refrenced time. Human communication between Earth and Mars could benefit from a method of equating time between the two locations taking into account the lag in time of sending data. For example sending radio signals back to Earth could take up to 20 sexagesimal minutes. Placing universal time on Mars slightly ahead of universal time on Earth provides a way to send a message at say 10:25 (25% past 10) in the morning on Mars and have it delivered or played back at 10:25 (25% past 10) on Earth.
 
+In this way sending a message at 10:25 (25% past 10 in the morning) could be delivered at 10:25 on Earth, giving the impression of instant communication.
+
+#### Enhancing the Martian Time-Slip
+Whereas PKD (Phillip K Dick) imagined the time at midnight to be frozen to celebrate Mars as a distinct civilization from Earth and a time to shed inhibitions, freezing time doesn't make too much logical sense in practical life. Therefore the first 36 sectors after midnight (The Decons) can be aproximated to a percentage. The progress of the time slip can be measured and at the end of the time slip (The Decons). This time slip provides the perfect calculation to make Mars be consistently ahead of Earth by 36 sectors. Giving a mechanisim to send a message from Mars timestamped with a local Mars time that would then almost equate to a real time on Earth or be considered the deliver by time to Earth based reception systems.
+
+```
+The extent of how far Mars is ahead of Earth shows around 65% past 11 at or 23:40 at night
+
+Earth Time  : 11:65⋅Nꝑ
+⋅Mars Time  : 12:00⋅Nꝑ
+
+Producing the 20 minutes for communciation lag
+```
+
+```
+The Time Slip begins at Midnight on Earth Where Coordinated Mars Time switches to Mars Timeslip Time
+
+The progression of the TS is marked in the hour section of the display:
+⋅Mars Time  : %:52⋅Sꝑ
+
+The period changes to "S" denoting the Time-Slip is in progress and the timezone MTC changes to MTS
+@019.sectors (MTS)
+
+At 36 sectors Timeslip Time ends leaving Mars ahead of Earth by 36 sectors.
+
+```
 
 #### Terms For The Day
 - Lumin (A whole of 864 sectors = 1 day of 24 hours, lumen = light, day is light)
