@@ -74,7 +74,7 @@ def get_bar():
 	return tb
 
 def get_labels():
-	return "SS 1 2 3 4 5 6 7 8 9 10AM/PM  2 3 4 5 6 7 8 9 10  SE"
+	return "LS 1 2 3 4 5 6 7 8 9 10AM/PM  2 3 4 5 6 7 8 9 10  LE"
 
 
 # Sectors per hour
@@ -215,9 +215,9 @@ def get_sst():
 
 
 	sat_string_1 = str(sector_ht) + "." + str(sector_hc) + ":" + str(sector_p) + "ꝑ"
-	sat_string_2 = "Hour:" + str(int(float(sector_hh))).rjust(2, '0') + " (" + str(sector_hc).rjust(2, '0')  + "% complete)"
+	sat_string_2 = "Hour:" + str(int(float(sector_hh))).rjust(2, '0') + "  (" + str(sector_hc).rjust(2, '0')  + "% complete)"
 	sst_string = str(sector_hd) + ":" + str(sector_m) + "." + str(sector_s) + ":" + str(sector_d)
-	sss_string = str("H" + str(sector_h) + ":" + str(sector_m) + "." + str(sector_s) + ":" + str(sector_p) + "ꝑ Segment[" + str(sector_q) + "] Period[" + str(sector_p) + "]")
+	sss_string = str("H" + str(sector_h) + ":" + str(sector_m) + "." + str(sector_s) + ":" + str(sector_p) + "ꝑ Segment[" + str(sector_q) + "] Period[" + str(sel) + "]")
 
 	return sst_string, sat_string_1, sat_string_2, sss_string, sel_string
 
@@ -426,8 +426,8 @@ def get_mst():
 
 
 	if mts:
-		#rot = int(round((int(mpc) / 100) * 360 , 0))
-		rot = int(float((dec * 10) + mod))
+		rot = int(float((dec * 10) + mod)) # trip through 10 days
+		#rot = int(float(dec * 10))
 	else:
 		rot = 0
 
@@ -489,10 +489,16 @@ def get_third_hand():
 
 # Define local time in beats
 def get_blt():
-	ssm = get_ssm()
-	bld = float(1000 - 864)
-	blt = float(float(ssm) + bld)
+	#ssm = get_ssm()
+	#bld = float(1000 - 864)
+	#blt = float(float(ssm) + bld)
+	#blt = float(ssm)
 
+	h, m, s = map(int, time.strftime("%H %M %S").split())
+	blt = ((h * 3600) + (m * 60) + s) / 86.4
+
+	if blt > 1000:
+		blt = 0
 	return str(format(float(blt), 0)).rjust(3, '0')
 
 # Define mars time in beats
@@ -637,7 +643,7 @@ def run_segment(when = "now"):
 		with open(dir_home + "/.local/share/midnight-sectors.json", "w") as jsn_f:
 			jsn_f.write(jsn_o)
 
-		time.sleep(0.45)
+		time.sleep(0.5)
 
 
 run_segment("CDT")
@@ -660,9 +666,9 @@ while True:
 
 	print("\n\n")
 
-	print(f"Sector Time [SRT]   (Duo:Percent:Period)  : {sat1}     {sat2}")
+	print(f"Sector Time [SRT]   (Sec:Percent:Period)  : {sat1}    {sat2}")
 	print(f"Sector Time [SEG]   (Oct:Dec:Dec:Period)  : {sss}")
-	print(f"Sector Time [STD]   (Duo:Dec:Dec:Period)  : {sst}")
+	print(f"Sector Time [STD]   (Sec:Dec:Dec:Period)  : {sst}")
 
 	print(f"Angle of Hedron              (Hour hand)  : {hst}°")
 	print(f"Angle of Sector            (Minute hand)  : {hrd}°")
@@ -674,9 +680,10 @@ while True:
 	print(f"Sector Beat        [Lum Complete = {str(spc).rjust(3, '0')}%]  : @{str(sbm).rjust(3, '0')}.sectors (SMT)")
 
 	if blt != 0:
-		print(f"Locale Beat                               : @{blt}.beats   ({get_ltz()})")
+		print(f"Locale Beat                        (Dec)  : @{blt}.beats   ({get_ltz()})")
 	if bmt != 0:
-		print(f"Global Beat                               : @{bmt}.beats   (BMT)")
+		print(f"Global Beat                        (Dec)  : @{bmt}.beats   (BMT)")
 
 
-	time.sleep(1)
+	time.sleep(0.1)
+
