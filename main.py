@@ -671,10 +671,10 @@ while True:
 	print("\n")
 
 	print(f"MarSol Beat        [Sol Complete = {str(mpc).rjust(3, '0')}%]  : @{bmr}.sectors ({tz_mar})")
-	print(f"Sector Beat        [Lum Complete = {str(spc).rjust(3, '0')}%]  : @str({sbm}).rjust(3, '0').sectors (SMT)")
+	print(f"Sector Beat        [Lum Complete = {str(spc).rjust(3, '0')}%]  : @{str(sbm).rjust(3, '0')}.sectors (SMT)")
 
 	if blt != 0:
-		print(f"Locale Beat                               : @{blt}.beats   ({get_ltz})")
+		print(f"Locale Beat                               : @{blt}.beats   ({get_ltz()})")
 	if bmt != 0:
 		print(f"Global Beat                               : @{bmt}.beats   (BMT)")
 
