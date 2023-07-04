@@ -541,7 +541,7 @@ def get_lst():
 
 @background
 def run_segment(when = "now"):
-	global iso, soi, pkd, mts, msm, mat1, mpc, zoo, ele, rot, dec, hst, hnd, hrd, sss, ssm, stm, sbm, sst, sat1, sat2, spc, spr, sph, spd, seg, sel, blt, bmt, bmr, lum, sol
+	global iso, soi, pkd, mts, msm, mat1, mpc, zoo, ele, rot, dec, tz_mar, hst, hnd, hrd, sss, ssm, stm, sbm, sst, sat1, sat2, spc, spr, sph, spd, seg, sel, blt, bmt, bmr, lum, sol
 	iso  = [1, 24, 1440, 86400, 864] # Clocks on Earth
 	soi  = [1, 24, 1440, 88775, 888] # Clocks on Mars ... 8*3 = 24, 8 and a bit hedrons (8 hour day with 4 periods, (or 16, also with 4 periods))
 
@@ -575,6 +575,7 @@ def run_segment(when = "now"):
 	rot  = 0
 	dec  = 0
 	zoo  = "Sagittarius"
+	tz_mar = ""
 
 	while True:
 		ssm = get_ssm() # sectors since midnight on Earth
@@ -645,38 +646,37 @@ run_segment("CDT")
 while True:
 	os.system("clear")
 
-	print("Local Time  : " + get_lst() + "  [ssm @" + str(ssm) + " stm @" + str(stm) + " lpc: " + str(spc)  + "% lpr: " + str(spr)  + "%]")
-	print("Range Bar   : " + get_bar())
-	print("              " + get_labels() + "\n")
-	print("Earth Lumin : (lum: " + str(lum) + ") (period: " + str(sel) + ") (segment: " + str(seg) + ")")
-	print("Earth Time  : " + str(sat1))
+	print(f"Local Time  : {get_lst()} [ssm @ {ssm} stm @ {stm} lpc: {spc}% lpr: {spr}%]")
+	print(f"Range Bar   : {get_bar()}")
+	print(f"              {get_labels()}")
+	print(f"")
+	print(f"Earth Lumin : (lum: {lum}) (period: {sel}) (segment: {seg})")
+	print(f"Earth Time  : {sat1}")
 
 	if mts:
-		print("⋅Mars Time  : " + str(mat1) + " Time-Slip Active (" + str(rot) + "°) (decan " + str(int(dec)).rjust(2, '0') + " : " + str(ele) + " in " + str(zoo) + ")")
-		tz_mar = "MTS" # Mars Time Slip
+		print(f"⋅Mars Time  : {mat1} Time-Slip Active ({rot}°) (decan {str(dec).rjust(2, '0')} : {ele} in {zoo})")
 	else:
-		tz_mar = "MTC" # Mars Coordinated Time
-		print("⋅Mars Time  : " + str(mat1))
+		print(f"⋅Mars Time  : {mat1}")
 
 	print("\n\n")
 
-	print("Sector Time [SRT]   (Duo:Percent:Period)  : " + str(sat1) + "     " + str(sat2))
-	print("Sector Time [SEG]   (Oct:Dec:Dec:Period)  : " + str(sss))
-	print("Sector Time [STD]   (Duo:Dec:Dec:Period)  : " + str(sst))
+	print(f"Sector Time [SRT]   (Duo:Percent:Period)  : {sat1}     {sat2}")
+	print(f"Sector Time [SEG]   (Oct:Dec:Dec:Period)  : {sss}")
+	print(f"Sector Time [STD]   (Duo:Dec:Dec:Period)  : {sst}")
 
-	#print("Sector Name                    (Latin)  : " + str(seg))
-	print("Angle of Hedron              (Hour hand)  : " + str(hst) + "°")
-	print("Angle of Sector            (Minute hand)  : " + str(hrd) + "°")
-	print("Angle of Decond            (Second hand)  : " + str(hnd) + "°\n")
+	print(f"Angle of Hedron              (Hour hand)  : {hst}°")
+	print(f"Angle of Sector            (Minute hand)  : {hrd}°")
+	print(f"Angle of Decond            (Second hand)  : {hnd}°")
 
-	print("MarSol Beat        [Sol Complete = "+str(mpc).rjust(3, '0')+"%]  : @" + str(bmr) + ".sectors (" + str(tz_mar) + ")") # Time on Mars
-	print("Sector Beat        [Lum Complete = "+str(spc).rjust(3, '0')+"%]  : @" + str(sbm).rjust(3, '0') + ".sectors (SMT)")
+	print("\n")
+
+	print(f"MarSol Beat        [Sol Complete = {str(mpc).rjust(3, '0')}%]  : @{bmr}.sectors ({tz_mar})")
+	print(f"Sector Beat        [Lum Complete = {str(spc).rjust(3, '0')}%]  : @str({sbm}).rjust(3, '0').sectors (SMT)")
 
 	if blt != 0:
-		print("Locale Beat                               : @" + str(blt) + ".beats   (" + str(get_ltz())  + ")")
+		print(f"Locale Beat                               : @{blt}.beats   ({get_ltz})")
 	if bmt != 0:
-		print("Global Beat                               : @" + str(bmt) + ".beats   (BMT)")
+		print(f"Global Beat                               : @{bmt}.beats   (BMT)")
 
 
-	# Simulate a real clock display
 	time.sleep(1)
