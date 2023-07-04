@@ -6,6 +6,7 @@
 
 import os, sys, time, math, json
 
+from http.server import BaseHTTPRequestHandler, HTTPServer
 from datetime import datetime
 from dateutil import tz
 
@@ -536,6 +537,10 @@ def get_lst():
 
 	return str(now.strftime("%H:%M:%S"))
 
+@background
+def server_api(port = "3633"):
+	os.system("uvicorn api:app --host 127.0.0.1 --port " + port)
+
 
 @background
 def run_segment(when = "now"):
@@ -680,7 +685,30 @@ def run_segment(when = "now"):
 
 
 run_segment("CDT")
+server_api("3633")
 
 
-os.system("uvicorn api:app --host 127.0.0.1 --port 3636")
+hostName = "localhost"; serverPort = 3636
 
+class MyServer(BaseHTTPRequestHandler):
+	def do_GET(self):
+		self.send_response(200)
+		self.send_header("Content-type", "text/html")
+		self.end_headers()
+		self.wfile.write(bytes("<html><head><title>https://pythonbasics.org</title></head>", "utf-8"))
+		self.wfile.write(bytes("<p>Request: %s</p>" % self.path, "utf-8"))
+		self.wfile.write(bytes("<body>", "utf-8"))
+		self.wfile.write(bytes("<p>This is an example web server.</p>", "utf-8"))
+		self.wfile.write(bytes("</body></html>", "utf-8"))
+
+if __name__ == "__main__":
+	webServer = HTTPServer((hostName, serverPort), MyServer)
+	print("Server started http://%s:%s" % (hostName, serverPort))
+
+	try:
+		webServer.serve_forever()
+	except KeyboardInterrupt:
+		pass
+
+	webServer.server_close()
+	print("Server stopped.")
