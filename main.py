@@ -4,7 +4,7 @@
 
 # An attempt at linking base 8 time to real time in a .beats style format
 
-import os,sys,time, math, json
+import os, sys, time, math, json
 
 from datetime import datetime
 from dateutil import tz
@@ -680,3 +680,7 @@ def run_segment(when = "now"):
 
 
 run_segment("CDT")
+
+
+os.system("uvicorn api:app --host 127.0.0.1 --port 3636")
+
