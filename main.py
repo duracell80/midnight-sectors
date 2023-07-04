@@ -416,12 +416,12 @@ def get_mst():
 				ele = "Pluto"
 				mod = 9.9
 		else:
-			zoo = ""
-			ele = ""
+			zoo = "Sagittarius"
+			ele = "Earth"
 
 	else:
-		zoo = ""
-		ele = ""
+		zoo = "Sagittarius"
+		ele = "Earth"
 		dec = 0
 
 
@@ -557,7 +557,7 @@ def run_segment(when = "now"):
 	stm  = 0
 	spc  = 0
 	spr  = 0
-	ele  = ""
+	ele  = "Earth"
 	sss  = "S1:00:00"
 	sst  = "00:00"
 	sat1 = "00:00"
@@ -574,7 +574,7 @@ def run_segment(when = "now"):
 	mpc  = 0
 	rot  = 0
 	dec  = 0
-	zoo  = ""
+	zoo  = "Sagittarius"
 
 	while True:
 		ssm = get_ssm() # sectors since midnight on Earth
@@ -604,23 +604,23 @@ def run_segment(when = "now"):
 
 		jsn_d = {
 			"local_time": str(get_lst()),
-			"earth_timezone": str(get_ltz()),
-			"earth_time_srt": str(sat1).replace("\ua751", ""),
-			"earth_time_seg": str(sss).replace("\ua751", ""),
-			"earth_time_sst": str(sst),
-			"earth_angle_hedron": float(hst),
-			"earth_angle_sector": float(hrd),
-			"earth_angle_decond": float(hnd),
-			"earth_beat_sector": str(sbm).rjust(3, '0'),
-			"earth_beat_locale": str(blt).rjust(3, '0'),
-			"earth_beat_global": str(bmt).rjust(3, '0'),
-			"earth_ssm": str(ssm).rjust(3, '0'),
-			"earth_stm": str(stm).rjust(3, '0'),
-			"earth_lum_elapsed": int(spc),
-			"earth_lum_remaining": int(spr),
-			"earth_lum_name": str(lum).lower(),
-			"earth_lum_period": str(sel).lower(),
-			"earth_lum_segment": str(seg).lower(),
+			"local_timezone": str(get_ltz()),
+			"local_time_srt": str(sat1).replace("\ua751", ""),
+			"local_time_seg": str(sss).replace("\ua751", ""),
+			"local_time_sst": str(sst),
+			"local_angle_hedron": float(hst),
+			"local_angle_sector": float(hrd),
+			"local_angle_decond": float(hnd),
+			"local_beat_sector": str(sbm).rjust(3, '0'),
+			"local_beat_locale": str(blt).rjust(3, '0'),
+			"local_beat_global": str(bmt).rjust(3, '0'),
+			"local_ssm": str(ssm).rjust(3, '0'),
+			"local_stm": str(stm).rjust(3, '0'),
+			"local_lum_elapsed": int(spc),
+			"local_lum_remaining": int(spr),
+			"local_lum_name": str(lum).lower(),
+			"local_lum_period": str(sel).lower(),
+			"local_lum_segment": str(seg).lower(),
 			"mars_time": str(mat1).replace("\ua751", ""),
 			"mars_timezone": str(tz_mar),
 			"mars_sol_elapsed": mpc,
