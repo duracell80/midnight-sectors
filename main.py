@@ -4,15 +4,40 @@
 
 # An attempt at linking base 8 time to real time in a .beats style format
 
-import os, sys, time, math, json
+import os,sys,time, math, json
 
 from datetime import datetime
 from dateutil import tz
 
-try:
+
+
+def import_safe(m, v = "0.0.0"):
+	import os, sys, logging
+
+	if m.isnumeric():
+		logging.error("Module parameters incorrect")
+		sys.exit()
+	try:
+		__import__(m)
+		result = True
+	except ModuleNotFoundError:
+		logging.error(f"Module not found: {m} ({v})")
+		os.system(f"pip install {m}=={v}")
+		result = True
+	except:
+		os.system(f"pip install {m}=={v}")
+		result = True
+
+
+	if result:
+		return True
+	else:
+		sys.exit()
+
+
+if import_safe("asyncio", "3.4.3"):
 	import asyncio
-except:
-	os.system("pip install asyncio==3.4.3")
+
 
 def background(f):
 	def wrapped(*args, **kwargs):
@@ -34,7 +59,7 @@ def scale(max = 864, min = 0, sector = 432):
 	return ((sector - min) / (max - min)) * 100
 
 def percentage(part, whole):
-	return 100 * float(part)/float(whole)
+	return 100 * float(part / whole)
 
 def get_lum(day = None):
 	if day:
