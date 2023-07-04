@@ -4,7 +4,7 @@
 
 # An attempt at linking base 8 time to real time in a .beats style format
 
-import os, sys, time, math
+import os, sys, time, math, json
 
 from datetime import datetime
 from dateutil import tz
@@ -544,6 +544,9 @@ def run_segment(when = "now"):
 	global iso, soi, pkd, mts, msm, mat1, mpc, zoo, ele, rot, dec, hst, hnd, hrd, sss, ssm, stm, sbm, sst, sat1, sat2, spc, spr, sph, spd, seg, sel, blt, bmt, bmr, lum, sol
 	iso  = [1, 24, 1440, 86400, 864] # Clocks on Earth
 	soi  = [1, 24, 1440, 88775, 888] # Clocks on Mars ... 8*3 = 24, 8 and a bit hedrons (8 hour day with 4 periods, (or 16, also with 4 periods))
+
+	dir_home = os.path.expanduser('~')
+
 	hst  = 0
 	hnd  = 0
 	hrd  = 0
@@ -593,7 +596,48 @@ def run_segment(when = "now"):
 		bmr, mts, msm = get_bmr()
 		mat1, mpc, zoo, ele, rot, dec = get_mst()
 
-		time.sleep(0.5)
+		if mts:
+			tz_mar = "MTS" # Mars Time Slip
+		else:
+			tz_mar = "MTC" # Mars Coordinated Time
+
+
+		jsn_d = {
+			"local_time": str(get_lst()),
+			"earth_timezone": str(get_ltz()),
+			"earth_time_srt": str(sat1).replace("\ua751", ""),
+			"earth_time_seg": str(sss).replace("\ua751", ""),
+			"earth_time_sst": str(sst),
+			"earth_angle_hedron": float(hst),
+			"earth_angle_sector": float(hrd),
+			"earth_angle_decond": float(hnd),
+			"earth_beat_sector": str(sbm).rjust(3, '0'),
+			"earth_beat_locale": str(blt).rjust(3, '0'),
+			"earth_beat_global": str(bmt).rjust(3, '0'),
+			"earth_ssm": str(ssm).rjust(3, '0'),
+			"earth_stm": str(stm).rjust(3, '0'),
+			"earth_lum_elapsed": int(spc),
+			"earth_lum_remaining": int(spr),
+			"earth_lum_name": str(lum).lower(),
+			"earth_lum_period": str(sel).lower(),
+			"earth_lum_segment": str(seg).lower(),
+			"mars_time": str(mat1).replace("\ua751", ""),
+			"mars_timezone": str(tz_mar),
+			"mars_sol_elapsed": mpc,
+			"mars_beat": str(bmr).rjust(3, '0'),
+			"mars_ts_active": mts,
+			"mars_ts_angle": float(rot),
+			"mars_ts_decan": int(dec),
+			"mars_ts_planet": str(ele).lower(),
+			"mars_ts_zodiac": str(zoo).lower(),
+		}
+
+		jsn_o = json.dumps(jsn_d, indent=4)
+		with open(dir_home + "/.local/share/midnight-sectors.json", "w") as jsn_f:
+			jsn_f.write(jsn_o)
+
+		time.sleep(0.45)
+
 
 run_segment("CDT")
 
@@ -626,7 +670,7 @@ while True:
 	print("Angle of Decond            (Second hand)  : " + str(hnd) + "°\n")
 
 	print("MarSol Beat        [Sol Complete = "+str(mpc).rjust(3, '0')+"%]  : @" + str(bmr) + ".sectors (" + str(tz_mar) + ")") # Time on Mars
-	print("Sector Beat        [Lux Complete = "+str(spc).rjust(3, '0')+"%]  : @" + str(sbm).rjust(3, '0') + ".sectors (SMT)")
+	print("Sector Beat        [Lum Complete = "+str(spc).rjust(3, '0')+"%]  : @" + str(sbm).rjust(3, '0') + ".sectors (SMT)")
 
 	if blt != 0:
 		print("Locale Beat                               : @" + str(blt) + ".beats   (" + str(get_ltz())  + ")")
