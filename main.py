@@ -643,7 +643,7 @@ def run_segment(when = "now"):
 		with open(dir_home + "/.local/share/midnight-sectors.json", "w") as jsn_f:
 			jsn_f.write(jsn_o)
 
-		time.sleep(0.5)
+		time.sleep(0.75)
 
 
 run_segment("CDT")
@@ -685,5 +685,5 @@ while True:
 		print(f"Global Beat                        (Dec)  : @{bmt}.beats   (BMT)")
 
 
-	time.sleep(0.1)
+	time.sleep(1)
 
