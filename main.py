@@ -615,15 +615,6 @@ while True:
 		print("⋅Mars Time  : " + str(mat1))
 
 	print("\n\n")
-	#print("Where")
-	#print("- stm = Sectors til midnight      (.sector   = decimal minute of an 8 hour day)")
-	#print("- ssm = Sectors since midnight    (.decond   = 1min:40s,  1,000d = 10m)")
-	#print("- lpc = Lumin percent completed   (.range    = from 0 to 100%)")
-	#print("- lpr = Lumin percent remaining   (.percent  = "+ str(float(36/10)*10) +"ds     1,000s = 16m)\n\n")
-	#print("- sph = Sectors per standard hour (~" + str(sph) + " .sectors in an hour)")
-	#print("- blt = Beats in Local time (.beat = 1min:25s, ~42 .beats in an hour)")
-	#print("\nPERIOD = [N]ight [A]fternoon [M]orning [E]vening")
-	#print("SS/SE  = [S]egment[S]tart [S]egment[E]nd\n\n")
 
 	print("Sector Time [SRT]   (Duo:Percent:Period)  : " + str(sat1) + "     " + str(sat2))
 	print("Sector Time [SEG]   (Oct:Dec:Dec:Period)  : " + str(sss))
