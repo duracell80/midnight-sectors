@@ -148,7 +148,7 @@ def get_sst():
 	if spc <= 22:
 		sector_p = "N"
 		sector_d = "Night"
-		sector_l = "nox"
+		sector_l = "somnus"
 	elif spc <= 50:
 		sector_p = "M"
 		sector_d = "Morning"
@@ -160,11 +160,11 @@ def get_sst():
 	elif spc <= 82:
 		sector_p = "E"
 		sector_d = "Evening"
-		sector_l = "vespera"
+		sector_l = "nocturnis"
 	elif spc <= 100:
 		sector_p = "N"
 		sector_d = "Night"
-		sector_l = "nocturnis"
+		sector_l = "nox"
 	else:
 		sector_p = "N"
 		sector_d = "Night"
