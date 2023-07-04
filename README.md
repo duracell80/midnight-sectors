@@ -140,6 +140,10 @@ Global Beat              : @240.beats   (BMT)
 
 Settlements on Mars would likely be commerce focused. How would we communicate easily between the two bodies in relation to a synchronized universal time and could we use the delta of 40 minutes between a sol and a lux to aid communication? Communications systems could have limited capacity or endure times of lower processing power and distances in space itself that could further delay message processing.
 
+The first live stream from MEX was around 16 minutes delayed:
+
+![June 2023 first livestream](https://raw.githubusercontent.com/duracell80/midnight-sectors/main/docs/images/livestream.png)
+
 Inspired by the Martian Time-Slip, midnight-sectors provides an approximation between time on Earth and Mars for the purpose of delivering messages back to Earth in synchronicity of human refrenced time. To humans a message sent at 10:10 on Mars would appear to be seen as a new message arriving on Earth at 10:10 if all processing and transmission was completed within or before 20 sexagesimal minutes. Human communication between Earth and Mars could benefit from a method of equating time between the two locations taking into account the lag in time of sending data. For example sending radio signals back to Earth could take up to 20 sexagesimal minutes. Placing universal time on Mars slightly ahead of universal time on Earth provides a way to send a message at say 10:25 (25% or quarter past 10) in the morning on Mars and have it delivered or played back at 10:25 (25% or quarter past 10) on Earth. Sending a message back if taking around 20 sexagesimal minutes completes the 40 minute difference between a day on Earth (a lux) and a day on Mars (a sol).
 
 Thus giving the impression of instant communication in the most important direction, Mars back to Earth (Thank you PKD).
@@ -174,6 +178,7 @@ The timezone MTC changes to MTS
 
 At 36 sectors; Timeslip Time ends leaving Mars ahead of Earth by 36 sectors. Artistically this Martian Time-Slip can be illustrated by lighting one of 36 stars on the face of a clock or other interface. At this time the zodiac signs can also be celebrated.
 
+(Permission to use this code in films, docuseries and science fiction works is granted)
 
 #### Beat IT (Inspiration)
 So I wouldn't have gone down a decimal rabbit hole if it wasn't for beats. As a kid of the 80's the Swatch was to us what these crazy computers on straps are to kids today, that and t-shirts that changed color when you got hot, wonder why that also never caught on? 
