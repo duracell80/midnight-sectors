@@ -170,7 +170,7 @@ Producing the 20 minutes for comms lag
 The Time Slip begins at Midnight on Earth Where Coordinated Mars Time switches to Mars Timeslip Time. The progression of the TS is marked in the hour section of the display:
 
 ```
-⋅Mars Time  : %:52⋅Sꝑ
+⋅Mars Time  : %:45⋅Sꝑ
 
 The period changes to "S" denoting the Time-Slip is in progress
 The timezone MTC changes to MTS
@@ -179,6 +179,14 @@ The timezone MTC changes to MTS
 ```
 
 At 36 sectors; Timeslip Time ends leaving Mars ahead of Earth by 36 sectors. Artistically this Martian Time-Slip can be illustrated by lighting one of 36 stars on the face of a clock or other interface. At this time the zodiac signs can also be celebrated.
+
+For example at 30% past midnight on Earth ... The Martian Time-Slip is active in the 17th decan, denoting Saturn in Virgo.
+
+```
+Earth Time  : 00.30:Nꝑ
+⋅Mars Time  : T%.45:Sꝑ Time-Slip Active (176°) (decan 17 : saturn in virgo)
+
+```
 
 (Permission to use this code in films, docuseries and science fiction works is granted)
 
