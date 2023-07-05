@@ -2,7 +2,14 @@
 # Author: Lee Jordan
 # Github: Duracell80
 
-import os, sys, logging
+import os, sys, logging, socket, requests
+global hn, ip, ea
+
+hn = socket.gethostname()
+ip = socket.gethostbyname(hn)
+if ip == "127.0.1.1":
+	ip = "127.0.0.1"
+ea = requests.get('https://checkip.amazonaws.com').text.strip()
 
 def import_safe(m, v = "0.0.0"):
 	if m.isnumeric():
@@ -33,6 +40,6 @@ if import_safe("fastapi", "0.97.0"):
 
 	@app.get("/v1/status", status_code=200)
 	async def status():
-		return '{"result": 200, "status": "online", "ipaddr": "test"}'
+		return '{"result": 200, "status": "online", "ip_int": "'+ ip +'", "ip_ext": "'+ ea +'"}'
 
 

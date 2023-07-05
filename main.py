@@ -2,14 +2,21 @@
 # Author: Lee Jordan
 # Github: Duracell80
 
-# An attempt at linking base 8 time to real time in a .beats style format
+# An attempt at linking base 8 time to real time in a .beats style format with an astrological and cosmic twist
 
-import os, sys, time, math, json
+import os, sys, socket, time, math, json, requests
 
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from datetime import datetime
 from dateutil import tz
 
+global hn, ip, ea
+
+hn = socket.gethostname()
+ip = socket.gethostbyname(hn)
+if ip == "127.0.1.1":
+	ip = "127.0.0.1"
+#ea = requests.get('https://checkip.amazonaws.com').text.strip()
 
 
 def import_safe(m, v = "0.0.0"):
@@ -680,6 +687,7 @@ def run_segment(when = "now"):
 		if bmt != 0:
 			print(f"Global Beat                        (Dec)  : @{bmt}.beats   (BMT)")
 
+		print(f"\n\nAPI: {ip}:3633/docs\nWEB: {ip}:3636")
 
 		time.sleep(1)
 
@@ -688,27 +696,46 @@ run_segment("CDT")
 server_api("3633")
 
 
-hostName = "localhost"; serverPort = 3636
+webhost = "localhost"; webport = 3636
 
-class MyServer(BaseHTTPRequestHandler):
+def read_file(path):
+	try:
+		with open(path) as f:
+			file = f.read()
+	except Exception as e:
+		file = e
+	return file
+
+
+def serve_data(self):
+	file = read_file("/home/lee/.local/share/midnight-sectors.json")
+	self.send_response(200, "OK")
+	self.end_headers()
+	self.wfile.write(bytes(file, "utf-8"))
+
+
+class WebServer(BaseHTTPRequestHandler):
 	def do_GET(self):
-		self.send_response(200)
-		self.send_header("Content-type", "text/html")
-		self.end_headers()
-		self.wfile.write(bytes("<html><head><title>https://pythonbasics.org</title></head>", "utf-8"))
-		self.wfile.write(bytes("<p>Request: %s</p>" % self.path, "utf-8"))
-		self.wfile.write(bytes("<body>", "utf-8"))
-		self.wfile.write(bytes("<p>This is an example web server.</p>", "utf-8"))
-		self.wfile.write(bytes("</body></html>", "utf-8"))
+		if self.path == '/data':
+			serve_data(self)
+		else:
+			self.send_response(200)
+			self.send_header("Content-type", "text/html")
+			self.end_headers()
+			self.wfile.write(bytes("<html><head><title>https://pythonbasics.org</title></head>", "utf-8"))
+			self.wfile.write(bytes("<p>Request: %s</p>" % self.path, "utf-8"))
+			self.wfile.write(bytes("<body>", "utf-8"))
+			self.wfile.write(bytes("<p>This is an example web server.</p>", "utf-8"))
+			self.wfile.write(bytes("</body></html>", "utf-8"))
 
 if __name__ == "__main__":
-	webServer = HTTPServer((hostName, serverPort), MyServer)
-	print("Server started http://%s:%s" % (hostName, serverPort))
+	webserver = HTTPServer((webhost, webport), WebServer)
+	print("Server started http://%s:%s" % (webhost, webport))
 
 	try:
-		webServer.serve_forever()
+		webserver.serve_forever()
 	except KeyboardInterrupt:
 		pass
 
-	webServer.server_close()
+	webserver.server_close()
 	print("Server stopped.")
