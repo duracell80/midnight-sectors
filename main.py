@@ -43,8 +43,13 @@ def import_safe(m, v = "0.0.0"):
 		sys.exit()
 
 
+
 if import_safe("asyncio", "3.4.3"):
 	import asyncio
+
+if import_safe("schedule", "1.2.0"):
+	import schedule
+
 
 
 def background(f):
@@ -52,6 +57,23 @@ def background(f):
 		return asyncio.new_event_loop().run_in_executor(None, f, *args, **kwargs)
 
 	return wrapped
+
+
+if import_safe("pysinewave", "0.0.7"):
+	from pysinewave import SineWave
+
+	@background
+	def pips():
+		sinewave = SineWave(pitch = 23, decibels = -20)
+		pips = [0.1, 0.1, 0.1, 0.1, 0.1, 0.5]
+
+		for i in range(len(pips)):
+			sinewave.play(); time.sleep(float(pips[i]))
+			sinewave.stop(); time.sleep(float(1-pips[i]))
+
+
+
+
 
 
 def init():
@@ -689,7 +711,11 @@ def run_segment(when = "now"):
 
 		print(f"\n\nAPI: {ip}:3633/docs\nWEB: {ip}:3636")
 
+		schedule.run_pending()
 		time.sleep(1)
+
+
+schedule.every().hour.at(":00").do(pips)
 
 
 run_segment("CDT")
