@@ -715,13 +715,10 @@ def run_segment(when = "now"):
 		time.sleep(1)
 
 
-schedule.every().hour.at(":00").do(pips)
+schedule.every().day.at("12:00").do(pips)
+schedule.every().day.at("00:00").do(pips)
 
-
-run_segment("CDT")
-server_api("3633")
-
-
+run_segment("CDT"); server_api("3633")
 webhost = "localhost"; webport = 3636
 
 def read_file(path):
