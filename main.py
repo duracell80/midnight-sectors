@@ -66,7 +66,9 @@ if import_safe("pysinewave", "0.0.7"):
 	def pips():
 		sinewave = SineWave(pitch = 23, decibels = -20)
 		pips = [0.1, 0.1, 0.1, 0.1, 0.1, 0.5]
-
+		# Run 60 seconds before and wait 55 seconds
+		print(f"[i] Pips activated ...")
+		time.sleep(55)
 		for i in range(len(pips)):
 			sinewave.play(); time.sleep(float(pips[i]))
 			sinewave.stop(); time.sleep(float(1-pips[i]))
@@ -545,11 +547,16 @@ def get_bmt(tz_base = "UTC"):
 
 	beats = ((h * 3600) + (m * 60) + s) / 86.4
 
-	if beats > 1000:
-		beats -= 1000
+	if beats > 999:
+		beats = 999
+	elif beats < 1:
+		beats = 1
 	elif beats < 0:
-		beats += 1000
-	bmt = str(format(float(beats), 0)).rjust(3, '0')
+		beats = 0
+	if beats > 997:
+		bmt = str(format(float(beats), 0)).rjust(3, '0')
+	else:
+		bmt = str(format(float(beats - 0.5), 0)).rjust(3, '0')
 	return bmt
 
 def get_ltz():
@@ -715,8 +722,8 @@ def run_segment(when = "now"):
 		time.sleep(1)
 
 
-schedule.every().hour.at(":00").do(pips)
-
+schedule.every().day.at("23:59").do(pips)
+schedule.every().day.at("11:59").do(pips)
 
 run_segment("CDT")
 server_api("3633")
