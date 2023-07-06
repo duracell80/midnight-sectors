@@ -724,9 +724,6 @@ def run_segment(when = "now"):
 schedule.every().day.at("23:59").do(pips)
 schedule.every().day.at("11:59").do(pips)
 
-run_segment("CDT")
-server_api("3633")
-
 
 run_segment("CDT"); server_api("3633")
 webhost = "localhost"; webport = 3636
