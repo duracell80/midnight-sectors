@@ -57,9 +57,11 @@ def speak_time(lang = "en", delta = 12):
 def speaking_clock(lang = 'en', x = 10, w = 15):
 	i = 0
 	while i < x:
+		pips_play("single-short")
+		time.sleep(2)
 		delta = 12; delta = speak_time(lang, delta)
 		print(f"[i] Next time signal in {w} seconds ...")
-		time.sleep(w)
+		time.sleep(int(w)-2)
 		i =+1
 
 
@@ -123,10 +125,6 @@ if import_safe("pysine", "0.9.2"):
 			pips = [1]
 			beat = [0]
 			freq = "1000:1300"
-		elif type.lower() == "nbc":
-			pips = [0.5]
-			beat = [0]
-			freq = "1000:1300"
 		elif type.lower() == "rom":
 			pips = [0.05, 0.15, 0.05, 0.15, 0.05, 0.15, 0.05, 0.15, 0.05, 0.15, 0.05, 0.15, 0.05, 0.15, 0.05, 0.5]
 			beat = [0]
@@ -135,6 +133,10 @@ if import_safe("pysine", "0.9.2"):
 			pips = [0.05, 0.05, 0.05, 0.05, 0.05]
 			beat = [0.05]
 			freq = "900:1800"
+		elif type.lower() == "single-short":
+			pips = [0.5]
+			beat = [0]
+			freq = "1000:1300"
 		else:
 			# Greenwhich Time Signal
 			pips = [0.1, 0.1, 0.1, 0.1, 0.1, 0.5]
