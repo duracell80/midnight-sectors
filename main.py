@@ -278,41 +278,165 @@ def get_mst():
 	if mts:
 		mector_p = "S"
 		mector_ht = "T%"
-		dec = int(bmr)
+		dec = int(bmr) + 1
+		if dec > 36:
+			dec = 36
+		ele = ""
+
 		if dec <= 3:
 			zoo = "Aries"
+			if dec == 1:
+				ele = "Mars"
+				mod = 3.3
+			if dec == 2:
+				ele = "Sun"
+				mod = 6.6
+			if dec == 3:
+				ele = "Jupiter"
+				mod = 9.9
 		elif dec <=6:
 			zoo = "Tarus"
+			if dec == 4:
+				ele = "Venus"
+				mod = 3.3
+			if dec == 5:
+				ele = "Mercury"
+				mod = 6.6
+			if dec == 6:
+				ele = "Saturn"
+				mod = 9.9
 		elif dec <=9:
 			zoo = "Gemini"
+			if dec == 7:
+				ele = "Mercury"
+				mod = 3.3
+			if dec == 8:
+				ele = "Venus"
+				mod = 6.6
+			if dec == 9:
+				ele = "Uranus"
+				mod = 9.9
 		elif dec <=12:
 			zoo = "Cancer"
+			if dec == 10:
+				ele = "Moon"
+				mod = 3.3
+			if dec == 11:
+				ele = "Pluto"
+				mod = 6.6
+			if dec == 12:
+				ele = "Neptune"
+				mod = 9.9
 		elif dec <=15:
 			zoo = "Leo"
+			if dec == 13:
+				ele = "Sun"
+				mod = 3.3
+			if dec == 14:
+				ele = "Jupiter"
+				mod = 6.6
+			if dec == 15:
+				ele = "Mars"
+				mod = 9.9
 		elif dec <=18:
 			zoo = "Virgo"
+			if dec == 16:
+				ele = "Mercury"
+				mod = 3.3
+			if dec == 17:
+				ele = "Saturn"
+				mod = 6.6
+			if dec == 18:
+				ele = "Venus"
+				mod = 9.9
 		elif dec <=21:
 			zoo = "Libra"
+			if dec == 19:
+				ele = "Venus"
+				mod = 3.3
+			if dec == 20:
+				ele = "Uranus"
+				mod = 6.6
+			if dec == 21:
+				ele = "Mercury"
+				mod = 9.9
 		elif dec <=24:
 			zoo = "Scorpio"
+			if dec == 22:
+				ele = "Pluto"
+				mod = 3.3
+			if dec == 23:
+				ele = "Neptune"
+				mod = 6.6
+			if dec == 24:
+				ele = "Moon"
+				mod = 9.9
 		elif dec <=27:
 			zoo = "Sagittarius"
+			if dec == 25:
+				ele = "Jupiter"
+				mod = 3.3
+			if dec == 26:
+				ele = "Mars"
+				mod = 6.6
+			if dec == 27:
+				ele = "Sun"
+				mod = 9.9
 		elif dec <=30:
 			zoo = "Capricorn"
+			if dec == 28:
+				ele = "Saturn"
+				mod = 3.3
+			if dec == 29:
+				ele = "Venus"
+				mod = 6.6
+			if dec == 30:
+				ele = "Mercury"
+				mod = 9.9
 		elif dec <=33:
 			zoo = "Aquarius"
+			if dec == 31:
+				ele = "Uranus"
+				mod = 3.3
+			if dec == 32:
+				ele = "Mercury"
+				mod = 6.6
+			if dec == 33:
+				ele = "Venus"
+				mod = 9.9
 		elif dec <=36:
 			zoo = "Pisces"
+			if dec == 34:
+				ele = "Neptune"
+				mod = 3.3
+			if dec == 35:
+				ele = "Moon"
+				mod = 6.6
+			if dec == 36:
+				ele = "Pluto"
+				mod = 9.9
 		else:
 			zoo = ""
+			ele = ""
 
 	else:
 		zoo = ""
+		ele = ""
+		dec = 0
 
+
+	if mts:
+		#rot = int(round((int(mpc) / 100) * 360 , 0))
+		rot = int(float((dec * 10) + mod))
+	else:
+		rot = 0
+
+	if rot > 360:
+		rot = 360
 
 	mat_string_1 = str(mector_ht) + "." + str(mector_hc) + ":" + str(mector_p) + "ꝑ"
 
-	return mat_string_1, mpc, zoo
+	return mat_string_1, mpc, zoo.lower(), ele.lower(), rot, dec
 
 def get_tick():
 	ssm = str(get_ssm()).split(".")
@@ -417,7 +541,7 @@ def get_lst():
 
 @background
 def run_segment(when = "now"):
-	global iso, soi, pkd, mts, msm, mat1, mpc, zoo, hst, hnd, hrd, sss, ssm, stm, sbm, sst, sat1, sat2, spc, spr, sph, spd, seg, sel, blt, bmt, bmr, lum, sol
+	global iso, soi, pkd, mts, msm, mat1, mpc, zoo, ele, rot, dec, hst, hnd, hrd, sss, ssm, stm, sbm, sst, sat1, sat2, spc, spr, sph, spd, seg, sel, blt, bmt, bmr, lum, sol
 	iso  = [1, 24, 1440, 86400, 864] # Clocks on Earth
 	soi  = [1, 24, 1440, 88775, 888] # Clocks on Mars ... 8*3 = 24, 8 and a bit hedrons (8 hour day with 4 periods, (or 16, also with 4 periods))
 	hst  = 0
@@ -430,6 +554,7 @@ def run_segment(when = "now"):
 	stm  = 0
 	spc  = 0
 	spr  = 0
+	ele  = ""
 	sss  = "S1:00:00"
 	sst  = "00:00"
 	sat1 = "00:00"
@@ -444,6 +569,8 @@ def run_segment(when = "now"):
 	mts  = False # Keep track of status of the Time Slip
 	msm  = 0
 	mpc  = 0
+	rot  = 0
+	dec  = 0
 	zoo  = ""
 
 	while True:
@@ -464,7 +591,7 @@ def run_segment(when = "now"):
 		bmt = get_bmt("UTC+1")
 
 		bmr, mts, msm = get_bmr()
-		mat1, mpc, zoo = get_mst()
+		mat1, mpc, zoo, ele, rot, dec = get_mst()
 
 		time.sleep(0.5)
 
@@ -481,7 +608,7 @@ while True:
 	print("Earth Time  : " + str(sat1))
 
 	if mts:
-		print("⋅Mars Time  : " + str(mat1) + " (Decon:" + str(int(bmr)).rjust(2, '0') + " - " + str(zoo).lower() + ")")
+		print("⋅Mars Time  : " + str(mat1) + " Time-Slip Active (" + str(rot) + "°) (decan " + str(int(dec)).rjust(2, '0') + " : " + str(ele) + " in " + str(zoo) + ")")
 		tz_mar = "MTS" # Mars Time Slip
 	else:
 		tz_mar = "MTC" # Mars Coordinated Time
