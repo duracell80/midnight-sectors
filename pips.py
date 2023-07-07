@@ -2,7 +2,7 @@
 # Author: Lee Jordan
 # Github: Duracell80
 
-import os, sys, time, logging
+import os, sys, subprocess, time, logging
 from timeit import default_timer as timer
 from datetime import datetime, timedelta
 
@@ -43,7 +43,7 @@ def speak_time(lang = "en", delta = 12):
 	try:
 		start = timer()
 		os.system(f'espeak -v {lang} -g 10 "{message}"')
-		pips("uk3")
+		pips_play("speakingclock")
 		end = timer()
 		delta = end - start
 		print(f"[i] {message} [{delta}]")
@@ -63,96 +63,110 @@ def speaking_clock(lang = 'en', x = 10, w = 15):
 		i =+1
 
 
+if import_safe("pysine", "0.9.2"):
+	from pysine import sine
 
-if import_safe("pysinewave", "0.0.7"):
-	from pysinewave import SineWave
-
-	def pips(type = "gmt"):
+	def pips_beats(type = "gmt"):
 		if type.lower() == "uk" or type.lower() == "nz":
-			sinewave = SineWave(pitch = 23, decibels = -20)
 			pips = [0.1, 0.1, 0.1, 0.1, 0.1, 0.5]
-		if type.lower() == "uk3" or type.lower() == "nz":
-			sinewave = SineWave(pitch = 31, decibels = -20)
-			pips = [0.15, 0.15, 0.5]
-		elif type.lower() == "ire":
-			sinewave = SineWave(pitch = 23, decibels = -20)
-			pips = [0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
-		elif type.lower() == "aus":
-			sinewave = SineWave(pitch = 18, decibels = -20)
-			pips = [0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
-		elif type.lower() == "chi":
-			sinewave = SineWave(pitch = 26, decibels = -20)
-			pips = [0.25, 0.25, 0.25, 0.25, 0.25]
-		elif type.lower() == "hk":
-			sinewave = SineWave(pitch = 23, decibels = -20)
-			pips = [0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
-		elif type.lower() == "ind":
-			sinewave = SineWave(pitch = 29, decibels = -20)
-			pips = [0.15, 0.15, 0.15, 0.15, 0.15, 0.15]
-		elif type.lower() == "bra":
-			sinewave = SineWave(pitch = 22, decibels = -20)
-			pips = [0.15, 0.15, 0.15]
-		elif type.lower() == "spa":
-			sinewave = SineWave(pitch = 21, decibels = -20)
+			beat = [0]
+			freq = "1000:1300"
+		elif type.lower() == "uk3" or type.lower() == "speakingclock":
 			pips = [0.15, 0.15]
-		elif type.lower() == "ita":
-			sinewave = SineWave(pitch = 29, decibels = -20)
+			beat = [0.5]
+			freq = "1000:1300"
+		elif type.lower() == "ire":
 			pips = [0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
-		elif type.lower() == "ger":
-			sinewave = SineWave(pitch = 18, decibels = -20)
-			pips = [0.15, 0.15, 0.5]
-		elif type.lower() == "jap":
-			sinewave = SineWave(pitch = 27, decibels = -20)
+			beat = [0]
+			freq = "1000:1300"
+		elif type.lower() == "aus":
+			pips = [0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+			beat = [0]
+			freq = "1000:1300"
+		elif type.lower() == "chi":
+			pips = [0.25, 0.25, 0.25, 0.25, 0.25]
+			beat = [0.5]
+			freq = "800:1600"
+		elif type.lower() == "hk":
+			pips = [0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+			beat = [0]
+			freq = "1000:1300"
+		elif type.lower() == "ind":
+			pips = [0.15, 0.15, 0.15, 0.15, 0.15, 0.15]
+			beat = [0]
+			freq = "1000:1300"
+		elif type.lower() == "isr":
+			pips = [0.1, 0.1, 0.1, 0.1, 0.1]
+			beat = [1]
+			freq = "1100:1100"
+		elif type.lower() == "bra":
 			pips = [0.15, 0.15, 0.15]
+			beat = [0.15]
+			freq = "920:1360"
+		elif type.lower() == "spa":
+			pips = [0.15, 0.15]
+			beat = [0.25, 0.25]
+			freq = "1000:800"
+		elif type.lower() == "ita":
+			pips = [0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+			beat = [0]
+			freq = "1000:1300"
+		elif type.lower() == "ger":
+			pips = [0.15, 0.15, 0.5]
+			beat = [0]
+			freq = "1200:1200"
+		elif type.lower() == "jap":
+			pips = [0.1, 0.1, 0.1]
+			beat = [3]
+			freq = "1000:1500"
 		elif type.lower() == "usa":
-			sinewave = SineWave(pitch = 12, decibels = -20)
 			pips = [1]
+			beat = [0]
+			freq = "1000:1300"
 		elif type.lower() == "nbc":
-			sinewave = SineWave(pitch = 25, decibels = -20)
 			pips = [0.5]
+			beat = [0]
+			freq = "1000:1300"
 		elif type.lower() == "rom":
-			sinewave = SineWave(pitch = 22, decibels = -20)
 			pips = [0.05, 0.15, 0.05, 0.15, 0.05, 0.15, 0.05, 0.15, 0.05, 0.15, 0.05, 0.15, 0.05, 0.15, 0.05, 0.5]
+			beat = [0]
+			freq = "1000:1300"
 		elif type.lower() == "slo":
-			sinewave = SineWave(pitch = 22, decibels = -20)
 			pips = [0.05, 0.05, 0.05, 0.05, 0.05]
-
+			beat = [0.05]
+			freq = "900:1800"
 		else:
-			# GMT
-			sinewave = SineWave(pitch = 23, decibels = -20)
+			# Greenwhich Time Signal
 			pips = [0.1, 0.1, 0.1, 0.1, 0.1, 0.5]
+			beat = [0]
+			freq = "1000:1300"
 
-		# Run 60 seconds before and wait 55 seconds
-		#print(f"[i] Pips activated ...")
-		#time.sleep(55)
+		return pips, beat, freq
+
+
+	def pips_play(type = "gmt"):
+		pips, beats, freq = pips_beats(type)
+		freqs = freq.split(":")
+
+		subprocess.call(["amixer", "-D", "pulse", "sset", "Master", "15%-"])
+		start = timer()
 		for i in range(len(pips)):
-			sinewave.play(); time.sleep(float(pips[i]))
-			sinewave.stop(); time.sleep(abs(float(1-pips[i])))
+			#is choppy ... sine(frequency = float(freqs[0]), duration = pips[i]);
+			subprocess.check_output('python3 -m pysine ' + str(freqs[0]) + ' ' + str(pips[i]), shell=True)
+			time.sleep(abs(float(0.555-pips[i])))
 
-		if type == "chi":
-			sinewave = SineWave(pitch = 30, decibels = -20)
-			sinewave.play(); time.sleep(0.5)
-			sinewave.stop()
-		if type == "bra":
-			sinewave = SineWave(pitch = 23, decibels = -20)
-			sinewave.play(); time.sleep(0.25)
-			sinewave.stop()
-		if type == "spa":
-			sinewave = SineWave(pitch = 23, decibels = -20)
-			sinewave.play(); time.sleep(0.25)
-			sinewave.stop(); time.sleep(0.25)
-			sinewave.play(); time.sleep(0.25)
-			sinewave.stop()
-		if type == "slo":
-			sinewave = SineWave(pitch = 32, decibels = -40)
-			sinewave.play(); time.sleep(0.05)
-			sinewave.stop()
+		for i in range(len(beats)):
+			subprocess.check_output('python3 -m pysine ' + str(freqs[1]) + ' ' + str(beats[i]), shell=True)
+			time.sleep(abs(float(0.555-pips[i])))
 
-		if type == "jap":
-			sinewave = SineWave(pitch = 30, decibels = -40)
-			sinewave.play(); time.sleep(3)
-			sinewave.stop()
-pips("uk")
+		end = timer(); delta = end - start
+		subprocess.call(["amixer", "-D", "pulse", "sset", "Master", "15%+"])
+		#print(f"[i] Duration of pips [{delta}]")
 
-# language as seen in espeak eg en-sc, number of loops, seconds between each reading
-speaking_clock('en', 10, 15)
+		return delta
+
+
+#pips_play("gmt")
+
+# language (espeak --help) number of loops, seconds between each reading
+speaking_clock('en', 100, 15)
