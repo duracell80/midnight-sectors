@@ -303,156 +303,123 @@ def get_mst():
 	if mts:
 		mector_p = "S"
 		mector_ht = "T%"
+
 		dec = int(bmr) + 1
 		if dec > 36:
 			dec = 36
-		ele = ""
 
 		if dec <= 3:
-			zoo = "Aries"
-			if dec == 1:
-				ele = "Mars"
-				mod = 3.3
-			if dec == 2:
-				ele = "Sun"
-				mod = 6.6
-			if dec == 3:
-				ele = "Jupiter"
-				mod = 9.9
-		elif dec <=6:
-			zoo = "Tarus"
-			if dec == 4:
-				ele = "Venus"
-				mod = 3.3
-			if dec == 5:
-				ele = "Mercury"
-				mod = 6.6
-			if dec == 6:
-				ele = "Saturn"
-				mod = 9.9
-		elif dec <=9:
-			zoo = "Gemini"
-			if dec == 7:
-				ele = "Mercury"
-				mod = 3.3
-			if dec == 8:
-				ele = "Venus"
-				mod = 6.6
-			if dec == 9:
-				ele = "Uranus"
-				mod = 9.9
-		elif dec <=12:
-			zoo = "Cancer"
-			if dec == 10:
-				ele = "Moon"
-				mod = 3.3
-			if dec == 11:
-				ele = "Pluto"
-				mod = 6.6
-			if dec == 12:
-				ele = "Neptune"
-				mod = 9.9
-		elif dec <=15:
-			zoo = "Leo"
-			if dec == 13:
-				ele = "Sun"
-				mod = 3.3
-			if dec == 14:
-				ele = "Jupiter"
-				mod = 6.6
-			if dec == 15:
-				ele = "Mars"
-				mod = 9.9
-		elif dec <=18:
-			zoo = "Virgo"
-			if dec == 16:
-				ele = "Mercury"
-				mod = 3.3
-			if dec == 17:
-				ele = "Saturn"
-				mod = 6.6
-			if dec == 18:
-				ele = "Venus"
-				mod = 9.9
-		elif dec <=21:
-			zoo = "Libra"
-			if dec == 19:
-				ele = "Venus"
-				mod = 3.3
-			if dec == 20:
-				ele = "Uranus"
-				mod = 6.6
-			if dec == 21:
-				ele = "Mercury"
-				mod = 9.9
-		elif dec <=24:
-			zoo = "Scorpio"
-			if dec == 22:
-				ele = "Pluto"
-				mod = 3.3
-			if dec == 23:
-				ele = "Neptune"
-				mod = 6.6
-			if dec == 24:
-				ele = "Moon"
-				mod = 9.9
-		elif dec <=27:
-			zoo = "Sagittarius"
-			if dec == 25:
-				ele = "Jupiter"
-				mod = 3.3
-			if dec == 26:
-				ele = "Mars"
-				mod = 6.6
-			if dec == 27:
-				ele = "Sun"
-				mod = 9.9
-		elif dec <=30:
-			zoo = "Capricorn"
-			if dec == 28:
-				ele = "Saturn"
-				mod = 3.3
-			if dec == 29:
-				ele = "Venus"
-				mod = 6.6
-			if dec == 30:
-				ele = "Mercury"
-				mod = 9.9
-		elif dec <=33:
-			zoo = "Aquarius"
-			if dec == 31:
-				ele = "Uranus"
-				mod = 3.3
-			if dec == 32:
-				ele = "Mercury"
-				mod = 6.6
-			if dec == 33:
-				ele = "Venus"
-				mod = 9.9
-		elif dec <=36:
-			zoo = "Pisces"
-			if dec == 34:
-				ele = "Neptune"
-				mod = 3.3
-			if dec == 35:
-				ele = "Moon"
-				mod = 6.6
-			if dec == 36:
-				ele = "Pluto"
-				mod = 9.9
-		else:
-			zoo = "Sagittarius"
-			ele = "Earth"
+			deg = 1
+		elif dec <= 6:
+			deg = 2
+		elif dec <= 9:
+			deg = 3
+		elif dec <= 12:
+			deg = 4
+		elif dec <= 15:
+			deg = 5
+		elif dec <= 18:
+			deg = 6
+		elif dec <= 21:
+			deg = 7
+		elif dec <= 24:
+			deg = 8
+		elif dec <= 27:
+			deg = 9
+		elif dec <= 30:
+			deg = 10
+		elif dec <= 33:
+			deg = 11
+		elif dec <= 36:
+			deg = 12
 
+		dec_d = {
+			"1": {
+				"z": "aries",
+				"1": "mars",
+				"2": "sun",
+				"3": "jupiter"
+			},
+			"2": {
+				"z": "tarus",
+                                "4": "venus",
+                                "5": "mercury",
+                                "6": "saturn"
+                        },
+			"3": {
+				"z": "gemini",
+                                "7": "mercury",
+                                "8": "venus",
+                                "9": "uranus"
+                        },
+			"4": {
+				"z" : "cancer",
+                                "10": "moon",
+                                "11": "pluto",
+                                "12": "neptune"
+                        },
+			"5": {
+				"z" : "leo",
+                                "13": "sun",
+                                "14": "jupiter",
+                                "15": "mars"
+                        },
+			"6": {
+				"z" : "virgo",
+                                "16": "mercury",
+                                "17": "saturn",
+                                "18": "venus"
+                        },
+			"7": {
+				"z" : "libre",
+                                "19": "venus",
+                                "20": "uranus",
+                                "21": "mercury"
+                        },
+			"8": {
+				"z" : "scorpio",
+                                "22": "pluto",
+                                "23": "neptune",
+                                "24": "moon"
+                        },
+			"9": {
+				"z" : "sagittarius",
+                                "25": "jupiter",
+                                "26": "mars",
+                                "27": "sun"
+                        },
+			"10": {
+				"z" : "capricorn",
+                                "28": "saturn",
+                                "29": "venus",
+                                "30": "mercury"
+                        },
+			"11": {
+				"z" : "aquarius",
+                                "31": "uranus",
+                                "32": "mercury",
+                                "33": "venus"
+                        },
+			"12": {
+				"z" : "pisces",
+                                "34": "neptune",
+                                "35": "moon",
+                                "36": "pluto"
+                        }
+		}
+		zoo = dec_d[str(deg)]["z"]
+		ele = dec_d[str(deg)][str(dec)]
+		#zoo = "test"
+		#ele = str(deg)
 	else:
 		zoo = "Sagittarius"
-		ele = "Earth"
+		ele = "Sun"
 		dec = 0
 
 
 	if mts:
-		rot = int(float((dec * 10) + mod)) # trip through 10 days
-		#rot = int(float(dec * 10))
+		#rot = int(float((dec * 10) + mod)) # trip through 10 days
+		rot = int(float(dec * 10))
 	else:
 		rot = 0
 
@@ -668,47 +635,48 @@ def run_segment(when = "now"):
 		with open(dir_home + "/.local/share/midnight-sectors.json", "w") as jsn_f:
 			jsn_f.write(jsn_o)
 
-		time.sleep(0.75)
+		os.system("clear")
+
+		print(f"Local Time  : {get_lst()} [ssm @ {ssm} stm @ {stm} lpc: {spc}% lpr: {spr}%]")
+		print(f"Range Bar   : {get_bar()}")
+		print(f"              {get_labels()}")
+		print(f"")
+		print(f"Earth Lumin : (lum: {lum}) (period: {sel}) (segment: {seg})")
+		print(f"Earth Time  : {sat1}")
+
+		if mts:
+			print(f"⋅Mars Time  : {mat1} Time-Slip Active ({str(rot).rjust(3, '0')}°) (decan {str(dec).rjust(2, '0')}: {ele} in {zoo})")
+			xs = 0
+			ds = ""
+			while xs <= int(dec)-1:
+				ds+="•"
+				xs+=1
+			print(f" Decan Line : {ds}")
+			print("\n")
+		else:
+			print(f"⋅Mars Time  : {mat1}")
+			print("\n\n")
+
+		print(f"Sector Time [SRT]   (Sec:Percent:Period)  : {sat1}    {sat2}")
+		print(f"Sector Time [SEG]   (Oct:Dec:Dec:Period)  : {sss}")
+		print(f"Sector Time [STD]   (Sec:Dec:Dec:Period)  : {sst}")
+
+		print(f"Angle of Hedron              (Hour hand)  : {hst}°")
+		print(f"Angle of Sector            (Minute hand)  : {hrd}°")
+		print(f"Angle of Decond            (Second hand)  : {hnd}°")
+
+		print("\n")
+
+		print(f"MarSol Beat        [Sol Complete = {str(mpc).rjust(3, '0')}%]  : @{bmr}.sectors ({tz_mar})")
+		print(f"Sector Beat        [Lum Complete = {str(spc).rjust(3, '0')}%]  : @{str(sbm).rjust(3, '0')}.sectors (SMT)")
+
+		if blt != 0:
+			print(f"Locale Beat                        (Dec)  : @{blt}.beats   ({get_ltz()})")
+		if bmt != 0:
+			print(f"Global Beat                        (Dec)  : @{bmt}.beats   (BMT)")
+
+
+		time.sleep(1)
 
 
 run_segment("CDT")
-
-
-while True:
-	os.system("clear")
-
-	print(f"Local Time  : {get_lst()} [ssm @ {ssm} stm @ {stm} lpc: {spc}% lpr: {spr}%]")
-	print(f"Range Bar   : {get_bar()}")
-	print(f"              {get_labels()}")
-	print(f"")
-	print(f"Earth Lumin : (lum: {lum}) (period: {sel}) (segment: {seg})")
-	print(f"Earth Time  : {sat1}")
-
-	if mts:
-		print(f"⋅Mars Time  : {mat1} Time-Slip Active ({rot}°) (decan {str(dec).rjust(2, '0')} : {ele} in {zoo})")
-	else:
-		print(f"⋅Mars Time  : {mat1}")
-
-	print("\n\n")
-
-	print(f"Sector Time [SRT]   (Sec:Percent:Period)  : {sat1}    {sat2}")
-	print(f"Sector Time [SEG]   (Oct:Dec:Dec:Period)  : {sss}")
-	print(f"Sector Time [STD]   (Sec:Dec:Dec:Period)  : {sst}")
-
-	print(f"Angle of Hedron              (Hour hand)  : {hst}°")
-	print(f"Angle of Sector            (Minute hand)  : {hrd}°")
-	print(f"Angle of Decond            (Second hand)  : {hnd}°")
-
-	print("\n")
-
-	print(f"MarSol Beat        [Sol Complete = {str(mpc).rjust(3, '0')}%]  : @{bmr}.sectors ({tz_mar})")
-	print(f"Sector Beat        [Lum Complete = {str(spc).rjust(3, '0')}%]  : @{str(sbm).rjust(3, '0')}.sectors (SMT)")
-
-	if blt != 0:
-		print(f"Locale Beat                        (Dec)  : @{blt}.beats   ({get_ltz()})")
-	if bmt != 0:
-		print(f"Global Beat                        (Dec)  : @{bmt}.beats   (BMT)")
-
-
-	time.sleep(1)
-
