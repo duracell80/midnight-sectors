@@ -6,6 +6,8 @@ import os, sys, subprocess, time, logging
 from timeit import default_timer as timer
 from datetime import datetime, timedelta
 
+logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"))
+
 def import_safe(m, v = "0.0.0"):
 	if m.isnumeric():
 		logging.error("Module parameters incorrect")
@@ -41,13 +43,18 @@ def speak_time(lang = "en", m = "The time will be", delta = 15, cmdline = False)
 		message_s = rewinds.strftime('%S')
 
 		if(int(int(message_s) - delta) == 15):
-			min_curr = str(int(message_m)).rjust(2, '0')
+
+			min_curr_message = "The current minute is " + str(int(message_m)).rjust(2, '0')
+			logging.info(f"[i] {min_curr_message}")
 			pips_play("single-short-low", cmdline)
-			os.system(f'espeak -v {lang} -g 10 "The current minute is {min_curr}"')
+			os.system(f'espeak -v {lang} -g 10 "{min_curr_message}"')
+
 		if(int(int(message_s) - delta) == 30):
-			min_next = str(int(message_m) + 1).rjust(2, '0')
+
+			min_next_message = "The next minute will be " + str(int(message_m) + 1).rjust(2, '0')
+			logging.info(f"[i] {min_next_message}")
 			pips_play("single-short-high", cmdline)
-			os.system(f'espeak -v {lang} -g 10 "The next minute will be {min_next}"')
+			os.system(f'espeak -v {lang} -g 10 "{min_next_message}"')
 
 		if int(message_s) == 0:
 			message_go = True
@@ -61,7 +68,7 @@ def speak_time(lang = "en", m = "The time will be", delta = 15, cmdline = False)
 				pips_play("speakingclock", False)
 				end = timer()
 				delta = end - start
-				print(f"[i] {message} [{delta}]")
+				logging.info(f"[i] {message} [{delta}]")
 
 				break
 
@@ -71,20 +78,20 @@ def speak_time(lang = "en", m = "The time will be", delta = 15, cmdline = False)
 	return round(delta, 3)
 
 
-def speaking_clock(lang = 'en', m = "On the long stroke the time will be", x = 10, cmdline = False):
+def speak_clock(lang = 'en', m = "On the long stroke the time will be", x = 10, cmdline = False):
 	m_1 = "the :00 second of the minute"
 	m_2 = f"[i] Speaking clock is set to language: {lang} and will chime on {m_1}"
 
 	if x == 0:
-		i = -1; print(f"{m_2} infinitely.")
+		i = -1; logging.info(f"{m_2} infinitely.")
 	else:
-		i = 0; print(f"{m_2} for {x} repetitions.")
+		i = 0; logging.info(f"{m_2} for {x} repetitions.")
 
 	while i < x:
 		delta = 15;
 		delta = speak_time(lang, m, delta, cmdline)
 
-		print(f"[i] Next time signal occurs on the stroke of {m_1} ...")
+		logging.info(f"[i] Next time signal occurs on the stroke of {m_1} ...")
 		time.sleep(0.15)
 		if x > 0:
 			i =+1
@@ -186,7 +193,7 @@ if import_safe("pysine", "0.9.2"):
 		pips, beats, freq = pips_beats(type)
 		freqs = freq.split(":")
 
-		subprocess.call(["amixer", "-D", "pulse", "sset", "Master", "15%-"])
+		vdown = subprocess.check_call(["amixer", "-D", "pulse", "sset", "Master", "15%-"], stdout=subprocess.DEVNULL)
 		start = timer()
 		for i in range(len(pips)):
 			if cmdline:
@@ -206,8 +213,9 @@ if import_safe("pysine", "0.9.2"):
 				#time.sleep(abs(float(1-beats[i])))
 
 		end = timer(); delta = end - start
-		subprocess.call(["amixer", "-D", "pulse", "sset", "Master", "15%+"])
-		#print(f"[i] Duration of the pips [{delta}]")
+		vup = subprocess.check_call(["amixer", "-D", "pulse", "sset", "Master", "15%+"], stdout=subprocess.DEVNULL)
+
+		logging.info(f"[i] Duration of the pips [{delta}]")
 
 		return delta
 
@@ -215,4 +223,6 @@ if import_safe("pysine", "0.9.2"):
 #pips_play("gmt, False")
 
 # language (espeak --help), message prepend,  number of loops (0 infinite), False = use python module, True = use command line call
-speaking_clock("en", "On the long stroke the time will be", 0, False)
+speak_clock("en", "On the long stroke the time will be", 0, False)
+
+#speak_time("en", "On the long stroke the time will be")
