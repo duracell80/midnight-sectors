@@ -29,52 +29,74 @@ def import_safe(m, v = "0.0.0"):
 
 
 # https://www.sitepoint.com/talking-clock-birth-voice-based-ui
-def speak_time(lang = "en", delta = 12):
-	timegrab = datetime.today()
-	rewinds  = timegrab + timedelta(seconds = delta)
+def speak_time(lang = "en", delta = 15, cmdline = False):
+	message_go = False
 
-	message_h = rewinds.strftime('%H')
-	message_m = rewinds.strftime('%M')
-	message_s = rewinds.strftime('%S')
+	while int(message_go) == False:
+		timegrab = datetime.today()
+		rewinds  = timegrab + timedelta(seconds = delta)
 
+		message_h = rewinds.strftime('%H')
+		message_m = rewinds.strftime('%M')
+		message_s = rewinds.strftime('%S')
 
-	message  = f"At the third stroke the time will be, {message_h} hours, {message_m} minutes and {message_s} seconds, precisely"
+		if(int(int(message_s) - delta) == 15):
+                        pips_play("single-short-high", cmdline)
 
-	try:
-		start = timer()
-		os.system(f'espeak -v {lang} -g 10 "{message}"')
-		pips_play("speakingclock")
-		end = timer()
-		delta = end - start
-		print(f"[i] {message} [{delta}]")
+		if(int(int(message_s) - delta) == 30):
+			pips_play("single-short-high", cmdline)
 
-	except:
-		print("[i] espeak library missing?")
+		if int(message_s) == 0:
+			message_go = True
+			message  = f"On the long stroke the time will be, {message_h} hours, {message_m} minutes and {message_s} seconds, precisely"
+
+			pips_play("single-short", cmdline)
+
+			try:
+				start = timer()
+				os.system(f'espeak -v {lang} -g 10 "{message}"')
+				pips_play("speakingclock")
+				end = timer()
+				delta = end - start
+				print(f"[i] {message} [{delta}]")
+
+				break
+
+			except:
+				print("[i] espeak library missing?")
 
 	return round(delta, 3)
 
 
-def speaking_clock(lang = 'en', x = 10, w = 15):
-	i = 0
+def speaking_clock(lang = 'en', x = 10, cmdline = False):
+	m_1 = "the :00 second of the minute"
+	m_2 = f"[i] Speaking clock is set to language: {lang} and will chime on {m_1}"
+
+	if x == 0:
+		i = -1; print(f"{m_2} infinitely.")
+	else:
+		i = 0; print(f"{m_2} for {x} repetitions.")
+
 	while i < x:
-		pips_play("single-short")
-		time.sleep(2)
-		delta = 12; delta = speak_time(lang, delta)
-		print(f"[i] Next time signal in {w} seconds ...")
-		time.sleep(int(w)-2)
-		i =+1
+		delta = 15;
+		delta = speak_time(lang, delta, cmdline)
+
+		print(f"[i] Next time signal occurs on the stroke of {m_1} ...")
+		time.sleep(0.25)
+		if x > 0:
+			i =+1
 
 
 if import_safe("pysine", "0.9.2"):
 	from pysine import sine
 
 	def pips_beats(type = "gmt"):
-		if type.lower() == "uk" or type.lower() == "nz":
+		if type.lower() == "uk" or type.lower() == "uk3" or type.lower() == "nz":
 			pips = [0.1, 0.1, 0.1, 0.1, 0.1, 0.5]
 			beat = [0]
 			freq = "1000:1300"
-		elif type.lower() == "uk3" or type.lower() == "speakingclock":
-			pips = [0.15, 0.15]
+		elif type.lower() == "uk5" or type.lower() == "speakingclock":
+			pips = [0.1, 0.1, 0.1, 0.1, 0.1]
 			beat = [0.5]
 			freq = "1000:1300"
 		elif type.lower() == "ire":
@@ -137,6 +159,10 @@ if import_safe("pysine", "0.9.2"):
 			pips = [0.5]
 			beat = [0]
 			freq = "1000:1300"
+		elif type.lower() == "single-short-high":
+			pips = [0.25]
+			beat = [0]
+			freq = "1500:1600"
 		else:
 			# Greenwhich Time Signal
 			pips = [0.1, 0.1, 0.1, 0.1, 0.1, 0.5]
@@ -146,16 +172,20 @@ if import_safe("pysine", "0.9.2"):
 		return pips, beat, freq
 
 
-	def pips_play(type = "gmt"):
+	def pips_play(type = "gmt", cmdline = False):
 		pips, beats, freq = pips_beats(type)
 		freqs = freq.split(":")
 
 		subprocess.call(["amixer", "-D", "pulse", "sset", "Master", "15%-"])
 		start = timer()
 		for i in range(len(pips)):
-			#is choppy ... sine(frequency = float(freqs[0]), duration = pips[i]);
-			subprocess.check_output('python3 -m pysine ' + str(freqs[0]) + ' ' + str(pips[i]), shell=True)
-			time.sleep(abs(float(0.555-pips[i])))
+			if cmdline:
+				subprocess.check_output('python3 -m pysine ' + str(freqs[0]) + ' ' + str(pips[i]), shell=True)
+				time.sleep(abs(float(0.555-pips[i])))
+			else:
+				sine(frequency = float(freqs[0]), duration = pips[i]);
+				time.sleep(abs(float(1-pips[i])))
+
 
 		for i in range(len(beats)):
 			subprocess.check_output('python3 -m pysine ' + str(freqs[1]) + ' ' + str(beats[i]), shell=True)
@@ -168,7 +198,7 @@ if import_safe("pysine", "0.9.2"):
 		return delta
 
 
-#pips_play("gmt")
+#pips_play("gmt, False")
 
-# language (espeak --help) number of loops, seconds between each reading
-speaking_clock('en', 100, 15)
+# language (espeak --help) number of loops (0 infinite), False = use python module, True = use command line call
+speaking_clock('en', 0, False)
