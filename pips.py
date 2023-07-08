@@ -179,7 +179,6 @@ if import_safe("pysine", "0.9.2"):
 			pips = [0.15]
 			beat = [0]
 			freq = "980:800"
-
 		else:
 			# Greenwhich Time Signal
 			pips = [0.1, 0.1, 0.1, 0.1, 0.1, 0.5]
@@ -219,8 +218,29 @@ if import_safe("pysine", "0.9.2"):
 
 		return delta
 
+def alarm(type = "lcd", cmdline = False):
+	freq = 900
+	beep = 0.15
+	gaps = 0.5
+	reps = 10
 
-#pips_play("gmt, False")
+	vups = subprocess.check_call(["amixer", "-D", "pulse", "sset", "Master", "30%"], stdout=subprocess.DEVNULL)
+
+	for i in range(0, int(reps)):
+		if cmdline:
+			subprocess.check_output('python3 -m pysine ' + str(freq) + ' ' + str(beep), shell=True)
+			time.sleep(int(gaps / 1.5))
+		else:
+			sine(frequency = float(freq), duration = beep);
+			time.sleep(gaps)
+
+	return
+
+
+
+
+#pips_play("gmt")
+#alarm()
 
 # language (espeak --help), message prepend,  number of loops (0 infinite), False = use python module, True = use command line call
 speak_clock("en", "On the long stroke the time will be", 0, False)
