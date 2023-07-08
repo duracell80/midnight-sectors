@@ -103,7 +103,7 @@ if import_safe("pysine", "0.9.2"):
 	def pips_beats(type = "gmt"):
 		if type.lower() == "uk5" or type.lower() == "speakingclock":
 			pips = [0.25, 0.25, 0.25, 0.25, 0.25]
-			beat = [0.5]
+			beat = [0.75]
 			freq = "1000:1000"
 			return pips, beat, freq
 
@@ -193,7 +193,7 @@ if import_safe("pysine", "0.9.2"):
 		pips, beats, freq = pips_beats(type)
 		freqs = freq.split(":")
 
-		vdown = subprocess.check_call(["amixer", "-D", "pulse", "sset", "Master", "15%-"], stdout=subprocess.DEVNULL)
+		vdown = subprocess.check_call(["amixer", "-D", "pulse", "sset", "Master", "30%-"], stdout=subprocess.DEVNULL)
 		start = timer()
 		for i in range(len(pips)):
 			if cmdline:
@@ -213,7 +213,7 @@ if import_safe("pysine", "0.9.2"):
 				#time.sleep(abs(float(1-beats[i])))
 
 		end = timer(); delta = end - start
-		vup = subprocess.check_call(["amixer", "-D", "pulse", "sset", "Master", "15%+"], stdout=subprocess.DEVNULL)
+		vup = subprocess.check_call(["amixer", "-D", "pulse", "sset", "Master", "30%+"], stdout=subprocess.DEVNULL)
 
 		logging.info(f"[i] Duration of the pips [{delta}]")
 
