@@ -41,10 +41,11 @@ def speak_time(lang = "en", delta = 15, cmdline = False):
 		message_s = rewinds.strftime('%S')
 
 		if(int(int(message_s) - delta) == 15):
-                        pips_play("single-short-high", cmdline)
-
+                        #pips_play("single-short-high", cmdline)
+			os.system(f'espeak -v {lang} -g 10 "{message_m}"')
 		if(int(int(message_s) - delta) == 30):
-			pips_play("single-short-high", cmdline)
+			#pips_play("single-short-high", cmdline)
+			os.system(f'espeak -v {lang} -g 10 "{str(int(message_m) + 1)}"')
 
 		if int(message_s) == 0:
 			message_go = True
@@ -91,12 +92,12 @@ if import_safe("pysine", "0.9.2"):
 	from pysine import sine
 
 	def pips_beats(type = "gmt"):
-		if type.lower() == "uk" or type.lower() == "uk3" or type.lower() == "nz":
+		if type.lower() == "uk" or type.lower() == "uk6" or type.lower() == "nz":
 			pips = [0.1, 0.1, 0.1, 0.1, 0.1, 0.5]
 			beat = [0]
 			freq = "1000:1300"
 		elif type.lower() == "uk5" or type.lower() == "speakingclock":
-			pips = [0.1, 0.1, 0.1, 0.1, 0.1]
+			pips = [0.25, 0.25, 0.25, 0.25, 0.25]
 			beat = [0.5]
 			freq = "1000:1300"
 		elif type.lower() == "ire":
